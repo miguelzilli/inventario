@@ -1,0 +1,16 @@
+G4\InventarioBundle\Entity\Garantias:
+    type: entity
+    table: null
+    repositoryClass: G4\InventarioBundle\Entity\GarantiasRepository
+    fields:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+        nombre:
+            type: string
+            length: 255
+        duracion:
+            type: integer
+    lifecycleCallbacks: {  }

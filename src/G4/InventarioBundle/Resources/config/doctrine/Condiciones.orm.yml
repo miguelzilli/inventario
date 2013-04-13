@@ -1,0 +1,14 @@
+G4\InventarioBundle\Entity\Condiciones:
+    type: entity
+    table: null
+    repositoryClass: G4\InventarioBundle\Entity\CondicionesRepository
+    fields:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+        nombre:
+            type: string
+            length: 255
+    lifecycleCallbacks: {  }

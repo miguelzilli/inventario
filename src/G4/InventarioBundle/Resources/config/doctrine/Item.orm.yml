@@ -1,0 +1,51 @@
+G4\InventarioBundle\Entity\Item:
+    type: entity
+    table: null
+    repositoryClass: G4\InventarioBundle\Entity\ItemRepository
+    fields:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+        nombre:
+            type: string
+            length: 255
+        fechaCompra:
+            type: date
+        marca:
+            type: string
+            length: 255
+        modelo:
+            type: string
+            length: 255
+        sn:
+            type: string
+            length: 255
+        garantia:
+            type: string
+            length: 255
+        categoria:
+            type: string
+            length: 255
+        costo:
+            type: string
+            length: 255
+        descripcion:
+            type: text
+        ubicacion:
+            type: string
+            length: 255
+        estado:
+            type: string
+            length: 255
+        condicion:
+            type: string
+            length: 255
+        codigoInventario:
+            type: string
+            length: 255
+        codigoItem:
+            type: string
+            length: 255
+    lifecycleCallbacks: {  }
