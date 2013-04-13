@@ -5,9 +5,9 @@ namespace G4\InventarioBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Ubicacion
+ * Categoria
  */
-class Ubicacion
+class Categoria
 {
     /**
      * @var integer
@@ -34,7 +34,7 @@ class Ubicacion
      * Set nombre
      *
      * @param string $nombre
-     * @return Ubicacion
+     * @return Categorias
      */
     public function setNombre($nombre)
     {

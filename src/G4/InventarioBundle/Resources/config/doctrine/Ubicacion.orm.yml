@@ -1,6 +1,6 @@
 G4\InventarioBundle\Entity\Ubicacion:
     type: entity
-    table: null
+    table: ubicaciones
     repositoryClass: G4\InventarioBundle\Entity\UbicacionRepository
     fields:
         id:

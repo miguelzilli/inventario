@@ -1,6 +1,6 @@
 G4\InventarioBundle\Entity\Item:
     type: entity
-    table: null
+    table: items
     repositoryClass: G4\InventarioBundle\Entity\ItemRepository
     fields:
         id:
@@ -48,4 +48,18 @@ G4\InventarioBundle\Entity\Item:
         codigoItem:
             type: string
             length: 255
+        createdAt:
+            type: datetime
+            column: created_at
+        createdBy:
+            type: string
+            length: 255
+            column: created_by
+        updatedAt:
+            type: datetime
+            column: updated_at
+        updatedBy:
+            type: string
+            length: 255
+            column: updated_by
     lifecycleCallbacks: {  }

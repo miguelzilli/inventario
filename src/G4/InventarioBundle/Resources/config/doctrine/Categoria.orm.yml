@@ -1,17 +1,14 @@
-G4\InventarioBundle\Entity\Imagen:
+G4\InventarioBundle\Entity\Categoria:
     type: entity
-    table: imagenes
-    repositoryClass: G4\InventarioBundle\Entity\ImagenRepository
+    table: categorias
+    repositoryClass: G4\InventarioBundle\Entity\CategoriaRepository
     fields:
         id:
             type: integer
             id: true
             generator:
                 strategy: AUTO
-        ruta:
-            type: string
-            length: 255
-        item:
+        nombre:
             type: string
             length: 255
     lifecycleCallbacks: {  }

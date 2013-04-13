@@ -45,14 +45,14 @@ class Prestamo
     private $observaciones;
 
     /**
-     * @var string
-     */
-    private $creadoPor;
-
-    /**
      * @var \DateTime
      */
     private $createdAt;
+
+    /**
+     * @var string
+     */
+    private $createdBy;
 
     /**
      * @var \DateTime
@@ -303,5 +303,28 @@ class Prestamo
     public function getUpdatedBy()
     {
         return $this->updatedBy;
+    }
+
+    /**
+     * Set createdBy
+     *
+     * @param string $createdBy
+     * @return Prestamo
+     */
+    public function setCreatedBy($createdBy)
+    {
+        $this->createdBy = $createdBy;
+    
+        return $this;
+    }
+
+    /**
+     * Get createdBy
+     *
+     * @return string 
+     */
+    public function getCreatedBy()
+    {
+        return $this->createdBy;
     }
 }
