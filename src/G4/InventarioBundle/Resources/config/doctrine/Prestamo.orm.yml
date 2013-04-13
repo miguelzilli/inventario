@@ -1,0 +1,40 @@
+G4\InventarioBundle\Entity\Prestamo:
+    type: entity
+    table: null
+    repositoryClass: G4\InventarioBundle\Entity\PrestamoRepository
+    fields:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+        apellido:
+            type: string
+            length: 255
+        nombre:
+            type: string
+            length: 255
+        dni:
+            type: string
+            length: 255
+        fecha:
+            type: date
+        fechaDevolucion:
+            type: date
+        observaciones:
+            type: text
+        creadoPor:
+            type: string
+            length: 255
+            column: creado_por
+        createdAt:
+            type: datetime
+            column: created_at
+        updatedAt:
+            type: datetime
+            column: updated_at
+        updatedBy:
+            type: string
+            length: 255
+            column: updated_by
+    lifecycleCallbacks: {  }

@@ -50,7 +50,7 @@ class Item
     private $categoria;
 
     /**
-     * @var string
+     * @var decimal
      */
     private $costo;
 
@@ -259,7 +259,7 @@ class Item
     /**
      * Set costo
      *
-     * @param string $costo
+     * @param decimal $costo
      * @return Item
      */
     public function setCosto($costo)
@@ -272,7 +272,7 @@ class Item
     /**
      * Get costo
      *
-     * @return string 
+     * @return decimal 
      */
     public function getCosto()
     {
