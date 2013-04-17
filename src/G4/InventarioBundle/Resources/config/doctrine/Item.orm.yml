@@ -11,8 +11,6 @@ G4\InventarioBundle\Entity\Item:
         nombre:
             type: string
             length: 255
-        fechaCompra:
-            type: date
         marca:
             type: string
             length: 255
@@ -22,32 +20,29 @@ G4\InventarioBundle\Entity\Item:
         sn:
             type: string
             length: 255
-        garantia:
-            type: string
-            length: 255
-        categoria:
-            type: string
-            length: 255
+        fechaCompra:
+            type: date
+            column: fecha_compra
+            nullable: true
         costo:
-            type: string
-            length: 255
+            type: decimal
+            scale: 2
+            nullable: true
+        garantia:
+            type: integer
         descripcion:
             type: text
-        ubicacion:
-            type: string
-            length: 255
-        estado:
-            type: string
-            length: 255
-        condicion:
-            type: string
-            length: 255
         codigoInventario:
             type: string
             length: 255
+            column: codigo_inventario
+            nullable: true
+            unique: true
         codigoItem:
             type: string
             length: 255
+            column: codigo_item
+            unique: true
         createdAt:
             type: datetime
             column: created_at
@@ -58,8 +53,44 @@ G4\InventarioBundle\Entity\Item:
         updatedAt:
             type: datetime
             column: updated_at
+            nullable: true
         updatedBy:
             type: string
             length: 255
             column: updated_by
-    lifecycleCallbacks: {  }
+            nullable: true
+    manyToOne:
+        categoria:
+            targetEntity: Categoria
+            inversedBy: items
+            joinColumn:
+                name: categoria_id
+                referencedColumnName: id
+        condicion:
+            targetEntity: Condicion
+            inversedBy: items
+            joinColumn:
+                name: condicion_id
+                referencedColumnName: id
+        estado:
+            targetEntity: Estado
+            inversedBy: items
+            joinColumn:
+                name: estado_id
+                referencedColumnName: id
+        ubicacion:
+            targetEntity: Ubicacion
+            inversedBy: items
+            joinColumn:
+                name: ubicacion_id
+                referencedColumnName: id
+    oneToMany:
+        imagenes:
+            targetEntity: Imagen
+            mappedBy: imagen
+        prestamos:
+            targetEntity: Prestamo
+            mappedBy: prestamo
+    lifecycleCallbacks:
+        prePersist: [ setCreatedAtValue, setCreatedByValue, setCodigoItemValue ]
+        preUpdate: [ setUpdatedAtValue, setUpdatedByValue ]

@@ -19,7 +19,19 @@ class Ubicacion
      */
     private $nombre;
 
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     */
+    private $items;
 
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->items = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+    
     /**
      * Get id
      *
@@ -51,5 +63,38 @@ class Ubicacion
     public function getNombre()
     {
         return $this->nombre;
+    }
+
+    /**
+     * Add items
+     *
+     * @param \G4\InventarioBundle\Entity\Item $items
+     * @return Ubicacion
+     */
+    public function addItem(\G4\InventarioBundle\Entity\Item $items)
+    {
+        $this->items[] = $items;
+    
+        return $this;
+    }
+
+    /**
+     * Remove items
+     *
+     * @param \G4\InventarioBundle\Entity\Item $items
+     */
+    public function removeItem(\G4\InventarioBundle\Entity\Item $items)
+    {
+        $this->items->removeElement($items);
+    }
+
+    /**
+     * Get items
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getItems()
+    {
+        return $this->items;
     }
 }

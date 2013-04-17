@@ -45,12 +45,7 @@ class Item
     private $garantia;
 
     /**
-     * @var string
-     */
-    private $categoria;
-
-    /**
-     * @var decimal
+     * @var float
      */
     private $costo;
 
@@ -58,21 +53,6 @@ class Item
      * @var string
      */
     private $descripcion;
-
-    /**
-     * @var string
-     */
-    private $ubicacion;
-
-    /**
-     * @var string
-     */
-    private $estado;
-
-    /**
-     * @var string
-     */
-    private $condicion;
 
     /**
      * @var string
@@ -104,6 +84,45 @@ class Item
      */
     private $updatedBy;
 
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     */
+    private $imagenes;
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     */
+    private $prestamos;
+
+    /**
+     * @var \G4\InventarioBundle\Entity\Categoria
+     */
+    private $categoria;
+
+    /**
+     * @var \G4\InventarioBundle\Entity\Condicion
+     */
+    private $condicion;
+
+    /**
+     * @var \G4\InventarioBundle\Entity\Estado
+     */
+    private $estado;
+
+    /**
+     * @var \G4\InventarioBundle\Entity\Ubicacion
+     */
+    private $ubicacion;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->imagenes = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->prestamos = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+    
     /**
      * Get id
      *
@@ -253,32 +272,9 @@ class Item
     }
 
     /**
-     * Set categoria
-     *
-     * @param string $categoria
-     * @return Item
-     */
-    public function setCategoria($categoria)
-    {
-        $this->categoria = $categoria;
-    
-        return $this;
-    }
-
-    /**
-     * Get categoria
-     *
-     * @return string 
-     */
-    public function getCategoria()
-    {
-        return $this->categoria;
-    }
-
-    /**
      * Set costo
      *
-     * @param decimal $costo
+     * @param float $costo
      * @return Item
      */
     public function setCosto($costo)
@@ -291,7 +287,7 @@ class Item
     /**
      * Get costo
      *
-     * @return decimal 
+     * @return float 
      */
     public function getCosto()
     {
@@ -319,75 +315,6 @@ class Item
     public function getDescripcion()
     {
         return $this->descripcion;
-    }
-
-    /**
-     * Set ubicacion
-     *
-     * @param string $ubicacion
-     * @return Item
-     */
-    public function setUbicacion($ubicacion)
-    {
-        $this->ubicacion = $ubicacion;
-    
-        return $this;
-    }
-
-    /**
-     * Get ubicacion
-     *
-     * @return string 
-     */
-    public function getUbicacion()
-    {
-        return $this->ubicacion;
-    }
-
-    /**
-     * Set estado
-     *
-     * @param string $estado
-     * @return Item
-     */
-    public function setEstado($estado)
-    {
-        $this->estado = $estado;
-    
-        return $this;
-    }
-
-    /**
-     * Get estado
-     *
-     * @return string 
-     */
-    public function getEstado()
-    {
-        return $this->estado;
-    }
-
-    /**
-     * Set condicion
-     *
-     * @param string $condicion
-     * @return Item
-     */
-    public function setCondicion($condicion)
-    {
-        $this->condicion = $condicion;
-    
-        return $this;
-    }
-
-    /**
-     * Get condicion
-     *
-     * @return string 
-     */
-    public function getCondicion()
-    {
-        return $this->condicion;
     }
 
     /**
@@ -526,5 +453,163 @@ class Item
     public function getUpdatedBy()
     {
         return $this->updatedBy;
+    }
+
+    /**
+     * Add imagenes
+     *
+     * @param \G4\InventarioBundle\Entity\Imagen $imagenes
+     * @return Item
+     */
+    public function addImagene(\G4\InventarioBundle\Entity\Imagen $imagenes)
+    {
+        $this->imagenes[] = $imagenes;
+    
+        return $this;
+    }
+
+    /**
+     * Remove imagenes
+     *
+     * @param \G4\InventarioBundle\Entity\Imagen $imagenes
+     */
+    public function removeImagene(\G4\InventarioBundle\Entity\Imagen $imagenes)
+    {
+        $this->imagenes->removeElement($imagenes);
+    }
+
+    /**
+     * Get imagenes
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getImagenes()
+    {
+        return $this->imagenes;
+    }
+
+    /**
+     * Add prestamos
+     *
+     * @param \G4\InventarioBundle\Entity\Prestamo $prestamos
+     * @return Item
+     */
+    public function addPrestamo(\G4\InventarioBundle\Entity\Prestamo $prestamos)
+    {
+        $this->prestamos[] = $prestamos;
+    
+        return $this;
+    }
+
+    /**
+     * Remove prestamos
+     *
+     * @param \G4\InventarioBundle\Entity\Prestamo $prestamos
+     */
+    public function removePrestamo(\G4\InventarioBundle\Entity\Prestamo $prestamos)
+    {
+        $this->prestamos->removeElement($prestamos);
+    }
+
+    /**
+     * Get prestamos
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getPrestamos()
+    {
+        return $this->prestamos;
+    }
+
+    /**
+     * Set categoria
+     *
+     * @param \G4\InventarioBundle\Entity\Categoria $categoria
+     * @return Item
+     */
+    public function setCategoria(\G4\InventarioBundle\Entity\Categoria $categoria = null)
+    {
+        $this->categoria = $categoria;
+    
+        return $this;
+    }
+
+    /**
+     * Get categoria
+     *
+     * @return \G4\InventarioBundle\Entity\Categoria 
+     */
+    public function getCategoria()
+    {
+        return $this->categoria;
+    }
+
+    /**
+     * Set condicion
+     *
+     * @param \G4\InventarioBundle\Entity\Condicion $condicion
+     * @return Item
+     */
+    public function setCondicion(\G4\InventarioBundle\Entity\Condicion $condicion = null)
+    {
+        $this->condicion = $condicion;
+    
+        return $this;
+    }
+
+    /**
+     * Get condicion
+     *
+     * @return \G4\InventarioBundle\Entity\Condicion 
+     */
+    public function getCondicion()
+    {
+        return $this->condicion;
+    }
+
+    /**
+     * Set estado
+     *
+     * @param \G4\InventarioBundle\Entity\Estado $estado
+     * @return Item
+     */
+    public function setEstado(\G4\InventarioBundle\Entity\Estado $estado = null)
+    {
+        $this->estado = $estado;
+    
+        return $this;
+    }
+
+    /**
+     * Get estado
+     *
+     * @return \G4\InventarioBundle\Entity\Estado 
+     */
+    public function getEstado()
+    {
+        return $this->estado;
+    }
+
+    /**
+     * Set ubicacion
+     *
+     * @param \G4\InventarioBundle\Entity\Ubicacion $ubicacion
+     * @return Item
+     */
+    public function setUbicacion(\G4\InventarioBundle\Entity\Ubicacion $ubicacion = null)
+    {
+        $this->ubicacion = $ubicacion;
+    
+        return $this;
+    }
+
+    /**
+     * Get ubicacion
+     *
+     * @return \G4\InventarioBundle\Entity\Ubicacion 
+     */
+    public function getUbicacion()
+    {
+        return $this->ubicacion;
     }
 }

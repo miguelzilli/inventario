@@ -20,7 +20,7 @@ class Imagen
     private $ruta;
 
     /**
-     * @var string
+     * @var \G4\InventarioBundle\Entity\Item
      */
     private $item;
 
@@ -61,10 +61,10 @@ class Imagen
     /**
      * Set item
      *
-     * @param string $item
+     * @param \G4\InventarioBundle\Entity\Item $item
      * @return Imagen
      */
-    public function setItem($item)
+    public function setItem(\G4\InventarioBundle\Entity\Item $item = null)
     {
         $this->item = $item;
     
@@ -74,7 +74,7 @@ class Imagen
     /**
      * Get item
      *
-     * @return string 
+     * @return \G4\InventarioBundle\Entity\Item 
      */
     public function getItem()
     {

@@ -64,6 +64,11 @@ class Prestamo
      */
     private $updatedBy;
 
+    /**
+     * @var \G4\InventarioBundle\Entity\Item
+     */
+    private $prestamo;
+
 
     /**
      * Get id
@@ -214,29 +219,6 @@ class Prestamo
     }
 
     /**
-     * Set creadoPor
-     *
-     * @param string $creadoPor
-     * @return Prestamo
-     */
-    public function setCreadoPor($creadoPor)
-    {
-        $this->creadoPor = $creadoPor;
-    
-        return $this;
-    }
-
-    /**
-     * Get creadoPor
-     *
-     * @return string 
-     */
-    public function getCreadoPor()
-    {
-        return $this->creadoPor;
-    }
-
-    /**
      * Set createdAt
      *
      * @param \DateTime $createdAt
@@ -257,6 +239,29 @@ class Prestamo
     public function getCreatedAt()
     {
         return $this->createdAt;
+    }
+
+    /**
+     * Set createdBy
+     *
+     * @param string $createdBy
+     * @return Prestamo
+     */
+    public function setCreatedBy($createdBy)
+    {
+        $this->createdBy = $createdBy;
+    
+        return $this;
+    }
+
+    /**
+     * Get createdBy
+     *
+     * @return string 
+     */
+    public function getCreatedBy()
+    {
+        return $this->createdBy;
     }
 
     /**
@@ -306,25 +311,25 @@ class Prestamo
     }
 
     /**
-     * Set createdBy
+     * Set prestamo
      *
-     * @param string $createdBy
+     * @param \G4\InventarioBundle\Entity\Item $prestamo
      * @return Prestamo
      */
-    public function setCreatedBy($createdBy)
+    public function setPrestamo(\G4\InventarioBundle\Entity\Item $prestamo = null)
     {
-        $this->createdBy = $createdBy;
+        $this->prestamo = $prestamo;
     
         return $this;
     }
 
     /**
-     * Get createdBy
+     * Get prestamo
      *
-     * @return string 
+     * @return \G4\InventarioBundle\Entity\Item 
      */
-    public function getCreatedBy()
+    public function getPrestamo()
     {
-        return $this->createdBy;
+        return $this->prestamo;
     }
 }

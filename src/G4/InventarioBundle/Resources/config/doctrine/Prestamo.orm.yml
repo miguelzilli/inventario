@@ -21,6 +21,8 @@ G4\InventarioBundle\Entity\Prestamo:
             type: date
         fechaDevolucion:
             type: date
+            column: fecha_devolucion
+            nullable: true
         observaciones:
             type: text
         createdAt:
@@ -33,8 +35,19 @@ G4\InventarioBundle\Entity\Prestamo:
         updatedAt:
             type: datetime
             column: updated_at
+            nullable: true
         updatedBy:
             type: string
             length: 255
             column: updated_by
-    lifecycleCallbacks: {  }
+            nullable: true
+    manyToOne:
+        prestamo:
+            targetEntity: Item
+            inversedBy: prestamos
+            joinColumn:
+                name: item_id
+                referencedColumnName: id
+    lifecycleCallbacks:
+        prePersist: [ setCreatedAtValue, setCreatedByValue ]
+        preUpdate: [ setUpdatedAtValue, setUpdatedByValue ]

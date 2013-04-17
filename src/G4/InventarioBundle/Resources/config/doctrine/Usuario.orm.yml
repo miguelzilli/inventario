@@ -1,6 +1,6 @@
 G4\InventarioBundle\Entity\Usuario:
     type: entity
-    table: null
+    table: usuarios
     repositoryClass: G4\InventarioBundle\Entity\UsuarioRepository
     fields:
         id:
@@ -17,10 +17,15 @@ G4\InventarioBundle\Entity\Usuario:
         email:
             type: string
             length: 255
+            unique: true
         username:
             type: string
             length: 255
+            unique: true
         password:
             type: string
             length: 255
+        isEnabled:
+            type: boolean
+            nullable: true
     lifecycleCallbacks: {  }
