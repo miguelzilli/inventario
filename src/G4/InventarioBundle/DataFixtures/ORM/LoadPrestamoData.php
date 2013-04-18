@@ -20,11 +20,12 @@ class LoadPrestamoData extends AbstractFixture implements OrderedFixtureInterfac
         $nombres[]='Roberto';
 
         for ($i = 1; $i <= 5; $i++) {
+            $fecha=date('Y-m-d',rand($min, $max));
             $prestamo = new Prestamo();
             $prestamo->setApellido($apellidos[rand(0,2)]);
             $prestamo->setDni(rand(1234567, 55555555));
-            $prestamo->setFecha(date('Y-m-d', rand($min, $max)));
-            $prestamo->setApellido($nombres[rand(0,2)]);
+            $prestamo->setFecha(new \DateTime($fecha));
+            $prestamo->setNombre($nombres[rand(0,2)]);
             $prestamo->setObservaciones('Observaciones del prestamo #'.$i);
             $prestamo->setItem($em->merge($this->getReference('item'.$i)));
 

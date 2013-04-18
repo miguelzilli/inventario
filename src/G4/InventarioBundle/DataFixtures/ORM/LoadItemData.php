@@ -15,6 +15,8 @@ class LoadItemData extends AbstractFixture implements OrderedFixtureInterface {
 
         for ($i = 1; $i <= 10; $i++) {
             $x = $i % 3 + 1;
+            $fecha=date('Y-m-d',rand($min, $max));
+
             $item = new Item();
             $item->setCategoria($em->merge($this->getReference('monitor')));
             $item->setCodigoInventario('MNT001-0000' . $i);
@@ -22,21 +24,23 @@ class LoadItemData extends AbstractFixture implements OrderedFixtureInterface {
             $item->setCosto(rand(800, 3000));
             $item->setDescripcion('Descripcion del item #' . $i);
             $item->setEstado($em->merge($this->getReference('estado' . $x)));
-            $item->setFechaCompra(date('Y-m-d', rand($min, $max)));
+            $item->setFechaCompra(new \DateTime($fecha));
             $item->setGarantia($i);
             $item->setMarca('Genérico');
             $item->setModelo('Genérico');
             $item->setNombre('Monitor' . $i);
             $item->setSn('abc' . $i);
-            $item->setUbicacion($em->merge($this->getReference('ubiciacion' . $x)));
+            $item->setUbicacion($em->merge($this->getReference('ubicacion' . $x)));
             
             $em->persist($item);
-            $em->flus();
+            $em->flush();
             $this->addReference('item'.$i, $item);
         }
 
         for ($i = 11; $i <= 20; $i++) {
             $x = $i % 3 + 1;
+            $fecha=date('Y-m-d',rand($min, $max));
+
             $item = new Item();
             $item->setCategoria($em->merge($this->getReference('teclado')));
             $item->setCodigoInventario('KBR001-0000' . $i);
@@ -44,21 +48,23 @@ class LoadItemData extends AbstractFixture implements OrderedFixtureInterface {
             $item->setCosto(rand(20, 300));
             $item->setDescripcion('Descripcion del item #' . $i);
             $item->setEstado($em->merge($this->getReference('estado' . $x)));
-            $item->setFechaCompra(date('Y-m-d', rand($min, $max)));
+            $item->setFechaCompra(new \DateTime($fecha));
             $item->setGarantia($i);
             $item->setMarca('Genérico');
             $item->setModelo('Genérico');
             $item->setNombre('Teclado' . $i);
             $item->setSn('def' . $i);
-            $item->setUbicacion($em->merge($this->getReference('ubiciacion' . $x)));
+            $item->setUbicacion($em->merge($this->getReference('ubicacion' . $x)));
 
             $em->persist($item);
-            $em->flus();
+            $em->flush();
             $this->addReference('item'.$i, $item);
         }
 
         for ($i = 21; $i <= 30; $i++) {
             $x = $i % 3 + 1;
+            $fecha=date('Y-m-d',rand($min, $max));
+            
             $item = new Item();
             $item->setCategoria($em->merge($this->getReference('notebook')));
             $item->setCodigoInventario('NBK001-0000' . $i);
@@ -66,16 +72,16 @@ class LoadItemData extends AbstractFixture implements OrderedFixtureInterface {
             $item->setCosto(rand(3000, 15000));
             $item->setDescripcion('Descripcion del item #' . $i);
             $item->setEstado($em->merge($this->getReference('estado' . $x)));
-            $item->setFechaCompra(date('Y-m-d', rand($min, $max)));
+            $item->setFechaCompra(new \DateTime($fecha));
             $item->setGarantia($i);
             $item->setMarca('Genérico');
             $item->setModelo('Genérico');
             $item->setNombre('Notebook' . $i);
             $item->setSn('ghi' . $i);
-            $item->setUbicacion($em->merge($this->getReference('ubiciacion' . $x)));
+            $item->setUbicacion($em->merge($this->getReference('ubicacion' . $x)));
             
             $em->persist($item);
-            $em->flus();
+            $em->flush();
             $this->addReference('item'.$i, $item);
         }
     }

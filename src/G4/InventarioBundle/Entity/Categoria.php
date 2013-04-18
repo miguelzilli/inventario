@@ -3,6 +3,7 @@
 namespace G4\InventarioBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use G4\InventarioBundle\Utils\Utils as Utils;
 
 /**
  * Categoria
@@ -130,6 +131,6 @@ class Categoria
      */
     public function setSlugValue()
     {
-        // Add your code here
+        $this->slug = Utils::slugify($this->getNombre());
     }
 }
