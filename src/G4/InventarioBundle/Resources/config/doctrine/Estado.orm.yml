@@ -2,12 +2,11 @@ G4\InventarioBundle\Entity\Estado:
     type: entity
     table: estados
     repositoryClass: G4\InventarioBundle\Entity\EstadoRepository
-    fields:
+    id:
         id:
             type: integer
-            id: true
-            generator:
-                strategy: AUTO
+            generator: { strategy: AUTO }
+    fields:
         nombre:
             type: string
             length: 255

@@ -67,7 +67,7 @@ class Prestamo
     /**
      * @var \G4\InventarioBundle\Entity\Item
      */
-    private $prestamo;
+    private $item;
 
 
     /**
@@ -311,25 +311,65 @@ class Prestamo
     }
 
     /**
-     * Set prestamo
+     * Set item
      *
-     * @param \G4\InventarioBundle\Entity\Item $prestamo
+     * @param \G4\InventarioBundle\Entity\Item $item
      * @return Prestamo
      */
-    public function setPrestamo(\G4\InventarioBundle\Entity\Item $prestamo = null)
+    public function setItem(\G4\InventarioBundle\Entity\Item $item = null)
     {
-        $this->prestamo = $prestamo;
+        $this->item = $item;
     
         return $this;
     }
 
     /**
-     * Get prestamo
+     * Get item
      *
      * @return \G4\InventarioBundle\Entity\Item 
      */
-    public function getPrestamo()
+    public function getItem()
     {
-        return $this->prestamo;
+        return $this->item;
+    }
+
+    /**
+     * @ORM\PrePersist
+     */
+    public function setCreatedAtValue()
+    {
+        if(!$this->getCreatedAt())
+        {
+            $this->createdAt = new \DateTime();
+        }
+    }
+
+    /**
+     * @ORM\PrePersist
+     */
+    public function setCreatedByValue()
+    {
+        if(!$this->getCreatedBy())
+        {
+        //CHANGE_THIS
+            $this->createdBy = 'Juan Perez';
+        }
+    }
+
+    /**
+     * @ORM\PreUpdate
+     */
+    public function setUpdatedAtValue()
+    {
+        $this->updatedAt = new \DateTime();
+    }
+
+    /**
+     * @ORM\PreUpdate
+     */
+    public function setUpdatedByValue()
+    {
+        //CHANGE_THIS
+        $this->updatedBy = 'Juan Perez';
     }
 }

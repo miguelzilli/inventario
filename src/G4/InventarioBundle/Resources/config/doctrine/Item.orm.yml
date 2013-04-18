@@ -2,12 +2,11 @@ G4\InventarioBundle\Entity\Item:
     type: entity
     table: items
     repositoryClass: G4\InventarioBundle\Entity\ItemRepository
-    fields:
+    id:
         id:
             type: integer
-            id: true
-            generator:
-                strategy: AUTO
+            generator: { strategy: AUTO }
+    fields:
         nombre:
             type: string
             length: 255
@@ -87,10 +86,10 @@ G4\InventarioBundle\Entity\Item:
     oneToMany:
         imagenes:
             targetEntity: Imagen
-            mappedBy: imagen
+            mappedBy: item
         prestamos:
             targetEntity: Prestamo
-            mappedBy: prestamo
+            mappedBy: item
     lifecycleCallbacks:
         prePersist: [ setCreatedAtValue, setCreatedByValue, setCodigoItemValue ]
         preUpdate: [ setUpdatedAtValue, setUpdatedByValue ]

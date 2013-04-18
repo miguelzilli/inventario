@@ -39,6 +39,11 @@ class Usuario
      */
     private $password;
 
+    /**
+     * @var boolean
+     */
+    private $isEnabled;
+
 
     /**
      * Get id
@@ -163,5 +168,28 @@ class Usuario
     public function getPassword()
     {
         return $this->password;
+    }
+
+    /**
+     * Set isEnabled
+     *
+     * @param boolean $isEnabled
+     * @return Usuario
+     */
+    public function setIsEnabled($isEnabled)
+    {
+        $this->isEnabled = $isEnabled;
+    
+        return $this;
+    }
+
+    /**
+     * Get isEnabled
+     *
+     * @return boolean 
+     */
+    public function getIsEnabled()
+    {
+        return $this->isEnabled;
     }
 }

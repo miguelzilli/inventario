@@ -2,12 +2,11 @@ G4\InventarioBundle\Entity\Condicion:
     type: entity
     table: condiciones
     repositoryClass: G4\InventarioBundle\Entity\CondicionRepository
-    fields:
+    id:
         id:
             type: integer
-            id: true
-            generator:
-                strategy: AUTO
+            generator: { strategy: AUTO }
+    fields:
         nombre:
             type: string
             length: 255

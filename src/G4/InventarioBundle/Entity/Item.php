@@ -20,11 +20,6 @@ class Item
     private $nombre;
 
     /**
-     * @var \DateTime
-     */
-    private $fechaCompra;
-
-    /**
      * @var string
      */
     private $marca;
@@ -40,14 +35,19 @@ class Item
     private $sn;
 
     /**
-     * @var string
+     * @var \DateTime
      */
-    private $garantia;
+    private $fechaCompra;
 
     /**
      * @var float
      */
     private $costo;
+
+    /**
+     * @var integer
+     */
+    private $garantia;
 
     /**
      * @var string
@@ -157,29 +157,6 @@ class Item
     }
 
     /**
-     * Set fechaCompra
-     *
-     * @param \DateTime $fechaCompra
-     * @return Item
-     */
-    public function setFechaCompra($fechaCompra)
-    {
-        $this->fechaCompra = $fechaCompra;
-    
-        return $this;
-    }
-
-    /**
-     * Get fechaCompra
-     *
-     * @return \DateTime 
-     */
-    public function getFechaCompra()
-    {
-        return $this->fechaCompra;
-    }
-
-    /**
      * Set marca
      *
      * @param string $marca
@@ -249,26 +226,26 @@ class Item
     }
 
     /**
-     * Set garantia
+     * Set fechaCompra
      *
-     * @param string $garantia
+     * @param \DateTime $fechaCompra
      * @return Item
      */
-    public function setGarantia($garantia)
+    public function setFechaCompra($fechaCompra)
     {
-        $this->garantia = $garantia;
+        $this->fechaCompra = $fechaCompra;
     
         return $this;
     }
 
     /**
-     * Get garantia
+     * Get fechaCompra
      *
-     * @return string 
+     * @return \DateTime 
      */
-    public function getGarantia()
+    public function getFechaCompra()
     {
-        return $this->garantia;
+        return $this->fechaCompra;
     }
 
     /**
@@ -292,6 +269,29 @@ class Item
     public function getCosto()
     {
         return $this->costo;
+    }
+
+    /**
+     * Set garantia
+     *
+     * @param integer $garantia
+     * @return Item
+     */
+    public function setGarantia($garantia)
+    {
+        $this->garantia = $garantia;
+    
+        return $this;
+    }
+
+    /**
+     * Get garantia
+     *
+     * @return integer 
+     */
+    public function getGarantia()
+    {
+        return $this->garantia;
     }
 
     /**
@@ -611,5 +611,57 @@ class Item
     public function getUbicacion()
     {
         return $this->ubicacion;
+    }
+    
+    /**
+     * @ORM\PrePersist
+     */
+    public function setCreatedAtValue()
+    {
+        if(!$this->getCreatedAt())
+        {
+            $this->createdAt = new \DateTime();
+        }
+    }
+
+    /**
+     * @ORM\PrePersist
+     */
+    public function setCreatedByValue()
+    {
+        if(!$this->getCreatedBy())
+        {
+        //CHANGE_THIS
+            $this->createdBy = 'Juan Perez';
+        }
+    }
+
+    /**
+     * @ORM\PrePersist
+     */
+    public function setCodigoItemValue()
+    {
+        if(!$this->getCodigoItem())
+        {
+        //CHANGE_THIS
+            $this->codigoItem = hash('md5',rand());
+        }
+    }
+
+    /**
+     * @ORM\PreUpdate
+     */
+    public function setUpdatedAtValue()
+    {
+        $this->updatedAt = new \DateTime();
+    }
+
+    /**
+     * @ORM\PreUpdate
+     */
+    public function setUpdatedByValue()
+    {
+        //CHANGE_THIS
+        $this->updatedBy = 'Juan Perez';
     }
 }

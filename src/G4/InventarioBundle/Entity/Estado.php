@@ -20,6 +20,11 @@ class Estado
     private $nombre;
 
     /**
+     * @var string
+     */
+    private $slug;
+
+    /**
      * @var \Doctrine\Common\Collections\Collection
      */
     private $items;
@@ -66,6 +71,29 @@ class Estado
     }
 
     /**
+     * Set slug
+     *
+     * @param string $slug
+     * @return Estado
+     */
+    public function setSlug($slug)
+    {
+        $this->slug = $slug;
+    
+        return $this;
+    }
+
+    /**
+     * Get slug
+     *
+     * @return string 
+     */
+    public function getSlug()
+    {
+        return $this->slug;
+    }
+
+    /**
      * Add items
      *
      * @param \G4\InventarioBundle\Entity\Item $items
@@ -96,5 +124,12 @@ class Estado
     public function getItems()
     {
         return $this->items;
+    }
+    /**
+     * @ORM\PrePersist
+     */
+    public function setSlugValue()
+    {
+        // Add your code here
     }
 }
