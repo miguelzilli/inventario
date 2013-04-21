@@ -2,9 +2,9 @@ parameters:
     database_driver: pdo_mysql
     database_host: 127.0.0.1
     database_port: null
-    database_name: inventario_dev
+    database_name: symfony
     database_user: root
-    database_password: toor
+    database_password: null
     database_path: null
 
     mailer_transport: smtp
@@ -13,4 +13,4 @@ parameters:
     mailer_password: null
 
     locale: en
-    secret: 98449116bcfe11063e49e39e9091b3ae4
+    secret: ThisTokenIsNotSoSecretChangeIt
