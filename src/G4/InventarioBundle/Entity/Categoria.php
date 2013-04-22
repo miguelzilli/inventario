@@ -133,4 +133,8 @@ class Categoria
     {
         $this->slug = Utils::slugify($this->getNombre());
     }
+
+    public function __toString(){
+        return $this->nombre;
+    }
 }

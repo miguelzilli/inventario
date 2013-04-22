@@ -1,0 +1,30 @@
+prestamo:
+    pattern:  /
+    defaults: { _controller: "G4InventarioBundle:Prestamo:index" }
+
+prestamo_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "G4InventarioBundle:Prestamo:show" }
+
+prestamo_new:
+    pattern:  /new
+    defaults: { _controller: "G4InventarioBundle:Prestamo:new" }
+
+prestamo_create:
+    pattern:  /create
+    defaults: { _controller: "G4InventarioBundle:Prestamo:create" }
+    requirements: { _method: post }
+
+prestamo_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "G4InventarioBundle:Prestamo:edit" }
+
+prestamo_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "G4InventarioBundle:Prestamo:update" }
+    requirements: { _method: post }
+
+prestamo_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "G4InventarioBundle:Prestamo:delete" }
+    requirements: { _method: post }

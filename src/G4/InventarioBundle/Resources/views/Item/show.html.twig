@@ -1,0 +1,78 @@
+{% extends 'JordiLlonchCrudGeneratorBundle::layout.html.twig' %}
+
+{% block title %}
+{{ parent() }} - Item {{ 'views.show.show'|trans({}, 'JordiLlonchCrudGeneratorBundle') }}
+{% endblock %}
+
+{% block page %}
+
+<h1>Item</h1>
+
+<form class="form-horizontal">
+    <fieldset>        <div class="control-group">
+            <label class="control-label">Id</label>
+            <div class="controls">                <span class="input-xlarge uneditable-input">{{ entity.id }}</span>            </div>
+        </div>        <div class="control-group">
+            <label class="control-label">Nombre</label>
+            <div class="controls">                <span class="input-xlarge uneditable-input">{{ entity.nombre }}</span>            </div>
+        </div>        <div class="control-group">
+            <label class="control-label">Marca</label>
+            <div class="controls">                <span class="input-xlarge uneditable-input">{{ entity.marca }}</span>            </div>
+        </div>        <div class="control-group">
+            <label class="control-label">Modelo</label>
+            <div class="controls">                <span class="input-xlarge uneditable-input">{{ entity.modelo }}</span>            </div>
+        </div>        <div class="control-group">
+            <label class="control-label">Sn</label>
+            <div class="controls">                <span class="input-xlarge uneditable-input">{{ entity.sn }}</span>            </div>
+        </div>        <div class="control-group">
+            <label class="control-label">Fechacompra</label>
+            <div class="controls">                <span class="input-xlarge uneditable-input">{{ entity.fechaCompra|date('Y-m-d H:i:s') }}</span>            </div>
+        </div>        <div class="control-group">
+            <label class="control-label">Costo</label>
+            <div class="controls">                <span class="input-xlarge uneditable-input">{{ entity.costo }}</span>            </div>
+        </div>        <div class="control-group">
+            <label class="control-label">Garantia</label>
+            <div class="controls">                <span class="input-xlarge uneditable-input">{{ entity.garantia }}</span>            </div>
+        </div>        <div class="control-group">
+            <label class="control-label">Descripcion</label>
+            <div class="controls">                <span class="input-xlarge uneditable-input">{{ entity.descripcion }}</span>            </div>
+        </div>        <div class="control-group">
+            <label class="control-label">Codigoinventario</label>
+            <div class="controls">                <span class="input-xlarge uneditable-input">{{ entity.codigoInventario }}</span>            </div>
+        </div>        <div class="control-group">
+            <label class="control-label">Codigoitem</label>
+            <div class="controls">                <span class="input-xlarge uneditable-input">{{ entity.codigoItem }}</span>            </div>
+        </div>        <div class="control-group">
+            <label class="control-label">Createdat</label>
+            <div class="controls">                <span class="input-xlarge uneditable-input">{{ entity.createdAt|date('Y-m-d H:i:s') }}</span>            </div>
+        </div>        <div class="control-group">
+            <label class="control-label">Createdby</label>
+            <div class="controls">                <span class="input-xlarge uneditable-input">{{ entity.createdBy }}</span>            </div>
+        </div>        <div class="control-group">
+            <label class="control-label">Updatedat</label>
+            <div class="controls">                <span class="input-xlarge uneditable-input">{{ entity.updatedAt|date('Y-m-d H:i:s') }}</span>            </div>
+        </div>        <div class="control-group">
+            <label class="control-label">Updatedby</label>
+            <div class="controls">                <span class="input-xlarge uneditable-input">{{ entity.updatedBy }}</span>            </div>
+        </div>    </fieldset>
+</form>
+
+<div>
+    <div class="float-left">
+        <a class="btn" href="{{ path('item') }}">
+            {{ 'views.recordactions.backtothelist'|trans({}, 'JordiLlonchCrudGeneratorBundle') }}
+        </a>
+    </div>
+    <div class="float-left">
+        <a class="btn btn-primary" href="{{ path('item_edit', { 'id': entity.id }) }}">
+            {{ 'views.recordactions.edit'|trans({}, 'JordiLlonchCrudGeneratorBundle') }}
+        </a>
+    </div>
+    <div class="float-left">
+        <form action="{{ path('item_delete', { 'id': entity.id }) }}" method="post">
+            {{ form_widget(delete_form) }}
+            <button class="btn btn-danger" type="submit" onclick="return confirm('{{ 'views.recordactions.confirm'|trans({}, 'JordiLlonchCrudGeneratorBundle') }}');">{{ 'views.recordactions.delete'|trans({}, 'JordiLlonchCrudGeneratorBundle') }}</button>
+        </form>
+    </div>
+</div>
+{% endblock %}
