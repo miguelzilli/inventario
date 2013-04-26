@@ -41,8 +41,7 @@
                 {{ form_row(filterForm.costo) }}
                 {{ form_row(filterForm.garantia) }}
                 {{ form_row(filterForm.descripcion) }}
-                {{ form_row(filterForm.codigoInventario) }}
-                {{ form_row(filterForm.codigoItem) }}
+                {{ form_row(filterForm.codigo) }}
                 {{ form_row(filterForm.createdAt) }}
                 {{ form_row(filterForm.createdBy) }}
                 {{ form_row(filterForm.updatedAt) }}
@@ -71,8 +70,7 @@
             <th>Costo</th>
             <th>Garantia</th>
             <th>Descripcion</th>
-            <th>Codigoinventario</th>
-            <th>Codigoitem</th>
+            <th>Codigo</th>
             <th>Createdat</th>
             <th>Createdby</th>
             <th>Updatedat</th>
@@ -92,8 +90,7 @@
             <td>{{ entity.costo }}</td>
             <td>{{ entity.garantia }}</td>
             <td>{{ entity.descripcion }}</td>
-            <td>{{ entity.codigoInventario }}</td>
-            <td>{{ entity.codigoItem }}</td>
+            <td>{{ entity.codigo }}</td>
             <td>{% if entity.createdAt %}{{ entity.createdAt|date('Y-m-d H:i:s') }}{% endif %}</td>
             <td>{{ entity.createdBy }}</td>
             <td>{% if entity.updatedAt %}{{ entity.updatedAt|date('Y-m-d H:i:s') }}{% endif %}</td>
