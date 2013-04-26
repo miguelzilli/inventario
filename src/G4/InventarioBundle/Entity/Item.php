@@ -6,111 +6,164 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Item
+ *
+ * @ORM\Table(name="items")
+ * @ORM\Entity
+ * @ORM\HasLifecycleCallbacks
  */
 class Item
 {
     /**
      * @var integer
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
 
     /**
      * @var string
+     *
+     * @ORM\Column(name="nombre", type="string", length=255)
      */
     private $nombre;
 
     /**
      * @var string
+     *
+     * @ORM\Column(name="marca", type="string", length=255)
      */
     private $marca;
 
     /**
      * @var string
+     *
+     * @ORM\Column(name="modelo", type="string", length=255)
      */
     private $modelo;
 
     /**
      * @var string
+     *
+     * @ORM\Column(name="sn", type="string", length=255)
      */
     private $sn;
 
     /**
      * @var \DateTime
+     *
+     * @ORM\Column(name="fecha_compra", type="date")
      */
     private $fechaCompra;
 
     /**
      * @var float
+     *
+     * @ORM\Column(name="costo", type="decimal", scale=2)
      */
     private $costo;
 
     /**
      * @var integer
+     *
+     * @ORM\Column(name="garantia", type="integer")
      */
     private $garantia;
 
     /**
      * @var string
+     *
+     * @ORM\Column(name="descripcion", type="text")
      */
     private $descripcion;
 
     /**
      * @var string
+     *
+     * @ORM\Column(name="codigo", type="string", length=255, unique=true)
      */
-    private $codigoInventario;
-
-    /**
-     * @var string
-     */
-    private $codigoItem;
+    private $codigo;
 
     /**
      * @var \DateTime
+     *
+     * @ORM\Column(name="created_at", type="datetime")
      */
     private $createdAt;
 
     /**
      * @var string
+     *
+     * @ORM\Column(name="created_by", type="string", length=255)
      */
     private $createdBy;
 
     /**
      * @var \DateTime
+     *
+     * @ORM\Column(name="updated_at", type="datetime")
      */
     private $updatedAt;
 
     /**
      * @var string
+     *
+     * @ORM\Column(name="updated_by", type="string")
      */
     private $updatedBy;
 
     /**
      * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\OneToMany(targetEntity="G4\InventarioBundle\Entity\Imagen", mappedBy="item")
      */
     private $imagenes;
 
     /**
      * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\OneToMany(targetEntity="G4\InventarioBundle\Entity\Prestamo", mappedBy="item")
      */
     private $prestamos;
 
     /**
      * @var \G4\InventarioBundle\Entity\Categoria
+     *
+     * @ORM\ManyToOne(targetEntity="G4\InventarioBundle\Entity\Categoria", inversedBy="items")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="categoria_id", referencedColumnName="id")
+     * })
      */
     private $categoria;
 
     /**
      * @var \G4\InventarioBundle\Entity\Condicion
+     *
+     * @ORM\ManyToOne(targetEntity="G4\InventarioBundle\Entity\Condicion", inversedBy="items")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="condicion_id", referencedColumnName="id")
+     * })
      */
     private $condicion;
 
     /**
      * @var \G4\InventarioBundle\Entity\Estado
+     *
+     * @ORM\ManyToOne(targetEntity="G4\InventarioBundle\Entity\Estado", inversedBy="items")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="estado_id", referencedColumnName="id")
+     * })
      */
     private $estado;
 
     /**
      * @var \G4\InventarioBundle\Entity\Ubicacion
+     *
+     * @ORM\ManyToOne(targetEntity="G4\InventarioBundle\Entity\Ubicacion", inversedBy="items")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="ubicacion_id", referencedColumnName="id")
+     * })
      */
     private $ubicacion;
 
@@ -121,6 +174,14 @@ class Item
     {
         $this->imagenes = new \Doctrine\Common\Collections\ArrayCollection();
         $this->prestamos = new \Doctrine\Common\Collections\ArrayCollection();
+
+        $now=new \DateTime();
+        $now=new \DateTime();
+        $this->setCreatedAt($now);
+        $this->setCreatedBy('Juan Perez');
+
+        $this->setUpdatedAt($now);
+        $this->setUpdatedBy('Juan Perez');
     }
     
     /**
@@ -318,49 +379,26 @@ class Item
     }
 
     /**
-     * Set codigoInventario
+     * Set codigo
      *
-     * @param string $codigoInventario
+     * @param string $codigo
      * @return Item
      */
-    public function setCodigoInventario($codigoInventario)
+    public function setCodigo($codigo)
     {
-        $this->codigoInventario = $codigoInventario;
+        $this->codigo = $codigo;
     
         return $this;
     }
 
     /**
-     * Get codigoInventario
+     * Get codigo
      *
      * @return string 
      */
-    public function getCodigoInventario()
+    public function getCodigo()
     {
-        return $this->codigoInventario;
-    }
-
-    /**
-     * Set codigoItem
-     *
-     * @param string $codigoItem
-     * @return Item
-     */
-    public function setCodigoItem($codigoItem)
-    {
-        $this->codigoItem = $codigoItem;
-    
-        return $this;
-    }
-
-    /**
-     * Get codigoItem
-     *
-     * @return string 
-     */
-    public function getCodigoItem()
-    {
-        return $this->codigoItem;
+        return $this->codigo;
     }
 
     /**
@@ -612,56 +650,18 @@ class Item
     {
         return $this->ubicacion;
     }
-    
-    /**
-     * @ORM\PrePersist
-     */
-    public function setCreatedAtValue()
-    {
-        if(!$this->getCreatedAt())
-        {
-            $this->createdAt = new \DateTime();
-        }
-    }
 
     /**
-     * @ORM\PrePersist
+     * @ORM\PreUpdate
      */
-    public function setCreatedByValue()
-    {
-        if(!$this->getCreatedBy())
-        {
-        //CHANGE_THIS
-            $this->createdBy = 'Juan Perez';
-        }
-    }
-
-    /**
-     * @ORM\PrePersist
-     */
-    public function setCodigoItemValue()
-    {
-        if(!$this->getCodigoItem())
-        {
-        //CHANGE_THIS
-            $this->codigoItem = hash('md5',rand());
-        }
+    public function setUpdatedAtValue() {
+        $this->setUpdatedAt(new \DateTime());
     }
 
     /**
      * @ORM\PreUpdate
      */
-    public function setUpdatedAtValue()
-    {
-        $this->updatedAt = new \DateTime();
-    }
-
-    /**
-     * @ORM\PreUpdate
-     */
-    public function setUpdatedByValue()
-    {
-        //CHANGE_THIS
-        $this->updatedBy = 'Juan Perez';
+    public function setUpdatedByValue() {
+        $this->setUpdatedBy('Juan Perez');
     }
 }

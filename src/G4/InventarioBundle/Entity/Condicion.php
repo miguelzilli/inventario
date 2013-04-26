@@ -7,26 +7,40 @@ use G4\InventarioBundle\Utils\Utils as Utils;
 
 /**
  * Condicion
+ *
+ * @ORM\Table(name="condiciones")
+ * @ORM\Entity
+ * @ORM\HasLifecycleCallbacks
  */
 class Condicion
 {
     /**
      * @var integer
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
 
     /**
      * @var string
+     *
+     * @ORM\Column(name="nombre", type="string", length=255, unique=true)
      */
     private $nombre;
 
     /**
      * @var string
+     *
+     * @ORM\Column(name="slug", type="string", length=255, unique=true)
      */
     private $slug;
 
     /**
      * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\OneToMany(targetEntity="G4\InventarioBundle\Entity\Item", mappedBy="condicion")
      */
     private $items;
 
@@ -126,15 +140,16 @@ class Condicion
     {
         return $this->items;
     }
+
+    public function __toString() {
+        return $this->getNombre();
+    }
     /**
      * @ORM\PrePersist
      */
-    public function setSlugValue()
-    {
-        $this->slug = Utils::slugify($this->getNombre());
-    }
-    
-    public function __toString(){
-        return $this->nombre;
+    public function setSlugValue() {
+        if (!$this->getSlug()) {
+            $this->setSlug(Utils::slugify($this->getNombre()));
+        }
     }
 }

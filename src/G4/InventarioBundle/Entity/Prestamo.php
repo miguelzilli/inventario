@@ -6,69 +6,114 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Prestamo
+ *
+ * @ORM\Table(name="prestamos")
+ * @ORM\Entity
+ * @ORM\HasLifecycleCallbacks
  */
 class Prestamo
 {
     /**
      * @var integer
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
 
     /**
      * @var string
+     *
+     * @ORM\Column(name="apellido", type="string", length=255)
      */
     private $apellido;
 
     /**
      * @var string
+     *
+     * @ORM\Column(name="nombre", type="string", length=255)
      */
     private $nombre;
 
     /**
      * @var string
+     *
+     * @ORM\Column(name="dni", type="string", length=255)
      */
     private $dni;
 
     /**
      * @var \DateTime
+     *
+     * @ORM\Column(name="fecha", type="date")
      */
     private $fecha;
 
     /**
      * @var \DateTime
+     *
+     * @ORM\Column(name="fecha_devolucion", type="date", nullable=true)
      */
     private $fechaDevolucion;
 
     /**
      * @var string
+     *
+     * @ORM\Column(name="observaciones", type="text")
      */
     private $observaciones;
 
     /**
      * @var \DateTime
+     *
+     * @ORM\Column(name="created_at", type="datetime")
      */
     private $createdAt;
 
     /**
      * @var string
+     *
+     * @ORM\Column(name="created_by", type="string", length=255)
      */
     private $createdBy;
 
     /**
      * @var \DateTime
+     *
+     * @ORM\Column(name="updated_at", type="datetime", nullable=true)
      */
     private $updatedAt;
 
     /**
      * @var string
+     *
+     * @ORM\Column(name="updated_by", type="string", length=255, nullable=true)
      */
     private $updatedBy;
 
     /**
      * @var \G4\InventarioBundle\Entity\Item
+     *
+     * @ORM\ManyToOne(targetEntity="G4\InventarioBundle\Entity\Item", inversedBy="prestamos")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="item_id", referencedColumnName="id")
+     * })
      */
     private $item;
 
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $now=new \DateTime();
+        $this->setCreatedAt($now);
+        $this->setCreatedBy('Juan Perez');
+
+        $this->setUpdatedAt($now);
+        $this->setUpdatedBy('Juan Perez');
+    }
 
     /**
      * Get id
@@ -334,42 +379,16 @@ class Prestamo
     }
 
     /**
-     * @ORM\PrePersist
+     * @ORM\PreUpdate
      */
-    public function setCreatedAtValue()
-    {
-        if(!$this->getCreatedAt())
-        {
-            $this->createdAt = new \DateTime();
-        }
-    }
-
-    /**
-     * @ORM\PrePersist
-     */
-    public function setCreatedByValue()
-    {
-        if(!$this->getCreatedBy())
-        {
-        //CHANGE_THIS
-            $this->createdBy = 'Juan Perez';
-        }
+    public function setUpdatedAtValue() {
+        $this->setUpdatedAt(new \DateTime());
     }
 
     /**
      * @ORM\PreUpdate
      */
-    public function setUpdatedAtValue()
-    {
-        $this->updatedAt = new \DateTime();
-    }
-
-    /**
-     * @ORM\PreUpdate
-     */
-    public function setUpdatedByValue()
-    {
-        //CHANGE_THIS
-        $this->updatedBy = 'Juan Perez';
+    public function setUpdatedByValue() {
+        $this->setUpdatedBy('Juan Perez');
     }
 }

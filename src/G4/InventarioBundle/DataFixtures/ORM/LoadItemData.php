@@ -19,7 +19,7 @@ class LoadItemData extends AbstractFixture implements OrderedFixtureInterface {
 
             $item = new Item();
             $item->setCategoria($em->merge($this->getReference('monitor')));
-            $item->setCodigoInventario('MNT001-0000' . $i);
+            $item->setCodigo('MNT001-0000' . $i);
             $item->setCondicion($em->merge($this->getReference('condicion' . $x)));
             $item->setCosto(rand(800, 3000));
             $item->setDescripcion('Descripcion del item #' . $i);
@@ -43,7 +43,7 @@ class LoadItemData extends AbstractFixture implements OrderedFixtureInterface {
 
             $item = new Item();
             $item->setCategoria($em->merge($this->getReference('teclado')));
-            $item->setCodigoInventario('KBR001-0000' . $i);
+            $item->setCodigo('KBR001-0000' . $i);
             $item->setCondicion($em->merge($this->getReference('condicion' . $x)));
             $item->setCosto(rand(20, 300));
             $item->setDescripcion('Descripcion del item #' . $i);
@@ -67,7 +67,7 @@ class LoadItemData extends AbstractFixture implements OrderedFixtureInterface {
             
             $item = new Item();
             $item->setCategoria($em->merge($this->getReference('notebook')));
-            $item->setCodigoInventario('NBK001-0000' . $i);
+            $item->setCodigo('NBK001-0000' . $i);
             $item->setCondicion($em->merge($this->getReference('condicion' . $x)));
             $item->setCosto(rand(3000, 15000));
             $item->setDescripcion('Descripcion del item #' . $i);

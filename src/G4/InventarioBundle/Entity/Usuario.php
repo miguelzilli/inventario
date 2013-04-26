@@ -6,41 +6,60 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Usuario
+ *
+ * @ORM\Table(name="usuarios")
+ * @ORM\Entity
  */
 class Usuario
 {
     /**
      * @var integer
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
 
     /**
      * @var string
+     *
+     * @ORM\Column(name="apellido", type="string", length=255)
      */
     private $apellido;
 
     /**
      * @var string
+     *
+     * @ORM\Column(name="nombre", type="string", length=255)
      */
     private $nombre;
 
     /**
      * @var string
+     *
+     * @ORM\Column(name="email", type="string", length=255, unique=true)
      */
     private $email;
 
     /**
      * @var string
+     *
+     * @ORM\Column(name="username", type="string", length=255, unique=true)
      */
     private $username;
 
     /**
      * @var string
+     *
+     * @ORM\Column(name="password", type="string", length=255)
      */
     private $password;
 
     /**
      * @var boolean
+     *
+     * @ORM\Column(name="is_enabled", type="boolean")
      */
     private $isEnabled;
 
