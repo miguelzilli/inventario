@@ -1,0 +1,35 @@
+mzInventarioBundle_categoria:
+        resource: "@mzInventarioBundle/Resources/config/routing/categoria.yml"
+        prefix:   /categoria
+
+mzInventarioBundle_condicion:
+        resource: "@mzInventarioBundle/Resources/config/routing/condicion.yml"
+        prefix:   /condicion
+
+mzInventarioBundle_estado:
+        resource: "@mzInventarioBundle/Resources/config/routing/estado.yml"
+        prefix:   /estado
+
+mzInventarioBundle_ubicacion:
+        resource: "@mzInventarioBundle/Resources/config/routing/ubicacion.yml"
+        prefix:   /ubicacion
+
+mzInventarioBundle_usuario:
+        resource: "@mzInventarioBundle/Resources/config/routing/usuario.yml"
+        prefix:   /usuario
+
+mzInventarioBundle_item:
+        resource: "@mzInventarioBundle/Resources/config/routing/item.yml"
+        prefix:   /item
+
+mzInventarioBundle_prestamo:
+        resource: "@mzInventarioBundle/Resources/config/routing/prestamo.yml"
+        prefix:   /prestamo
+
+mzInventarioBundle_imagen:
+        resource: "@mzInventarioBundle/Resources/config/routing/imagen.yml"
+        prefix:   /imagen
+
+homepage:
+    pattern:  /
+    defaults: { _controller: mzInventarioBundle:Default:index }

@@ -22,7 +22,7 @@ class AppKernel extends Kernel
             new JMS\SecurityExtraBundle\JMSSecurityExtraBundle(),
             new Lexik\Bundle\FormFilterBundle\LexikFormFilterBundle(),
             new JordiLlonch\Bundle\CrudGeneratorBundle\JordiLlonchCrudGeneratorBundle(),
-            new G4\InventarioBundle\G4InventarioBundle(),
+            new mz\InventarioBundle\mzInventarioBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

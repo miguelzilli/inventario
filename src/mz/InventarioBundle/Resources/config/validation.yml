@@ -1,0 +1,35 @@
+mz\InventarioBundle\Entity\Categoria:
+    properties:
+        nombre:
+            - NotBlank: ~
+
+mz\InventarioBundle\Entity\Condicion:
+    properties:
+        nombre:
+            - NotBlank: ~
+
+mz\InventarioBundle\Entity\Estado:
+    properties:
+        nombre:
+            - NotBlank: ~
+
+mz\InventarioBundle\Entity\Imagen:
+
+mz\InventarioBundle\Entity\Item:
+    properties:
+        nombre:
+            - NotBlank: ~
+
+mz\InventarioBundle\Entity\Prestamo:
+
+mz\InventarioBundle\Entity\Ubicacion:
+    properties:
+        nombre:
+            - NotBlank: ~
+
+mz\InventarioBundle\Entity\Usuario:
+    properties:
+        nombre:
+            - NotBlank: ~
+
+#mz\InventarioBundle\Entity\:

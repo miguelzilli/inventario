@@ -1,0 +1,30 @@
+estado:
+    pattern:  /
+    defaults: { _controller: "mzInventarioBundle:Estado:index" }
+
+estado_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "mzInventarioBundle:Estado:show" }
+
+estado_new:
+    pattern:  /new
+    defaults: { _controller: "mzInventarioBundle:Estado:new" }
+
+estado_create:
+    pattern:  /create
+    defaults: { _controller: "mzInventarioBundle:Estado:create" }
+    requirements: { _method: post }
+
+estado_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "mzInventarioBundle:Estado:edit" }
+
+estado_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "mzInventarioBundle:Estado:update" }
+    requirements: { _method: post }
+
+estado_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "mzInventarioBundle:Estado:delete" }
+    requirements: { _method: post }

@@ -1,0 +1,30 @@
+condicion:
+    pattern:  /
+    defaults: { _controller: "mzInventarioBundle:Condicion:index" }
+
+condicion_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "mzInventarioBundle:Condicion:show" }
+
+condicion_new:
+    pattern:  /new
+    defaults: { _controller: "mzInventarioBundle:Condicion:new" }
+
+condicion_create:
+    pattern:  /create
+    defaults: { _controller: "mzInventarioBundle:Condicion:create" }
+    requirements: { _method: post }
+
+condicion_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "mzInventarioBundle:Condicion:edit" }
+
+condicion_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "mzInventarioBundle:Condicion:update" }
+    requirements: { _method: post }
+
+condicion_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "mzInventarioBundle:Condicion:delete" }
+    requirements: { _method: post }

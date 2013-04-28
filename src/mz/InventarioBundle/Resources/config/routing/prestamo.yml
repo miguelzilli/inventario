@@ -1,0 +1,30 @@
+prestamo:
+    pattern:  /
+    defaults: { _controller: "mzInventarioBundle:Prestamo:index" }
+
+prestamo_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "mzInventarioBundle:Prestamo:show" }
+
+prestamo_new:
+    pattern:  /new
+    defaults: { _controller: "mzInventarioBundle:Prestamo:new" }
+
+prestamo_create:
+    pattern:  /create
+    defaults: { _controller: "mzInventarioBundle:Prestamo:create" }
+    requirements: { _method: post }
+
+prestamo_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "mzInventarioBundle:Prestamo:edit" }
+
+prestamo_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "mzInventarioBundle:Prestamo:update" }
+    requirements: { _method: post }
+
+prestamo_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "mzInventarioBundle:Prestamo:delete" }
+    requirements: { _method: post }

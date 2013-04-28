@@ -6,6 +6,6 @@
 #_internal:
 #    resource: "@FrameworkBundle/Resources/config/routing/internal.xml"
 #    prefix:   /_internal
-g4_inventario:
-    resource: "@G4InventarioBundle/Resources/config/routing.yml"
+mz_inventario:
+    resource: "@mzInventarioBundle/Resources/config/routing.yml"
     prefix:   /
