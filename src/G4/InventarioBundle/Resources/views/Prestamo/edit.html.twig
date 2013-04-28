@@ -1,4 +1,4 @@
-{% extends 'JordiLlonchCrudGeneratorBundle::layout.html.twig' %}
+{% extends 'G4InventarioBundle::layout.html.twig' %}
 
 {% block title %}
 {{ parent() }} - Prestamo {{ 'views.edit.edit'|trans({}, 'JordiLlonchCrudGeneratorBundle') }}
@@ -10,22 +10,22 @@
 
 <form class="well" action="{{ path('prestamo_update', { 'id': entity.id }) }}" method="post" {{ form_enctype(edit_form) }}>
     {{ form_widget(edit_form) }}
-    <p>
-        <button type="submit" class="btn btn-success">{{ 'views.edit.editbutton'|trans({}, 'JordiLlonchCrudGeneratorBundle') }}</button>
-    </p>
-</form>
+        <p>
+            <button type="submit" class="btn btn-success">{{ 'views.edit.editbutton'|trans({}, 'JordiLlonchCrudGeneratorBundle') }}</button>
+        </p>
+    </form>
 
-<div>
-    <div class="float-left">
-        <a class="btn" href="{{ path('prestamo') }}">
+    <div>
+        <div class="float-left">
+            <a class="btn" href="{{ path('prestamo') }}">
             {{ 'views.recordactions.backtothelist'|trans({}, 'JordiLlonchCrudGeneratorBundle') }}
-        </a>
-    </div>
-    <div class="float-left">
-        <form action="{{ path('prestamo_delete', { 'id': entity.id }) }}" method="post">
+                </a>
+            </div>
+            <div class="float-left">
+                <form action="{{ path('prestamo_delete', { 'id': entity.id }) }}" method="post">
             {{ form_widget(delete_form) }}
-            <button class="btn btn-danger" type="submit" onclick="return confirm('{{ 'views.recordactions.confirm'|trans({}, 'JordiLlonchCrudGeneratorBundle') }}');">{{ 'views.recordactions.delete'|trans({}, 'JordiLlonchCrudGeneratorBundle') }}</button>
-        </form>
-    </div>
-</div>
+                        <button class="btn btn-danger" type="submit" onclick="return confirm('{{ 'views.recordactions.confirm'|trans({}, 'JordiLlonchCrudGeneratorBundle') }}');">{{ 'views.recordactions.delete'|trans({}, 'JordiLlonchCrudGeneratorBundle') }}</button>
+                    </form>
+                </div>
+            </div>
 {% endblock %}

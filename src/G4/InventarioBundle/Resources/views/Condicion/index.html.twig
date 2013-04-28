@@ -1,89 +1,74 @@
-{% extends 'JordiLlonchCrudGeneratorBundle::layout.html.twig' %}
+{% extends 'G4InventarioBundle::layout.html.twig' %}
 
 {% block title %}
-{{ parent() }} - Condicion {{ 'views.index.list'|trans({}, 'JordiLlonchCrudGeneratorBundle') }}
+    {{ parent() }} - Condiciones
+{% endblock %}
+
+{% block pagetitle %}
+    Condiciones
 {% endblock %}
 
 {% block page %}
-
-<div class="row">
-
-    <div class="span8">
-        <h1>Condicion {{ 'views.index.list'|trans({}, 'JordiLlonchCrudGeneratorBundle') }}</h1>
-    </div>
-    <div class="span2">
+<div class="row-fluid">
+    <div class="row-fluid">
         {% if form_errors(filterForm) %}
-        <div class="alert alert-block alert-error fade in form-errors">
-            {{ form_errors(filterForm) }}
-        </div>
+            <div class="alert alert-block alert-error fade in form-errors">
+                {{ form_errors(filterForm) }}
+            </div>
         {% endif %}
-        &nbsp;
     </div>
-    <div class="span2">
+    <div class="row-fluid inline-actions">
+        <div class="btn-toolbar">
+            <a class="btn btn-primary" href="{{ path('condicion_new') }}">
+                <i class="icon-plus"></i> Agregar
+            </a>
+        </div>
         <div class="filters-right">
             <a class="btn dropdown-toggle" data-toggle="collapse" data-target="#filters">
-                {{ 'views.index.filters'|trans({}, 'JordiLlonchCrudGeneratorBundle') }}
-                <span class="caret"></span>
+                Filtrar <span class="caret"></span>
             </a>
         </div>
     </div>
-
-    <div class="span12">
+    <div class="row-fluid">
         <div id="filters" class="collapse">
-
             <form class="well" action="{{ path('condicion') }}" method="post" {{ form_enctype(filterForm) }}>
-                {{ form_row(filterForm.id) }}
                 {{ form_row(filterForm.nombre) }}
                 {{ form_row(filterForm.slug) }}
                 {{ form_rest(filterForm) }}
-
                 <p>
-                    <button type="submit" name="filter_action" value="reset">{{ 'views.index.reset'|trans({}, 'JordiLlonchCrudGeneratorBundle') }}</button>
-                    <button type="submit" name="filter_action" value="filter">{{ 'views.index.filter'|trans({}, 'JordiLlonchCrudGeneratorBundle') }}</button>
+                    <button type="submit" name="filter_action" value="reset">Reset</button>
+                    <button type="submit" name="filter_action" value="filter">Filtrar</button>
                 </p>
             </form>
         </div>
     </div>
-
-    <div class="span12">
-
-    <table class="table table-striped table-bordered table-condensed">
-    <thead>
-        <tr>
-            <th>Id</th>
-            <th>Nombre</th>
-            <th>Slug</th>
-            <th>{{ 'views.index.actions'|trans({}, 'JordiLlonchCrudGeneratorBundle') }}</th>
-        </tr>
-    </thead>
-    <tbody>
-    {% for entity in entities %}
-        <tr>
-            <td><a href="{{ path('condicion_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
-            <td>{{ entity.nombre }}</td>
-            <td>{{ entity.slug }}</td>
-            <td>
-        <a class="btn btn-mini" href="{{ path('condicion_show', { 'id': entity.id }) }}">
-            {{ 'views.actions.show'|trans({}, 'JordiLlonchCrudGeneratorBundle') }}
-        </a>
-        <a class="btn btn-mini" href="{{ path('condicion_edit', { 'id': entity.id }) }}">
-            {{ 'views.actions.edit'|trans({}, 'JordiLlonchCrudGeneratorBundle') }}
-        </a>            </td>
-        </tr>
-    {% endfor %}
-    </tbody>
-</table>
+    <div class="well">
+        <table class="table table-striped table-hover table-condensed">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Nombre</th>
+                    <th>Slug</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for entity in entities %}
+                <tr>
+                    <td>{{ loop.index }}</td>
+                    <td>
+                        <a href="{{ path('condicion_show', { 'id': entity.id }) }}">{{ entity.nombre }}</a>
+                    </td>
+                    <td>{{ entity.slug }}</td>
+                    <td class="actions">
+                        <a href="{{ path('condicion_show', { 'id': entity.id }) }}"><i class="icon-pencil"></i> </a>
+                        <a href="{{ path('condicion_edit', { 'id': entity.id }) }}"><i class="icon-remove"></i> </a>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
     </div>
-
-    <div class="span4">
     {{ pagerHtml|raw }}
-    </div>
-
-        <div class="span8">
-    <a class="btn btn-primary likepaginator" href="{{ path('condicion_new') }}">
-            {{ 'views.index.createnew'|trans({}, 'JordiLlonchCrudGeneratorBundle') }} Condicion
-        </a>
-    </div>
-    </div>
-
+</div>
 {% endblock %}
