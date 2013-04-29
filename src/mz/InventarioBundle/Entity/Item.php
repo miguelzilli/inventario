@@ -650,6 +650,10 @@ class Item
     {
         return $this->ubicacion;
     }
+    
+    public function __toString() {
+        return $this->getNombre();
+    }
 
     /**
      * @ORM\PreUpdate

@@ -1,14 +1,35 @@
 {% extends 'mzInventarioBundle::layout.html.twig' %}
 
 {% block title %}
-{{ parent() }} - Categoria {{ 'views.show.show'|trans({}, 'JordiLlonchCrudGeneratorBundle') }}
+    {{ parent() }} - Categorías
 {% endblock %}
+
+{% block pagetitle %} Categoría {% endblock %}
 
 {% block page %}
 
-<h1>Categoria</h1>
+<div class="row-fluid">
+    <div class="btn-toolbar">
+        <a class="btn" href="{{ path('categoria') }}">
+            <i class="icon-angle-left icon-large"></i> Volver
+        </a>
+    </div>
+    <div class="btn-toolbar">
+        <a class="btn btn-primary" href="{{ path('categoria_edit', { 'id': entity.id }) }}">
+            <i class="icon-pencil icon-large"></i> Editar
+        </a>
+    </div>
+    <div class="btn-toolbar">
+        <form action="{{ path('categoria_delete', { 'id': entity.id }) }}" method="post" class="shitty-delete-form">
+            {{ form_widget(delete_form) }}
+            <button class="btn btn-danger" type="submit" onclick="return confirm('Seguro que desea eliminar este registro?');">
+                <i class="icon-trash icon-large"></i> Borrar
+            </button>
+        </form>
+    </div>
+</div>
 
-<form class="form-horizontal">
+<form class="well form-horizontal">
     <fieldset>
         <div class="control-group">
             <label class="control-label">Id</label>
@@ -30,23 +51,4 @@
         </div>
     </fieldset>
 </form>
-
-<div>
-    <div class="float-left">
-        <a class="btn" href="{{ path('categoria') }}">
-            {{ 'views.recordactions.backtothelist'|trans({}, 'JordiLlonchCrudGeneratorBundle') }}
-        </a>
-    </div>
-    <div class="float-left">
-        <a class="btn btn-primary" href="{{ path('categoria_edit', { 'id': entity.id }) }}">
-            {{ 'views.recordactions.edit'|trans({}, 'JordiLlonchCrudGeneratorBundle') }}
-        </a>
-    </div>
-    <div class="float-left">
-        <form action="{{ path('categoria_delete', { 'id': entity.id }) }}" method="post">
-            {{ form_widget(delete_form) }}
-            <button class="btn btn-danger" type="submit" onclick="return confirm('{{ 'views.recordactions.confirm'|trans({}, 'JordiLlonchCrudGeneratorBundle') }}');">{{ 'views.recordactions.delete'|trans({}, 'JordiLlonchCrudGeneratorBundle') }}</button>
-        </form>
-    </div>
-</div>
 {% endblock %}

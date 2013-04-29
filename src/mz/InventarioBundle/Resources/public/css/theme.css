@@ -520,12 +520,12 @@ input[type="password"] {
   -webkit-border-radius: 0px;
   -moz-border-radius: 0px;
   border-radius: 0px;
+  padding: .5em 1em;
+  margin-top: 1em;
 **/
   -moz-background-clip: padding;
   -webkit-background-clip: padding-box;
   background-clip: padding-box;
-  padding: .5em 1em;
-  margin-top: 1em;
   border: 1px solid #f2e187;
   background: #f7ecb5;
   background: -webkit-gradient(linear, left bottom, left top, color-stop(0, #f7ecb5), color-stop(1, #fcf8e3));
@@ -769,7 +769,7 @@ table.table.list tr:first-child td {
 }
 
 .btn-toolbar{
-  display: inline;
+  display: inline-block;
 }
 
 .well{
@@ -783,10 +783,10 @@ td.actions{
 .btn-primary{
   display: inline-block;
 }
-.inline-actions{
-  margin-top: 10px
-}
 .btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .btn-primary.disabled, .btn-primary[disabled] {
   background-color: #414959;
   color: #FFFFFF;
+}
+form.shitty-delete-form{
+  margin: 0;
 }

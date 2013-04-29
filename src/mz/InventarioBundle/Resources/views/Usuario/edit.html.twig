@@ -11,20 +11,21 @@
 <form class="well" action="{{ path('usuario_update', { 'id': entity.id }) }}" method="post" {{ form_enctype(edit_form) }}>
     {{ form_widget(edit_form) }}
     <p>
-        <button type="submit" class="btn btn-success">{{ 'views.edit.editbutton'|trans({}, 'JordiLlonchCrudGeneratorBundle') }}</button>
+        <button type="submit" class="btn btn-success"><i class="icon-save icon-large"></i> Guardar</button>
     </p>
 </form>
 
 <div>
     <div class="float-left">
         <a class="btn" href="{{ path('usuario') }}">
-            {{ 'views.recordactions.backtothelist'|trans({}, 'JordiLlonchCrudGeneratorBundle') }}
+            <i class="icon-angle-left icon-large"></i> Volver
         </a>
     </div>
     <div class="float-left">
         <form action="{{ path('usuario_delete', { 'id': entity.id }) }}" method="post">
             {{ form_widget(delete_form) }}
-            <button class="btn btn-danger" type="submit" onclick="return confirm('{{ 'views.recordactions.confirm'|trans({}, 'JordiLlonchCrudGeneratorBundle') }}');">{{ 'views.recordactions.delete'|trans({}, 'JordiLlonchCrudGeneratorBundle') }}</button>
+            <button class="btn btn-danger" type="submit" onclick="return confirm('Seguro que desea eliminar este registro?');">
+                <i class="icon-trash icon-large"></i> Borrar</button>
         </form>
     </div>
 </div>

@@ -1,25 +1,24 @@
 {% extends 'mzInventarioBundle::layout.html.twig' %}
 
-{% block title %}
-{{ parent() }} - Estado {{ 'views.new.creation'|trans({}, 'JordiLlonchCrudGeneratorBundle') }}
-{% endblock %}
+{% block title %} {{ parent() }} - Estados {% endblock %}
+
+{% block pagetitle %} Agregar Estado {% endblock %}
 
 {% block page %}
-
-<h1>Estado {{ 'views.new.creation'|trans({}, 'JordiLlonchCrudGeneratorBundle') }}</h1>
+<div class="row-fluid">
+    <div class="btn-toolbar">
+        <a class="btn" href="{{ path('estado') }}">
+            <i class="icon-angle-left icon-large"></i> Volver
+        </a>
+    </div>
+</div>
 
 <form class="well" action="{{ path('estado_create') }}" method="post" {{ form_enctype(form) }}>
     {{ form_widget(form) }}
     <p>
-        <button type="submit" class="btn btn-success">{{ 'views.new.create'|trans({}, 'JordiLlonchCrudGeneratorBundle') }}</button>
+        <button type="submit" class="btn btn-success">
+            <i class="icon-save icon-large"></i> Guardar
+        </button>
     </p>
 </form>
-
-<div>
-    <div class="float-left">
-        <a class="btn" href="{{ path('estado') }}">
-            {{ 'views.recordactions.backtothelist'|trans({}, 'JordiLlonchCrudGeneratorBundle') }}
-        </a>
-    </div>
-</div>
 {% endblock %}

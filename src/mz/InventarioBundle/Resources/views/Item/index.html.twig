@@ -86,14 +86,14 @@
             <td>{{ entity.marca }}</td>
             <td>{{ entity.modelo }}</td>
             <td>{{ entity.sn }}</td>
-            <td>{% if entity.fechaCompra %}{{ entity.fechaCompra|date('Y-m-d H:i:s') }}{% endif %}</td>
+            <td>{% if entity.fechaCompra %}{{ entity.fechaCompra|date('d-m-Y H:i:s') }}{% endif %}</td>
             <td>{{ entity.costo }}</td>
             <td>{{ entity.garantia }}</td>
             <td>{{ entity.descripcion }}</td>
             <td>{{ entity.codigo }}</td>
-            <td>{% if entity.createdAt %}{{ entity.createdAt|date('Y-m-d H:i:s') }}{% endif %}</td>
+            <td>{% if entity.createdAt %}{{ entity.createdAt|date('d-m-Y H:i:s') }}{% endif %}</td>
             <td>{{ entity.createdBy }}</td>
-            <td>{% if entity.updatedAt %}{{ entity.updatedAt|date('Y-m-d H:i:s') }}{% endif %}</td>
+            <td>{% if entity.updatedAt %}{{ entity.updatedAt|date('d-m-Y H:i:s') }}{% endif %}</td>
             <td>{{ entity.updatedBy }}</td>
             <td>
         <a class="btn btn-mini" href="{{ path('item_show', { 'id': entity.id }) }}">
@@ -113,8 +113,8 @@
     </div>
 
         <div class="span8">
-    <a class="btn btn-primary likepaginator" href="{{ path('item_new') }}">
-            {{ 'views.index.createnew'|trans({}, 'JordiLlonchCrudGeneratorBundle') }} Item
+    <a class="btn btn-primary" href="{{ path('item_new') }}">
+            <i class="icon-plus"></i> Agregar
         </a>
     </div>
     </div>

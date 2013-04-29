@@ -37,7 +37,7 @@
     <div class="float-left">
 
         <a class="btn" href="{{ path('imagen') }}">
-            {{ 'views.recordactions.backtothelist'|trans({}, 'JordiLlonchCrudGeneratorBundle') }}
+            <i class="icon-angle-left icon-large"></i> Volver
 
         </a>
 
@@ -57,7 +57,8 @@
         <form action="{{ path('imagen_delete', { 'id': entity.id }) }}" method="post">
             {{ form_widget(delete_form) }}
 
-            <button class="btn btn-danger" type="submit" onclick="return confirm('{{ 'views.recordactions.confirm'|trans({}, 'JordiLlonchCrudGeneratorBundle') }}');">{{ 'views.recordactions.delete'|trans({}, 'JordiLlonchCrudGeneratorBundle') }}</button>
+            <button class="btn btn-danger" type="submit" onclick="return confirm('Seguro que desea eliminar este registro?');">
+                <i class="icon-trash icon-large"></i> Borrar</button>
 
         </form>
 
