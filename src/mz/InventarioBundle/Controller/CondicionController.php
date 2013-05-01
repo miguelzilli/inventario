@@ -102,8 +102,8 @@ class CondicionController extends Controller
         $view = new TwitterBootstrapView();
         $pagerHtml = $view->render($pagerfanta, $routeGenerator, array(
             'proximity' => 3,
-            'prev_message' => $translator->trans('views.index.pagprev', array(), 'JordiLlonchCrudGeneratorBundle'),
-            'next_message' => $translator->trans('views.index.pagnext', array(), 'JordiLlonchCrudGeneratorBundle'),
+            'prev_message' => 'Anterior',
+            'next_message' => 'Siguiente',
         ));
     
         return array($entities, $pagerHtml);

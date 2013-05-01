@@ -3,12 +3,17 @@
 namespace mz\InventarioBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Security\Core\Validator\Constraint as SecurityAssert;
 
 /**
  * Usuario
  *
  * @ORM\Table(name="usuarios")
  * @ORM\Entity
+ * @UniqueEntity(fields="username", message="Ya existe un registro con este nombre.")
+ * @UniqueEntity(fields="email", message="Ya existe un registro con este nombre.")
  */
 class Usuario
 {
@@ -25,6 +30,7 @@ class Usuario
      * @var string
      *
      * @ORM\Column(name="apellido", type="string", length=255)
+     * @Assert\NotBlank(message="Este campo no puede quedar en blanco.")
      */
     private $apellido;
 
@@ -32,6 +38,7 @@ class Usuario
      * @var string
      *
      * @ORM\Column(name="nombre", type="string", length=255)
+     * @Assert\NotBlank(message="Este campo no puede quedar en blanco.")
      */
     private $nombre;
 
@@ -39,6 +46,8 @@ class Usuario
      * @var string
      *
      * @ORM\Column(name="email", type="string", length=255, unique=true)
+     * @Assert\Email(message = "La dirección: '{{ value }}' no es válida.")
+     * @Assert\NotBlank(message="Este campo no puede quedar en blanco.")
      */
     private $email;
 
@@ -46,6 +55,8 @@ class Usuario
      * @var string
      *
      * @ORM\Column(name="username", type="string", length=255, unique=true)
+     * @Assert\NotBlank(message="Este campo no puede quedar en blanco.")
+     * @Assert\Length(min = "6", minMessage = "Ingrese al menos {{ limit }} caracteres.")
      */
     private $username;
 
@@ -53,16 +64,26 @@ class Usuario
      * @var string
      *
      * @ORM\Column(name="password", type="string", length=255)
+     * @Assert\NotBlank(message="Este campo no puede quedar en blanco.")
+     * @Assert\Length(min = "6", minMessage = "Ingrese al menos {{ limit }} caracteres.")
      */
     private $password;
+
+    /**
+     * @var string
+     * 
+     * @SecurityAssert\UserPassword(message = "Contraseña incorrecta.")
+     * @Assert\NotBlank(message="Este campo no puede quedar en blanco.")
+     */
+    private $oldPassword;
 
     /**
      * @var boolean
      *
      * @ORM\Column(name="is_enabled", type="boolean")
+     * @Assert\Type(type="bool", message="El valor {{ value }} no es del tipo {{ type }}.")
      */
-    private $isEnabled;
-
+    private $isEnabled = true;
 
     /**
      * Get id

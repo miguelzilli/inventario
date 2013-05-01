@@ -4,13 +4,15 @@ namespace mz\InventarioBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use mz\InventarioBundle\Utils\Utils as Utils;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * Estado
  *
  * @ORM\Table(name="estados")
  * @ORM\Entity
- * @ORM\HasLifecycleCallbacks
+ * @UniqueEntity(fields="nombre", message="Ya existe un registro con este nombre.")
  */
 class Estado
 {
@@ -27,13 +29,13 @@ class Estado
      * @var string
      *
      * @ORM\Column(name="nombre", type="string", length=255, unique=true)
+     * @Assert\NotBlank(message="Este campo no puede quedar en blanco.")
      */
     private $nombre;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="slug", type="string", length=255, unique=true)
      */
     private $slug;
 
@@ -43,7 +45,6 @@ class Estado
      * @ORM\OneToMany(targetEntity="mz\InventarioBundle\Entity\Item", mappedBy="estado")
      */
     private $items;
-
     /**
      * Constructor
      */
@@ -66,11 +67,12 @@ class Estado
      * Set nombre
      *
      * @param string $nombre
-     * @return Estado
+     * @return Categoria
      */
     public function setNombre($nombre)
     {
         $this->nombre = $nombre;
+        $this->setSlug($nombre);
     
         return $this;
     }
@@ -89,11 +91,11 @@ class Estado
      * Set slug
      *
      * @param string $slug
-     * @return Estado
+     * @return Categoria
      */
     public function setSlug($slug)
     {
-        $this->slug = $slug;
+        $this->slug = Utils::slugify($slug);
     
         return $this;
     }
@@ -112,7 +114,7 @@ class Estado
      * Add items
      *
      * @param \mz\InventarioBundle\Entity\Item $items
-     * @return Estado
+     * @return Categoria
      */
     public function addItem(\mz\InventarioBundle\Entity\Item $items)
     {
@@ -143,13 +145,5 @@ class Estado
 
     public function __toString() {
         return $this->getNombre();
-    }
-    /**
-     * @ORM\PrePersist
-     */
-    public function setSlugValue() {
-        if (!$this->getSlug()) {
-            $this->setSlug(Utils::slugify($this->getNombre()));
-        }
     }
 }

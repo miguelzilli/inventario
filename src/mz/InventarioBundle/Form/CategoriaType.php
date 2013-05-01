@@ -12,7 +12,7 @@ class CategoriaType extends AbstractType
     {
         $builder
             ->add('nombre')
-            ->add('slug')
+            //->add('slug')
         ;
     }
 

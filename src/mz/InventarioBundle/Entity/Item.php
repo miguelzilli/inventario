@@ -3,6 +3,8 @@
 namespace mz\InventarioBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * Item
@@ -10,6 +12,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="items")
  * @ORM\Entity
  * @ORM\HasLifecycleCallbacks
+ * @UniqueEntity(fields="codigo", message="Ya existe un registro con este código.")
  */
 class Item
 {
@@ -26,6 +29,7 @@ class Item
      * @var string
      *
      * @ORM\Column(name="nombre", type="string", length=255)
+     * @Assert\NotBlank(message="Este campo no puede quedar en blanco.")
      */
     private $nombre;
 
@@ -33,6 +37,7 @@ class Item
      * @var string
      *
      * @ORM\Column(name="marca", type="string", length=255)
+     * @Assert\NotBlank(message="Este campo no puede quedar en blanco.")
      */
     private $marca;
 
@@ -40,6 +45,7 @@ class Item
      * @var string
      *
      * @ORM\Column(name="modelo", type="string", length=255)
+     * @Assert\NotBlank(message="Este campo no puede quedar en blanco.")
      */
     private $modelo;
 
@@ -48,12 +54,14 @@ class Item
      *
      * @ORM\Column(name="sn", type="string", length=255)
      */
-    private $sn;
+    private $sn = "";
 
     /**
      * @var \DateTime
      *
      * @ORM\Column(name="fecha_compra", type="date")
+     * @Assert\Date(message="Fecha inválida.")
+     * @Assert\NotBlank(message="Este campo no puede quedar en blanco.")
      */
     private $fechaCompra;
 
@@ -61,13 +69,16 @@ class Item
      * @var float
      *
      * @ORM\Column(name="costo", type="decimal", scale=2)
+     * @Assert\Type(type="numeric", message="El valor ingresado no es válido.")
      */
-    private $costo;
+    private $costo = 0;
 
     /**
      * @var integer
      *
      * @ORM\Column(name="garantia", type="integer")
+     * @Assert\Type(type="numeric", message="El valor ingresado no es válido.")
+     * @Assert\Type(type="integer", message="El valor ingresado no es válido.")
      */
     private $garantia;
 
@@ -76,12 +87,13 @@ class Item
      *
      * @ORM\Column(name="descripcion", type="text")
      */
-    private $descripcion;
+    private $descripcion = "";
 
     /**
      * @var string
      *
      * @ORM\Column(name="codigo", type="string", length=255, unique=true)
+     * @Assert\NotBlank(message="Este campo no puede quedar en blanco.")
      */
     private $codigo;
 
@@ -134,6 +146,7 @@ class Item
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="categoria_id", referencedColumnName="id")
      * })
+     * @Assert\NotBlank(message="Este campo no puede quedar en blanco.")
      */
     private $categoria;
 
@@ -144,6 +157,7 @@ class Item
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="condicion_id", referencedColumnName="id")
      * })
+     * @Assert\NotBlank(message="Este campo no puede quedar en blanco.")
      */
     private $condicion;
 
@@ -154,6 +168,7 @@ class Item
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="estado_id", referencedColumnName="id")
      * })
+     * @Assert\NotBlank(message="Este campo no puede quedar en blanco.")
      */
     private $estado;
 
@@ -164,6 +179,7 @@ class Item
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="ubicacion_id", referencedColumnName="id")
      * })
+     * @Assert\NotBlank(message="Este campo no puede quedar en blanco.")
      */
     private $ubicacion;
 
@@ -176,7 +192,7 @@ class Item
         $this->prestamos = new \Doctrine\Common\Collections\ArrayCollection();
 
         $now=new \DateTime();
-        $now=new \DateTime();
+
         $this->setCreatedAt($now);
         $this->setCreatedBy('Juan Perez');
 

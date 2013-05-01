@@ -3,6 +3,7 @@
 namespace mz\InventarioBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Prestamo
@@ -26,6 +27,7 @@ class Prestamo
      * @var string
      *
      * @ORM\Column(name="apellido", type="string", length=255)
+     * @Assert\NotBlank(message="Este campo no puede quedar en blanco.")
      */
     private $apellido;
 
@@ -33,6 +35,7 @@ class Prestamo
      * @var string
      *
      * @ORM\Column(name="nombre", type="string", length=255)
+     * @Assert\NotBlank(message="Este campo no puede quedar en blanco.")
      */
     private $nombre;
 
@@ -40,6 +43,9 @@ class Prestamo
      * @var string
      *
      * @ORM\Column(name="dni", type="string", length=255)
+     * @Assert\Type(type="numeric", message="El valor ingresado no es válido.")
+     * @Assert\Type(type="integer", message="El valor ingresado no es válido.")
+     * @Assert\NotBlank(message="Este campo no puede quedar en blanco.")
      */
     private $dni;
 
@@ -47,6 +53,8 @@ class Prestamo
      * @var \DateTime
      *
      * @ORM\Column(name="fecha", type="date")
+     * @Assert\NotBlank(message="Este campo no puede quedar en blanco.")
+     * @Assert\Date(message="Fecha inválida.")
      */
     private $fecha;
 
@@ -54,6 +62,7 @@ class Prestamo
      * @var \DateTime
      *
      * @ORM\Column(name="fecha_devolucion", type="date", nullable=true)
+     * @Assert\Date(message="Fecha inválida.")
      */
     private $fechaDevolucion;
 

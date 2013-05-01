@@ -2,28 +2,6 @@ imagen:
     pattern:  /
     defaults: { _controller: "mzInventarioBundle:Imagen:index" }
 
-imagen_show:
-    pattern:  /{id}/show
-    defaults: { _controller: "mzInventarioBundle:Imagen:show" }
-
-imagen_new:
-    pattern:  /new
-    defaults: { _controller: "mzInventarioBundle:Imagen:new" }
-
-imagen_create:
-    pattern:  /create
-    defaults: { _controller: "mzInventarioBundle:Imagen:create" }
-    requirements: { _method: post }
-
-imagen_edit:
-    pattern:  /{id}/edit
-    defaults: { _controller: "mzInventarioBundle:Imagen:edit" }
-
-imagen_update:
-    pattern:  /{id}/update
-    defaults: { _controller: "mzInventarioBundle:Imagen:update" }
-    requirements: { _method: post }
-
 imagen_delete:
     pattern:  /{id}/delete
     defaults: { _controller: "mzInventarioBundle:Imagen:delete" }

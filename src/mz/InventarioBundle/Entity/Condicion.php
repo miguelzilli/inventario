@@ -4,13 +4,15 @@ namespace mz\InventarioBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use mz\InventarioBundle\Utils\Utils as Utils;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * Condicion
  *
  * @ORM\Table(name="condiciones")
  * @ORM\Entity
- * @ORM\HasLifecycleCallbacks
+ * @UniqueEntity(fields="nombre", message="Ya existe un registro con este nombre.")
  */
 class Condicion
 {
@@ -27,13 +29,13 @@ class Condicion
      * @var string
      *
      * @ORM\Column(name="nombre", type="string", length=255, unique=true)
+     * @Assert\NotBlank(message="Este campo no puede quedar en blanco.")
      */
     private $nombre;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="slug", type="string", length=255, unique=true)
      */
     private $slug;
 
@@ -43,7 +45,6 @@ class Condicion
      * @ORM\OneToMany(targetEntity="mz\InventarioBundle\Entity\Item", mappedBy="condicion")
      */
     private $items;
-
     /**
      * Constructor
      */
@@ -71,6 +72,7 @@ class Condicion
     public function setNombre($nombre)
     {
         $this->nombre = $nombre;
+        $this->setSlug($nombre);
     
         return $this;
     }
@@ -93,7 +95,7 @@ class Condicion
      */
     public function setSlug($slug)
     {
-        $this->slug = $slug;
+        $this->slug = Utils::slugify($slug);
     
         return $this;
     }
@@ -143,13 +145,5 @@ class Condicion
 
     public function __toString() {
         return $this->getNombre();
-    }
-    /**
-     * @ORM\PrePersist
-     */
-    public function setSlugValue() {
-        if (!$this->getSlug()) {
-            $this->setSlug(Utils::slugify($this->getNombre()));
-        }
     }
 }

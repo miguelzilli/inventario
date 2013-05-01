@@ -102,136 +102,13 @@ class ImagenController extends Controller
         $view = new TwitterBootstrapView();
         $pagerHtml = $view->render($pagerfanta, $routeGenerator, array(
             'proximity' => 3,
-            'prev_message' => $translator->trans('views.index.pagprev', array(), 'JordiLlonchCrudGeneratorBundle'),
-            'next_message' => $translator->trans('views.index.pagnext', array(), 'JordiLlonchCrudGeneratorBundle'),
+            'prev_message' => 'Anterior',
+            'next_message' => 'Siguiente',
         ));
     
         return array($entities, $pagerHtml);
     }
     
-    /**
-     * Finds and displays a Imagen entity.
-     *
-     */
-    public function showAction($id)
-    {
-        $em = $this->getDoctrine()->getManager();
-
-        $entity = $em->getRepository('mzInventarioBundle:Imagen')->find($id);
-
-        if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Imagen entity.');
-        }
-
-        $deleteForm = $this->createDeleteForm($id);
-
-        return $this->render('mzInventarioBundle:Imagen:show.html.twig', array(
-            'entity'      => $entity,
-            'delete_form' => $deleteForm->createView(),        ));
-    }
-
-    /**
-     * Displays a form to create a new Imagen entity.
-     *
-     */
-    public function newAction()
-    {
-        $entity = new Imagen();
-        $form   = $this->createForm(new ImagenType(), $entity);
-
-        return $this->render('mzInventarioBundle:Imagen:new.html.twig', array(
-            'entity' => $entity,
-            'form'   => $form->createView(),
-        ));
-    }
-
-    /**
-     * Creates a new Imagen entity.
-     *
-     */
-    public function createAction()
-    {
-        $entity  = new Imagen();
-        $request = $this->getRequest();
-        $form    = $this->createForm(new ImagenType(), $entity);
-        $form->bind($request);
-
-        if ($form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($entity);
-            $em->flush();
-            $this->get('session')->getFlashBag()->add('success', 'flash.create.success');
-
-            return $this->redirect($this->generateUrl('imagen_show', array('id' => $entity->getId())));        } else {
-            $this->get('session')->getFlashBag()->add('error', 'flash.create.error');
-        }
-
-        return $this->render('mzInventarioBundle:Imagen:new.html.twig', array(
-            'entity' => $entity,
-            'form'   => $form->createView(),
-        ));
-    }
-    /**
-     * Displays a form to edit an existing Imagen entity.
-     *
-     */
-    public function editAction($id)
-    {
-        $em = $this->getDoctrine()->getManager();
-
-        $entity = $em->getRepository('mzInventarioBundle:Imagen')->find($id);
-
-        if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Imagen entity.');
-        }
-
-        $editForm = $this->createForm(new ImagenType(), $entity);
-        $deleteForm = $this->createDeleteForm($id);
-
-        return $this->render('mzInventarioBundle:Imagen:edit.html.twig', array(
-            'entity'      => $entity,
-            'edit_form'   => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
-        ));
-    }
-
-    /**
-     * Edits an existing Imagen entity.
-     *
-     */
-    public function updateAction($id)
-    {
-        $em = $this->getDoctrine()->getManager();
-
-        $entity = $em->getRepository('mzInventarioBundle:Imagen')->find($id);
-
-        if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Imagen entity.');
-        }
-
-        $editForm   = $this->createForm(new ImagenType(), $entity);
-        $deleteForm = $this->createDeleteForm($id);
-
-        $request = $this->getRequest();
-
-        $editForm->bind($request);
-
-        if ($editForm->isValid()) {
-            $em->persist($entity);
-            $em->flush();
-            $this->get('session')->getFlashBag()->add('success', 'flash.update.success');
-
-            return $this->redirect($this->generateUrl('imagen_edit', array('id' => $id)));
-        } else {
-            $this->get('session')->getFlashBag()->add('error', 'flash.update.error');
-        }
-
-        return $this->render('mzInventarioBundle:Imagen:edit.html.twig', array(
-            'entity'      => $entity,
-            'edit_form'   => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
-        ));
-    }
     /**
      * Deletes a Imagen entity.
      *

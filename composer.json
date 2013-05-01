@@ -24,8 +24,7 @@
         "doctrine/data-fixtures": "dev-master",
         "doctrine/doctrine-fixtures-bundle": "dev-master",
         "lexik/form-filter-bundle": "dev-master",
-        "pagerfanta/pagerfanta": "dev-master",
-        "jordillonch/crud-generator": "2.1.x-dev"
+        "pagerfanta/pagerfanta": "dev-master"
     },
     "scripts": {
         "post-install-cmd": [
