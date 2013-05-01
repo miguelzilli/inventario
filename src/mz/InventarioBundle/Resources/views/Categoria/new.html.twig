@@ -1,4 +1,5 @@
 {% extends 'mzInventarioBundle::layout.html.twig' %}
+{% import 'mzInventarioBundle::macros.html.twig' as macros %}
 
 {% block title %} {{ parent() }} - Categorías {% endblock %}
 
@@ -6,18 +7,10 @@
 
 {% block page %}
 <div class="row-fluid">
-    <div class="btn-toolbar">
-        <a class="btn" href="{{ path('categoria') }}">
-            <i class="icon-angle-left icon-large"></i> Volver
-        </a>
-    </div>
+    {{ macros.btn_volver('categoria') }}
 </div>
 <form class="well" action="{{ path('categoria_create') }}" method="post" {{ form_enctype(form) }}>
     {{ form_widget(form) }}
-    <p>
-        <button type="submit" class="btn btn-success">
-            <i class="icon-save icon-large"></i> Guardar
-        </button>
-    </p>
+    <p>{{ macros.btn_guardar() }}</p>
 </form>
 {% endblock %}

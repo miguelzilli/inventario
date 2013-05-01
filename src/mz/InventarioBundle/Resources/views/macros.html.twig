@@ -1,0 +1,44 @@
+{% macro btn_agregar(route_name) %}
+<div class="btn-toolbar">
+    <a class="btn btn-primary" href="{{ path(route_name) }}">
+        <i class="icon-plus"></i> Agregar
+    </a>
+</div>
+{% endmacro %}
+
+{% macro btn_guardar() %}
+    <button type="submit" class="btn btn-success">
+        <i class="icon-save icon-large"></i> Guardar
+    </button>
+{% endmacro %}
+
+{% macro btn_borrar() %}
+    <button class="btn btn-danger" type="submit" onclick="return confirm('Seguro que desea eliminar este registro?');">
+        <i class="icon-trash icon-large"></i> Borrar
+    </button>
+{% endmacro %}
+
+{% macro btn_borrarf(route_name, entity_id, delete_form) %}
+    <div class="btn-toolbar">
+        <form action="{{ path(route_name, { 'id': entity_id }) }}" method="post" class="shitty-delete-form">
+            {{ form_widget(delete_form) }}
+            {{ _self.btn_borrar() }}
+        </form>
+    </div>
+{% endmacro %}
+
+{% macro btn_volver(route_name) %}
+    <div class="btn-toolbar">
+        <a class="btn" href="{{ path(route_name) }}">
+            <i class="icon-angle-left icon-large"></i> Volver
+        </a>
+    </div>
+{% endmacro %}
+
+{% macro btn_editar(route_name, entity_id) %}
+    <div class="btn-toolbar">
+        <a class="btn btn-primary" href="{{ path(route_name, { 'id': entity_id }) }}">
+            <i class="icon-pencil icon-large"></i> Editar
+        </a>
+    </div>
+{% endmacro %}

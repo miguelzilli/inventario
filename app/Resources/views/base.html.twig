@@ -38,10 +38,16 @@
             {% block sidenav %}{% endblock %}
         </nav>
 
-        <section class="content">
+        <section id="content" class="content">
             {% block content %}{% endblock %}
         </section>
 
-        {% block javascript %}{% endblock %}
+        <footer>
+            <hr>
+            <p class="pull-right">A <a href="http://www.portnine.com/bootstrap-themes" target="_blank">Free Bootstrap Theme</a> by <a href="http://www.portnine.com" target="_blank">Portnine</a></p>
+            <p>&copy; 2012 <a href="http://www.portnine.com" target="_blank">Portnine</a></p>
+        </footer>
+
+        {% block javascripts %}{% endblock %}
 </body>
 </html>

@@ -1,54 +1,18 @@
 {% extends 'mzInventarioBundle::layout.html.twig' %}
+{% import 'mzInventarioBundle::macros.html.twig' as macros %}
 
-{% block title %}
-    {{ parent() }} - Estados
-{% endblock %}
+{% block title %} {{ parent() }} - Estados {% endblock %}
 
 {% block pagetitle %} Estado {% endblock %}
 
 {% block page %}
-
-<div class="row-fluid">
-    <div class="btn-toolbar">
-        <a class="btn" href="{{ path('estado') }}">
-            <i class="icon-angle-left icon-large"></i> Volver
-        </a>
+    <div class="row-fluid">
+        {{ macros.btn_volver('estado') }}
+        {{ macros.btn_editar('estado_edit', entity.id) }}
+        {{ macros.btn_borrarf('estado_delete', entity.id, delete_form) }}
     </div>
-    <div class="btn-toolbar">
-        <a class="btn btn-primary" href="{{ path('estado_edit', { 'id': entity.id }) }}">
-            <i class="icon-pencil icon-large"></i> Editar
-        </a>
-    </div>
-    <div class="btn-toolbar">
-        <form action="{{ path('estado_delete', { 'id': entity.id }) }}" method="post" class="shitty-delete-form">
-            {{ form_widget(delete_form) }}
-            <button class="btn btn-danger" type="submit" onclick="return confirm('Seguro que desea eliminar este registro?');">
-                <i class="icon-trash icon-large"></i> Borrar
-            </button>
-        </form>
-    </div>
-</div>
-
-<form class="well form-horizontal">
-    <fieldset>
-        <div class="control-group">
-            <label class="control-label">Id</label>
-            <div class="controls">
-                <span class="input-xlarge uneditable-input">{{ entity.id }}</span>
-            </div>
-        </div>
-        <div class="control-group">
-            <label class="control-label">Nombre</label>
-            <div class="controls">
-                <span class="input-xlarge uneditable-input">{{ entity.nombre }}</span>
-            </div>
-        </div>
-        <div class="control-group">
-            <label class="control-label">Slug</label>
-            <div class="controls">
-                <span class="input-xlarge uneditable-input">{{ entity.slug }}</span>
-            </div>
-        </div>
-    </fieldset>
-</form>
+    
+    <form class="well form-horizontal">
+        {% include 'mzInventarioBundle:Partials:_show_fieldset.html.twig' with { 'entity': entity } %}
+    </form>
 {% endblock %}

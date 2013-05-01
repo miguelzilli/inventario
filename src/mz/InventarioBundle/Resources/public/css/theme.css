@@ -97,7 +97,8 @@ hr {
 .content {
   min-width: 400px;
   position: relative;
-  min-height: 800px;
+  /**min-height: 800px;**/
+  min-height: 494px;
   background: #fff;
   margin-left: 240px;
   border-left: 1px solid #cccccc;
@@ -146,13 +147,13 @@ hr {
 }
 footer {
   padding: 1em;
-  margin-top: 4em;
+  /**margin-top: 4em;**/
   color: #666;
   font-size: .85em;
   line-height: 1.3em;
 }
 footer hr {
-  margin: 2em -2em;
+  /**margin: 2em -2em;**/
 }
 /*Quick Toolbar*/
 .btn-toolbar.quick-toolbar {
@@ -762,16 +763,14 @@ table.table.list tr:first-child td {
   }
 }
 
-/*Modificado por Mz*/
+/** Modificado por MZ **/
 .table-hover tbody tr:hover > td,
 .table-hover tbody tr:hover > th {
   background-color: #f0f5ff;
 }
-
 .btn-toolbar{
   display: inline-block;
 }
-
 .well{
   padding-bottom: 0;
   margin-bottom: 10px;
@@ -789,4 +788,17 @@ td.actions{
 }
 form.shitty-delete-form{
   margin: 0;
+}
+.sidebar-nav .nav-header {
+  text-decoration: none;
+}
+.sidebar-nav .nav-header .icon-chevron-down {
+  float: right;
+}
+footer{
+    background: none repeat scroll 0 0 #FFFFFF;
+    border-left: 3px solid #999999;
+    margin-left: 240px;
+    min-width: 400px;
+    position: relative;
 }

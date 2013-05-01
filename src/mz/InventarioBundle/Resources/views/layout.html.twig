@@ -1,7 +1,5 @@
 {% extends '::base.html.twig' %}
 
-{% block title %} mzInventario {% endblock %}
-
 {% block stylesheets %}
     <link href="{{ asset('bundles/mzinventario/css/bootstrap.css') }}" rel="stylesheet" type="text/css">
     <link href="{{ asset('bundles/mzinventario/css/bootstrap-responsive.css') }}" rel="stylesheet">
@@ -19,18 +17,15 @@
 {% block navbar %}
     <div class="navbar-inner">
         <ul class="nav pull-right">
-            <li><a href="#" class="hidden-phone visible-tablet visible-desktop" role="button">Settings</a></li>
             <li id="fat-menu" class="dropdown">
                 <a href="#" role="button" class="dropdown-toggle" data-toggle="dropdown">
-                    <i class="icon-user"></i> Jack Smith
+                    <i class="icon-user"></i> [USER NAME]
                     <i class="icon-caret-down"></i>
                 </a>
                 <ul class="dropdown-menu">
-                    <li><a tabindex="-1" href="#">My Account</a></li>
+                    <li><a href="#" tabindex="-1">Perfil</a></li>
                     <li class="divider"> </li>
-                    <li><a tabindex="-1" class="visible-phone" href="#">Settings</a></li>
-                    <li class="divider visible-phone"> </li>
-                    <li><a tabindex="-1" href="sign-in.html">Logout</a></li>
+                    <li><a href="#" tabindex="-1">Salir</a></li>
                 </ul>
             </li>
         </ul>
@@ -39,69 +34,61 @@
 {% endblock %}
 
 {% block sidenav %}
-    <a href="#dashboard-menu" class="nav-header" data-toggle="collapse"><i class="icon-dashboard"></i>Dashboard</a>
+    <a href="#dashboard-menu" class="nav-header" data-toggle="collapse">
+        <i class="icon-dashboard"></i>Inventario <i class="icon-chevron-up"></i>
+    </a>
     <ul id="dashboard-menu" class="nav nav-list collapse in">
-        <li><a href="{{ path('item') }}">Items</a></li>
-        <li ><a href="{{ path('categoria') }}">Categorias</a></li>
-        <li ><a href="{{ path('condicion') }}">Condiciones</a></li>
-        <li ><a href="{{ path('estado') }}">Estados</a></li>
-        <li ><a href="{{ path('ubicacion') }}">Ubicaciones</a></li>
-        <li ><a href="{{ path('prestamo') }}">Prestamos</a></li>
-        <li ><a href="{{ path('imagen') }}">Imágenes</a></li>
-        <li ><a href="{{ path('usuario') }}">Usuarios</a></li>
+        <li><a class="mnu_link" href="{{ path('item') }}">Items</a></li>
+        <li><a class="mnu_link" href="{{ path('prestamo') }}">Prestamos</a></li>
+        <li><a href="{{ path('imagen') }}">Imágenes</a></li>
     </ul>
 
-    <a href="#accounts-menu" class="nav-header" data-toggle="collapse"><i class="icon-briefcase"></i>Account<span class="label label-info">+3</span></a>
-    <ul id="accounts-menu" class="nav nav-list collapse">
-        <li ><a href="sign-in.html">Sign In</a></li>
-        <li ><a href="sign-up.html">Sign Up</a></li>
-        <li ><a href="reset-password.html">Reset Password</a></li>
+    <a href="#reports-menu" class="nav-header collapsed" data-toggle="collapse">
+        <i class="icon-bar-chart"></i>Reportes <i class="icon-chevron-up"></i>
+    </a>
+    <ul id="reports-menu" class="nav nav-list collapse">
+        <li ><a href="#">[REPORTES]</a></li>
     </ul>
 
-    <a href="#error-menu" class="nav-header collapsed" data-toggle="collapse"><i class="icon-exclamation-sign"></i>Error Pages <i class="icon-chevron-up"></i></a>
-    <ul id="error-menu" class="nav nav-list collapse">
-        <li ><a href="403.html">403 page</a></li>
-        <li ><a href="404.html">404 page</a></li>
-        <li ><a href="500.html">500 page</a></li>
-        <li ><a href="503.html">503 page</a></li>
+    <a href="#configs-menu" class="nav-header collapsed" data-toggle="collapse">
+        <i class="icon-cogs"></i>Configuración <i class="icon-chevron-up"></i>
+    </a>
+    <ul id="configs-menu" class="nav nav-list collapse">
+        <li ><a class="mnu_link" href="{{ path('categoria') }}">Categorias</a></li>
+        <li ><a class="mnu_link" href="{{ path('condicion') }}">Condiciones</a></li>
+        <li ><a class="mnu_link" href="{{ path('estado') }}">Estados</a></li>
+        <li ><a class="mnu_link" href="{{ path('ubicacion') }}">Ubicaciones</a></li>
     </ul>
 
-    <a href="#legal-menu" class="nav-header" data-toggle="collapse"><i class="icon-legal"></i>Legal</a>
-    <ul id="legal-menu" class="nav nav-list collapse">
-        <li ><a href="privacy-policy.html">Privacy Policy</a></li>
-        <li ><a href="terms-and-conditions.html">Terms and Conditions</a></li>
-    </ul>
-
-    <a href="help.html" class="nav-header" ><i class="icon-question-sign"></i>Help</a>
-    <a href="faq.html" class="nav-header" ><i class="icon-comment"></i>Faq</a>
+    <a href="{{ path ('usuario')}}" class="nav-header mnu_link">
+        <i class="icon-group"></i>Usuarios
+    </a>
 {% endblock %}
 
 {% block content %}
     <section class="header">
         <div class="stats">
-
             {% block stats %}
                 <p class="stat"><span class="number">53</span>tickets</p>
                 <p class="stat"><span class="number">27</span>tasks</p>
                 <p class="stat"><span class="number">15</span>waiting</p>
             {% endblock %}
-
         </div>
 
         <h1 class="page-title">{% block pagetitle %}Dashboard{% endblock %}</h1>
-
     </section>
 
-    {% block breadcrumb %}
-        <ul class="breadcrumb">
-            <li><a href="index.html">Home</a> <span class="divider">/</span></li>
-            <li class="active">Dashboard</li>
-        </ul>
-    {% endblock %}
+    <section id="breadcrumb">
+        {% block breadcrumb %}
+            <ul class="breadcrumb">
+                <li><a href="{{ path('item')}}">Home</a> <span class="divider">/</span></li>
+                <li class="active">Dashboard</li>
+            </ul>
+        {% endblock %}
+    </section>
 
     <section class="container-fluid">
         <div class="row-fluid">
-
             {% for type, flashMessages in app.session.flashbag.all() %}
                     {% for flashMessage in flashMessages %}
                         <div class="alert alert-{{ type }}">
@@ -113,18 +100,20 @@
 
             {% block flashmessages %}{% endblock %}
 
-            {% block page %}[CONTENT HERE]{% endblock %}
-
+            {% block page %}{% endblock %}
         </div>
-        <footer>
-            <hr>
-            <!-- Purchase a site license to remove this link from the footer: http://www.portnine.com/bootstrap-themes -->
-            <p class="pull-right">A <a href="http://www.portnine.com/bootstrap-themes" target="_blank">Free Bootstrap Theme</a> by <a href="http://www.portnine.com" target="_blank">Portnine</a></p>
-            <p>&copy; 2012 <a href="http://www.portnine.com" target="_blank">Portnine</a></p>
-        </footer>
     </section>
 {% endblock %}
-{% block javascript %}
+
+{% block javascripts %}
     <script src="{{ asset('bundles/mzinventario/js/jquery-1.7.2.min.js')}}" type="text/javascript"></script>
     <script src="{{ asset('bundles/mzinventario/js/bootstrap.js')}}"></script>
+    <script type="text/javascript">
+    $(document).ready(function(){
+        $('a.mnu_link').click(function(event){
+            event.preventDefault();
+            $('#content').load($(this).attr('href'));
+        });
+    });
+    </script>
 {% endblock %}

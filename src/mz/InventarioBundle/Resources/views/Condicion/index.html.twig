@@ -1,21 +1,19 @@
-{% extends 'mzInventarioBundle::layout.html.twig' %}
+{% extends app.request.isXmlHttpRequest ? "mzInventarioBundle::layout_ajax.html.twig" : "mzInventarioBundle::layout.html.twig" %}
 
-{% block title %}
-    {{ parent() }} - Condiciones
-{% endblock %}
+{% block title %} {{ parent() }} - Condiciones {% endblock %}
 
-{% block pagetitle %}
-    Condiciones
-{% endblock %}
+{% block pagetitle %} Condiciones {% endblock %}
 
-{% block page %}
-<div class="row-fluid">
+{% block flashmessages %}
+    {{ parent() }}
     {% if form_errors(filterForm) %}
         <div class="alert alert-block alert-error fade in form-errors">
             {{ form_errors(filterForm) }}
         </div>
     {% endif %}
-</div>
+{% endblock %}
+
+{% block page %}
 <div class="row-fluid">
     <div class="btn-toolbar">
         <a class="btn btn-primary" href="{{ path('condicion_new') }}">
