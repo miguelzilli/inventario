@@ -11,6 +11,7 @@ use Pagerfanta\View\TwitterBootstrapView;
 use mz\InventarioBundle\Entity\Usuario;
 use mz\InventarioBundle\Form\UsuarioType;
 use mz\InventarioBundle\Form\UsuarioFilterType;
+use Symfony\Component\Security\Core\Encoder\MessageDigestPasswordEncoder as PassEncoder;
 
 /**
  * Usuario controller.
@@ -158,11 +159,14 @@ class UsuarioController extends Controller
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
+
             $em->persist($entity);
             $em->flush();
-            $this->get('session')->getFlashBag()->add('success', 'flash.create.success');
 
-            return $this->redirect($this->generateUrl('usuario_show', array('id' => $entity->getId())));        } else {
+            $this->get('session')->getFlashBag()->add('success', 'flash.create.success');
+            return $this->redirect($this->generateUrl('usuario_show', array('id' => $entity->getId())));
+
+        } else {
             $this->get('session')->getFlashBag()->add('error', 'flash.create.error');
         }
 

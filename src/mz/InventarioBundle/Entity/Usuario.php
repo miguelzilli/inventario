@@ -5,17 +5,19 @@ namespace mz\InventarioBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
-use Symfony\Component\Security\Core\Validator\Constraint as SecurityAssert;
+use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Security\Core\Encoder\MessageDigestPasswordEncoder as PassEncoder;
 
 /**
  * Usuario
  *
  * @ORM\Table(name="usuarios")
  * @ORM\Entity
- * @UniqueEntity(fields="username", message="Ya existe un registro con este nombre.")
- * @UniqueEntity(fields="email", message="Ya existe un registro con este nombre.")
+ * @ORM\HasLifecycleCallbacks
+ * @UniqueEntity(fields="username", message="Ya existe un usuario con este nombre.")
+ * @UniqueEntity(fields="email", message="Ya existe un usuario con este email.")
  */
-class Usuario
+class Usuario implements UserInterface
 {
     /**
      * @var integer
@@ -56,7 +58,7 @@ class Usuario
      *
      * @ORM\Column(name="username", type="string", length=255, unique=true)
      * @Assert\NotBlank(message="Este campo no puede quedar en blanco.")
-     * @Assert\Length(min = "6", minMessage = "Ingrese al menos {{ limit }} caracteres.")
+     * //Assert\Length(min = "6", minMessage = "Ingrese al menos {{ limit }} caracteres.")
      */
     private $username;
 
@@ -65,17 +67,25 @@ class Usuario
      *
      * @ORM\Column(name="password", type="string", length=255)
      * @Assert\NotBlank(message="Este campo no puede quedar en blanco.")
-     * @Assert\Length(min = "6", minMessage = "Ingrese al menos {{ limit }} caracteres.")
+     * //Assert\Length(min = "6", minMessage = "Ingrese al menos {{ limit }} caracteres.")
      */
     private $password;
 
     /**
      * @var string
-     * 
-     * @SecurityAssert\UserPassword(message = "Contraseña incorrecta.")
-     * @Assert\NotBlank(message="Este campo no puede quedar en blanco.")
+     *
+     * @ORM\Column(name="salt", type="string", length=255)
      */
-    private $oldPassword;
+    private $salt;
+
+    /**
+     * @var string
+     * UserInterface requires a "getRoles" method
+     * so i named this atribute in plural
+     *
+     * @ORM\Column(name="roles", type="string", length=255)
+     */
+    private $roles;
 
     /**
      * @var boolean
@@ -84,6 +94,47 @@ class Usuario
      * @Assert\Type(type="bool", message="El valor {{ value }} no es del tipo {{ type }}.")
      */
     private $isEnabled = true;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="created_at", type="datetime")
+     */
+    private $createdAt;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="created_by", type="string", length=255)
+     */
+    private $createdBy;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="updated_at", type="datetime")
+     */
+    private $updatedAt;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="updated_by", type="string", length=255)
+     */
+    private $updatedBy;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $now=new \DateTime();
+        $this->setCreatedAt($now);
+        $this->setCreatedBy('CHANGE_THIS');
+
+        $this->setUpdatedAt($now);
+        $this->setUpdatedBy('CHANGE_THIS');
+    }
 
     /**
      * Get id
@@ -195,7 +246,7 @@ class Usuario
      */
     public function setPassword($password)
     {
-        $this->password = $password;
+        $this->password = $this->encodePass($password);
     
         return $this;
     }
@@ -231,5 +282,185 @@ class Usuario
     public function getIsEnabled()
     {
         return $this->isEnabled;
+    }
+
+    /**
+     * Compares this user to another to determine if they are the same.
+     *
+     * @param UserInterface $user The user
+     * @return boolean True if equal, false othwerwise.
+     */
+    public function equals(UserInterface $user) {
+        return md5($this->getUsername()) == md5($user->getUsername());
+    }
+
+    /**
+     * Erases the user credentials.
+     */
+    public function eraseCredentials() {
+
+    }
+
+    /**
+     * Set salt
+     *
+     * @param string $salt
+     * @return Usuario
+     */
+    public function setSalt($salt)
+    {
+        $this->salt = $salt;
+    
+        return $this;
+    }
+
+    /**
+     * Get salt
+     *
+     * @return string 
+     */
+    public function getSalt()
+    {
+        return $this->salt;
+    }
+
+    /**
+     * Set roles
+     *
+     * @param string $roles
+     * @return Usuario
+     */
+    public function setRoles($roles)
+    {
+        $this->roles = $roles;
+    
+        return $this;
+    }
+
+    /**
+     * Get roles
+     *
+     * @return array 
+     */
+    public function getRoles()
+    {
+        return array($this->roles);
+    }
+
+    /**
+     * Set createdAt
+     *
+     * @param \DateTime $createdAt
+     * @return Usuario
+     */
+    public function setCreatedAt($createdAt)
+    {
+        $this->createdAt = $createdAt;
+    
+        return $this;
+    }
+
+    /**
+     * Get createdAt
+     *
+     * @return \DateTime 
+     */
+    public function getCreatedAt()
+    {
+        return $this->createdAt;
+    }
+
+    /**
+     * Set createdBy
+     *
+     * @param string $createdBy
+     * @return Usuario
+     */
+    public function setCreatedBy($createdBy)
+    {
+        $this->createdBy = $createdBy;
+    
+        return $this;
+    }
+
+    /**
+     * Get createdBy
+     *
+     * @return string 
+     */
+    public function getCreatedBy()
+    {
+        return $this->createdBy;
+    }
+
+    /**
+     * Set updatedAt
+     *
+     * @param \DateTime $updatedAt
+     * @return Usuario
+     */
+    public function setUpdatedAt($updatedAt)
+    {
+        $this->updatedAt = $updatedAt;
+    
+        return $this;
+    }
+
+    /**
+     * Get updatedAt
+     *
+     * @return \DateTime 
+     */
+    public function getUpdatedAt()
+    {
+        return $this->updatedAt;
+    }
+
+    /**
+     * Set updatedBy
+     *
+     * @param string $updatedBy
+     * @return Usuario
+     */
+    public function setUpdatedBy($updatedBy)
+    {
+        $this->updatedBy = $updatedBy;
+    
+        return $this;
+    }
+
+    /**
+     * Get updatedBy
+     *
+     * @return string 
+     */
+    public function getUpdatedBy()
+    {
+        return $this->updatedBy;
+    }
+    
+    /**
+     * @ORM\PreUpdate
+     */
+    public function setUpdatedAtValue() {
+        $this->setUpdatedAt(new \DateTime());
+    }
+
+    /**
+     * @ORM\PreUpdate
+     */
+    public function setUpdatedByValue() {
+        $this->setUpdatedBy('CHANGE_THIS');
+    }
+
+    /**
+     * getEncodedPassword
+     *
+     * @return string 
+     */
+    private function encodePass($pass) {
+        $encoder = new PassEncoder('sha512', true, 13);
+        $encodedPassword = $encoder->encodePassword($pass, $this->getSalt());
+        return $encodedPassword;
     }
 }

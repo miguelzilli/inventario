@@ -194,10 +194,10 @@ class Item
         $now=new \DateTime();
 
         $this->setCreatedAt($now);
-        $this->setCreatedBy('Juan Perez');
+        $this->setCreatedBy('CHANGE_THIS');
 
         $this->setUpdatedAt($now);
-        $this->setUpdatedBy('Juan Perez');
+        $this->setUpdatedBy('CHANGE_THIS');
     }
     
     /**
@@ -682,6 +682,6 @@ class Item
      * @ORM\PreUpdate
      */
     public function setUpdatedByValue() {
-        $this->setUpdatedBy('Juan Perez');
+        $this->setUpdatedBy('CHANGE_THIS');
     }
 }

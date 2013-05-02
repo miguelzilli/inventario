@@ -5,7 +5,7 @@ imports:
 framework:
     #esi:             ~
     #translator:      { fallback: "%locale%" }
-    translator:      { fallback: es }
+    #translator:      { fallback: en }
     secret:          "%secret%"
     router:
         resource: "%kernel.root_dir%/config/routing.yml"
@@ -25,6 +25,7 @@ twig:
     strict_variables: "%kernel.debug%"
     form:
         resources:
+            - mzInventarioBundle::form_div_layout.html.twig
             - LexikFormFilterBundle:Form:form_div_layout.html.twig
 
 # Assetic Configuration

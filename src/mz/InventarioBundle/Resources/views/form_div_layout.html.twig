@@ -1,0 +1,26 @@
+{# modified to fit bootstrap validation display #}
+{% block form_row %}
+{% spaceless %}
+    {% set con_error = errors|length > 0 ? 'error' : 'success' %}
+    <div class="control-group controls {{ con_error }}">
+        {{ form_label(form, null, {'label_attr': {'class': 'control-label'}}) }}
+        {{ form_widget(form) }}
+        {{ form_errors(form) }}
+    </div>
+{% endspaceless %}
+{% endblock form_row %}
+
+{# modified to fit bootstrap validation display (a <span> instead of an <ul>) #}
+{% block form_errors %}
+{% spaceless %}
+    {% if errors|length > 0 %}
+        {% for error in errors %}
+            <span class="help-inline">{{
+                error.messagePluralization is null
+                    ? error.messageTemplate|trans(error.messageParameters, 'validators')
+                    : error.messageTemplate|transchoice(error.messagePluralization, error.messageParameters, 'validators')
+            }}</span>
+        {% endfor %}
+    {% endif %}
+{% endspaceless %}
+{% endblock form_errors %}
