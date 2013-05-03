@@ -23,13 +23,13 @@
                     <i class="icon-caret-down"></i>
                 </a>
                 <ul class="dropdown-menu">
-                    <li><a href="#" tabindex="-1">Perfil</a></li>
+                    <li><a href="{{ path('profile', {'id': 1})}}" tabindex="-1">Perfil</a></li>
                     <li class="divider"> </li>
                     <li><a href="#" tabindex="-1">Salir</a></li>
                 </ul>
             </li>
         </ul>
-        <a class="brand" href="index.html"><span class="first">G4</span> <span class="second">Inventario</span></a>
+        <a class="brand" href="{{ path('homepage') }}"><span class="first">G4</span> <span class="second">Inventario</span></a>
     </div>
 {% endblock %}
 
@@ -38,8 +38,8 @@
         <i class="icon-dashboard"></i>Inventario <i class="icon-chevron-up"></i>
     </a>
     <ul id="dashboard-menu" class="nav nav-list collapse in">
-        <li><a class="mnu_link" href="{{ path('item') }}">Items</a></li>
-        <li><a class="mnu_link" href="{{ path('prestamo') }}">Prestamos</a></li>
+        <li><a class="mnu_link" href="{{ path('homepage') }}">Items</a></li>
+        <li><a class="mnu_link" href="{{ path('prestamo') }}">Préstamos</a></li>
         <li><a href="{{ path('imagen') }}">Imágenes</a></li>
     </ul>
 
@@ -54,7 +54,7 @@
         <i class="icon-cogs"></i>Configuración <i class="icon-chevron-up"></i>
     </a>
     <ul id="configs-menu" class="nav nav-list collapse">
-        <li ><a class="mnu_link" href="{{ path('categoria') }}">Categorias</a></li>
+        <li ><a class="mnu_link" href="{{ path('categoria') }}">Categorías</a></li>
         <li ><a class="mnu_link" href="{{ path('condicion') }}">Condiciones</a></li>
         <li ><a class="mnu_link" href="{{ path('estado') }}">Estados</a></li>
         <li ><a class="mnu_link" href="{{ path('ubicacion') }}">Ubicaciones</a></li>
@@ -78,15 +78,6 @@
         <h1 class="page-title">{% block pagetitle %}Dashboard{% endblock %}</h1>
     </section>
 
-    <section id="breadcrumb">
-        {% block breadcrumb %}
-            <ul class="breadcrumb">
-                <li><a href="{{ path('item')}}">Home</a> <span class="divider">/</span></li>
-                <li class="active">Dashboard</li>
-            </ul>
-        {% endblock %}
-    </section>
-
     <section class="container-fluid">
         <div class="row-fluid">
             {% for type, flashMessages in app.session.flashbag.all() %}
@@ -94,8 +85,8 @@
                         <div class="alert alert-{{ type }}">
                             <button type="button" class="close" data-dismiss="alert">×</button>
                             <strong>{{ flashMessage }}</strong>
+                        </div>
                     {% endfor %}
-                </div>
             {% endfor %}
 
             {% block flashmessages %}{% endblock %}

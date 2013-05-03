@@ -117,6 +117,7 @@ hr {
   border-top: 1px solid #ffffff;
   border-left: 1px solid #ffffff;
   padding: 0em 1.25em;
+  margin-bottom: 10px;
 }
 .header h1 {
   font-size: 2em;
@@ -508,9 +509,9 @@ a.block-heading:hover,
 }
 input[type="text"],
 input[type="password"] {
-  -webkit-border-radius: 0px;
+/*  -webkit-border-radius: 0px;
   -moz-border-radius: 0px;
-  border-radius: 0px;
+  border-radius: 0px;*/
   -moz-background-clip: padding;
   -webkit-background-clip: padding-box;
   background-clip: padding-box;
@@ -801,4 +802,8 @@ footer{
     margin-left: 240px;
     min-width: 400px;
     position: relative;
+}
+
+form div.control-group span.help-inline{
+  margin-bottom: 10px
 }

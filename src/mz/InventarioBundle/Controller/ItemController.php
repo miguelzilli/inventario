@@ -94,7 +94,7 @@ class ItemController extends Controller
         $me = $this;
         $routeGenerator = function($page) use ($me)
         {
-            return $me->generateUrl('item', array('page' => $page));
+            return $me->generateUrl('homepage', array('page' => $page));
         };
     
         // Paginator - view
@@ -258,7 +258,7 @@ class ItemController extends Controller
             $this->get('session')->getFlashBag()->add('error', 'flash.delete.error');
         }
 
-        return $this->redirect($this->generateUrl('item'));
+        return $this->redirect($this->generateUrl('homepage'));
     }
 
     private function createDeleteForm($id)

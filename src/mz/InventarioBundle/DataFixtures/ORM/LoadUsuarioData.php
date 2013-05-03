@@ -6,6 +6,7 @@ use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use mz\InventarioBundle\Entity\Usuario;
+use mz\InventarioBundle\Utils\Utils as Utils;
 
 class LoadUsuarioData extends AbstractFixture implements OrderedFixtureInterface {
 
@@ -16,7 +17,8 @@ class LoadUsuarioData extends AbstractFixture implements OrderedFixtureInterface
         $admin->setEmail('miguelzilli@mail.com');
         $admin->setUsername('admin');
         $admin->setSalt(md5(time()));
-        $admin->setPassword('adminpass');
+        $password=Utils::encodePassword('adminpass', $admin->getSalt());
+        $admin->setPassword($password);
         $admin->setRoles('ROLE_ADMIN');
         $admin->setIsEnabled(true);
 
@@ -26,7 +28,8 @@ class LoadUsuarioData extends AbstractFixture implements OrderedFixtureInterface
         $user->setEmail('juanperez@mail.com');
         $user->setUsername('user');
         $user->setSalt(md5(time()));
-        $user->setPassword('userpass');
+        $password=Utils::encodePassword('userpass', $user->getSalt());
+        $user->setPassword($password);
         $user->setRoles('ROLE_USER');
         $user->setIsEnabled(true);
 

@@ -1,30 +1,21 @@
-usuario:
-    pattern:  /
-    defaults: { _controller: "mzInventarioBundle:Usuario:index" }
+profile:
+    pattern:  /{id}/profile
+    defaults: { _controller: "mzInventarioBundle:Usuario:profile" }
 
-usuario_show:
-    pattern:  /{id}/show
-    defaults: { _controller: "mzInventarioBundle:Usuario:show" }
-
-usuario_new:
-    pattern:  /new
-    defaults: { _controller: "mzInventarioBundle:Usuario:new" }
-
-usuario_create:
-    pattern:  /create
-    defaults: { _controller: "mzInventarioBundle:Usuario:create" }
-    requirements: { _method: post }
-
-usuario_edit:
-    pattern:  /{id}/edit
+profile_edit:
+    pattern:   /{id}/edit
     defaults: { _controller: "mzInventarioBundle:Usuario:edit" }
 
-usuario_update:
+profile_update:
     pattern:  /{id}/update
     defaults: { _controller: "mzInventarioBundle:Usuario:update" }
     requirements: { _method: post }
 
-usuario_delete:
-    pattern:  /{id}/delete
-    defaults: { _controller: "mzInventarioBundle:Usuario:delete" }
+change_pass:
+    pattern:   /{id}/change_pass
+    defaults: { _controller: "mzInventarioBundle:Usuario:changePassword" }
+
+update_pass:
+    pattern:  /{id}/update_pass
+    defaults: { _controller: "mzInventarioBundle:Usuario:updatePassword" }
     requirements: { _method: post }

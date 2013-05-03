@@ -5,6 +5,7 @@ namespace mz\InventarioBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use mz\InventarioBundle\Entity\Usuario as Usuario;
 
 class UsuarioType extends AbstractType
 {
@@ -17,9 +18,10 @@ class UsuarioType extends AbstractType
             ->add('username')
             ->add('password')
             //->add('salt')
-            ->add('roles')
-            ->add('isEnabled')
-        ;
+            ->add('roles', 'choice', array(
+                'label' => 'Rol',
+                'choices' => Usuario::obtenerRoles()))
+             ->add('isEnabled', null, array('label'=>'Habilitado?'));
     }
 
     public function setDefaultOptions(OptionsResolverInterface $resolver)

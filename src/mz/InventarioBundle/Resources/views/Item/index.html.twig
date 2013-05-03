@@ -27,7 +27,7 @@
     </div>
 </div>
 <div id="filters" class="collapse">
-    <form class="well" action="{{ path('item') }}" method="post" {{ form_enctype(filterForm) }}>
+    <form class="well" action="{{ path('homepage') }}" method="post" {{ form_enctype(filterForm) }}>
         {{ form_row(filterForm.id) }}
         {{ form_row(filterForm.nombre) }}
         {{ form_row(filterForm.marca) }}

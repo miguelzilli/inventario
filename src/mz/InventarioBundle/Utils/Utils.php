@@ -1,5 +1,6 @@
 <?php
 namespace mz\InventarioBundle\Utils;
+use Symfony\Component\Security\Core\Encoder\MessageDigestPasswordEncoder as PasswordEncoder;
 
 class Utils
 {
@@ -29,5 +30,11 @@ class Utils
         }
 
         return $text;
+    }
+
+    static function encodePassword($pass, $salt=null){
+        $encoder = new PasswordEncoder('sha512', true, 13);
+        $result = $encoder->encodePassword($pass, $salt);
+        return $result;
     }
 }

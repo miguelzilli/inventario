@@ -11,15 +11,6 @@
         <h1 class="page-title">{% block pagetitle %}Dashboard{% endblock %}</h1>
     </section>
 
-    <section id="breadcrumb">
-        {% block breadcrumb %}
-            <ul class="breadcrumb">
-                <li><a href="{{ path('item')}}">Home</a> <span class="divider">/</span></li>
-                <li class="active">Dashboard</li>
-            </ul>
-        {% endblock %}
-    </section>
-
     <section class="container-fluid">
         <div class="row-fluid">
             {% for type, flashMessages in app.session.flashbag.all() %}

@@ -2,38 +2,19 @@
 
 {% block title %} {{ parent() }} - Usuarios {% endblock %}
 
-{% block pagetitle %} Usuario {% endblock %}
+{% block pagetitle %} Perfil del Usuario {% endblock %}
 
 {% block page %}
 <div class="row-fluid">
     <div class="btn-toolbar">
-        <a class="btn" href="{{ path('usuario') }}">
-            <i class="icon-angle-left icon-large"></i> Volver
-        </a>
-    </div>
-    <div class="btn-toolbar">
-        <a class="btn btn-primary" href="{{ path('usuario_edit', { 'id': entity.id }) }}">
+        <a class="btn btn-primary" href="{{ path('profile_edit', { 'id': entity.id }) }}">
             <i class="icon-pencil icon-large"></i> Editar
         </a>
-    </div>
-    <div class="btn-toolbar">
-        <form action="{{ path('usuario_delete', { 'id': entity.id }) }}" method="post" class="shitty-delete-form">
-            {{ form_widget(delete_form) }}
-            <button class="btn btn-danger" type="submit" onclick="return confirm('Seguro que desea eliminar este registro?');">
-                <i class="icon-trash icon-large"></i> Borrar
-            </button>
-        </form>
     </div>
 </div>
 
 <form class="well form-horizontal">
     <fieldset>
-        <div class="control-group">
-            <label class="control-label">Id</label>
-            <div class="controls">
-                <span class="input-xlarge uneditable-input">{{ entity.id }}</span>
-            </div>
-        </div>
         <div class="control-group">
             <label class="control-label">Apellido</label>
             <div class="controls">
@@ -56,18 +37,6 @@
             <label class="control-label">Username</label>
             <div class="controls">
                 <span class="input-xlarge uneditable-input">{{ entity.username }}</span>
-            </div>
-        </div>
-        <div class="control-group">
-            <label class="control-label">Password</label>
-            <div class="controls">
-                <span class="input-xlarge uneditable-input">{{ entity.password }}</span>
-            </div>
-        </div>
-        <div class="control-group">
-            <label class="control-label">Isenabled</label>
-            <div class="controls">
-                <span class="input-xlarge uneditable-input">{{ entity.isEnabled }}</span>
             </div>
         </div>
     </fieldset>

@@ -6,7 +6,6 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
-use Symfony\Component\Security\Core\Encoder\MessageDigestPasswordEncoder as PassEncoder;
 
 /**
  * Usuario
@@ -15,7 +14,6 @@ use Symfony\Component\Security\Core\Encoder\MessageDigestPasswordEncoder as Pass
  * @ORM\Entity
  * @ORM\HasLifecycleCallbacks
  * @UniqueEntity(fields="username", message="Ya existe un usuario con este nombre.")
- * @UniqueEntity(fields="email", message="Ya existe un usuario con este email.")
  */
 class Usuario implements UserInterface
 {
@@ -58,7 +56,7 @@ class Usuario implements UserInterface
      *
      * @ORM\Column(name="username", type="string", length=255, unique=true)
      * @Assert\NotBlank(message="Este campo no puede quedar en blanco.")
-     * //Assert\Length(min = "6", minMessage = "Ingrese al menos {{ limit }} caracteres.")
+     * Assert\Length(min = "6", minMessage = "Ingrese al menos {{ limit }} caracteres.")
      */
     private $username;
 
@@ -67,7 +65,7 @@ class Usuario implements UserInterface
      *
      * @ORM\Column(name="password", type="string", length=255)
      * @Assert\NotBlank(message="Este campo no puede quedar en blanco.")
-     * //Assert\Length(min = "6", minMessage = "Ingrese al menos {{ limit }} caracteres.")
+     * Assert\Length(min = "6", minMessage = "Ingrese al menos {{ limit }} caracteres.")
      */
     private $password;
 
@@ -246,7 +244,7 @@ class Usuario implements UserInterface
      */
     public function setPassword($password)
     {
-        $this->password = $this->encodePass($password);
+        $this->password = $password;
     
         return $this;
     }
@@ -282,23 +280,6 @@ class Usuario implements UserInterface
     public function getIsEnabled()
     {
         return $this->isEnabled;
-    }
-
-    /**
-     * Compares this user to another to determine if they are the same.
-     *
-     * @param UserInterface $user The user
-     * @return boolean True if equal, false othwerwise.
-     */
-    public function equals(UserInterface $user) {
-        return md5($this->getUsername()) == md5($user->getUsername());
-    }
-
-    /**
-     * Erases the user credentials.
-     */
-    public function eraseCredentials() {
-
     }
 
     /**
@@ -344,7 +325,7 @@ class Usuario implements UserInterface
      */
     public function getRoles()
     {
-        return array($this->roles);
+        return $this->roles;
     }
 
     /**
@@ -454,13 +435,25 @@ class Usuario implements UserInterface
     }
 
     /**
-     * getEncodedPassword
+     * Compares this user to another to determine if they are the same.
      *
-     * @return string 
+     * @param UserInterface $user The user
+     * @return boolean True if equal, false othwerwise.
      */
-    private function encodePass($pass) {
-        $encoder = new PassEncoder('sha512', true, 13);
-        $encodedPassword = $encoder->encodePassword($pass, $this->getSalt());
-        return $encodedPassword;
+    public function equals(UserInterface $user) {
+        return md5($this->getUsername()) == md5($user->getUsername());
+    }
+
+    /**
+     * Erases the user credentials.
+     */
+    public function eraseCredentials() {
+
+    }
+
+    static function obtenerRoles(){
+        return array(
+            'ROLE_USER' => 'Usuario',
+            'ROLE_ADMIN' => 'Administrador');
     }
 }
