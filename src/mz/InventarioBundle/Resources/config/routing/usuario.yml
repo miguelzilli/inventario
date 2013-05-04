@@ -11,11 +11,11 @@ profile_update:
     defaults: { _controller: "mzInventarioBundle:Usuario:update" }
     requirements: { _method: post }
 
-change_pass:
-    pattern:   /{id}/change_pass
-    defaults: { _controller: "mzInventarioBundle:Usuario:changePassword" }
+pass_edit:
+    pattern:   /{id}/pass_edit
+    defaults: { _controller: "mzInventarioBundle:Usuario:passEdit" }
 
-update_pass:
-    pattern:  /{id}/update_pass
-    defaults: { _controller: "mzInventarioBundle:Usuario:updatePassword" }
+pass_update:
+    pattern:  /{id}/pass_update
+    defaults: { _controller: "mzInventarioBundle:Usuario:passUpdate" }
     requirements: { _method: post }

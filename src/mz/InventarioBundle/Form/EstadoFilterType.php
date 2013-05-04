@@ -14,9 +14,9 @@ class EstadoFilterType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            //->add('id', 'filter_number_range')
+            // ->add('id', 'filter_number_range')
             ->add('nombre', 'filter_text')
-            ->add('slug', 'filter_text')
+            // ->add('slug', 'filter_text')
         ;
 
         $listener = function(FormEvent $event)
@@ -40,6 +40,6 @@ class EstadoFilterType extends AbstractType
 
     public function getName()
     {
-        return 'mz_inventariobundle_estadofiltertype';
+        return 'mz_estadofiltertype';
     }
 }

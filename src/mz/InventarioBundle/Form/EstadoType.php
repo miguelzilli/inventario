@@ -25,6 +25,6 @@ class EstadoType extends AbstractType
 
     public function getName()
     {
-        return 'mz_inventariobundle_estadotype';
+        return 'mz_estadotype';
     }
 }

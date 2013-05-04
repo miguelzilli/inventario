@@ -1,0 +1,39 @@
+usuario:
+    pattern:  /
+    defaults: { _controller: "mzInventarioBundle:UsuariosAdmin:index" }
+
+usuario_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "mzInventarioBundle:UsuariosAdmin:show" }
+
+usuario_new:
+    pattern:  /new
+    defaults: { _controller: "mzInventarioBundle:UsuariosAdmin:new" }
+
+usuario_create:
+    pattern:  /create
+    defaults: { _controller: "mzInventarioBundle:UsuariosAdmin:create" }
+    requirements: { _method: post }
+
+usuario_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "mzInventarioBundle:UsuariosAdmin:edit" }
+
+usuario_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "mzInventarioBundle:UsuariosAdmin:update" }
+    requirements: { _method: post }
+
+usuario_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "mzInventarioBundle:UsuariosAdmin:delete" }
+    requirements: { _method: post }
+
+usuario_pass_edit:
+    pattern: /{id}/pass_edit
+    defaults: { _controller: "mzInventarioBundle:UsuariosAdmin:passEdit" }
+
+usuario_pass_update:
+    pattern:  /{id}/pass_update
+    defaults: { _controller: "mzInventarioBundle:UsuariosAdmin:passUpdate" }
+    requirements: { _method: post }

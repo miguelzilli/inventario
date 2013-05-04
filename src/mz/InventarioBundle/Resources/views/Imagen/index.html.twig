@@ -17,8 +17,6 @@
 
 <div id="filters" class="collapse">
     <form class="well" action="{{ path('imagen') }}" method="post" {{ form_enctype(filterForm) }}>
-        {{ form_row(filterForm.id) }}
-        {{ form_row(filterForm.ruta) }}
         {{ form_rest(filterForm) }}
         <p>
             <button class="btn" type="submit" name="filter_action" value="reset">Reset</button>

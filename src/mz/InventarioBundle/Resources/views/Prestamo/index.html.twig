@@ -27,17 +27,6 @@
 </div>
 <div id="filters" class="collapse">
     <form class="well" action="{{ path('prestamo') }}" method="post" {{ form_enctype(filterForm) }}>
-        {{ form_row(filterForm.id) }}
-        {{ form_row(filterForm.apellido) }}
-        {{ form_row(filterForm.nombre) }}
-        {{ form_row(filterForm.dni) }}
-        {{ form_row(filterForm.fecha) }}
-        {{ form_row(filterForm.fechaDevolucion) }}
-        {{ form_row(filterForm.observaciones) }}
-        {{ form_row(filterForm.createdAt) }}
-        {{ form_row(filterForm.createdBy) }}
-        {{ form_row(filterForm.updatedAt) }}
-        {{ form_row(filterForm.updatedBy) }}
         {{ form_rest(filterForm) }}
         <p>
             <button class="btn" type="submit" name="filter_action" value="reset">Reset</button>

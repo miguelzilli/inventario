@@ -14,17 +14,17 @@ class PrestamoFilterType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('id', 'filter_number_range')
+            // ->add('id', 'filter_number_range')
             ->add('apellido', 'filter_text')
             ->add('nombre', 'filter_text')
-            ->add('dni', 'filter_text')
-            ->add('fecha', 'filter_date_range')
-            ->add('fechaDevolucion', 'filter_date_range')
-            ->add('observaciones', 'filter_text')
-            ->add('createdAt', 'filter_date_range')
-            ->add('createdBy', 'filter_text')
-            ->add('updatedAt', 'filter_date_range')
-            ->add('updatedBy', 'filter_text')
+            // ->add('dni', 'filter_text')
+            // ->add('fecha', 'filter_date_range')
+            // ->add('fechaDevolucion', 'filter_date_range')
+            // ->add('observaciones', 'filter_text')
+            // ->add('createdAt', 'filter_date_range')
+            // ->add('createdBy', 'filter_text')
+            // ->add('updatedAt', 'filter_date_range')
+            // ->add('updatedBy', 'filter_text')
         ;
 
         $listener = function(FormEvent $event)
@@ -48,6 +48,6 @@ class PrestamoFilterType extends AbstractType
 
     public function getName()
     {
-        return 'mz_inventariobundle_prestamofiltertype';
+        return 'mz_prestamofiltertype';
     }
 }

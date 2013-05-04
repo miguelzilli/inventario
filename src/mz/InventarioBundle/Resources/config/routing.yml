@@ -1,3 +1,15 @@
+login:
+    pattern:  /login
+    defaults: { _controller: "mzInventarioBundle:UsuariosAdmin:login" }
+
+login_check:
+    pattern:  /login_check
+    defaults: { _controller: "mzInventarioBundle:UsuariosAdmin:login" }
+
+logout:
+    pattern:  /logout
+    defaults: { _controller: "mzInventarioBundle:UsuariosAdmin:login" }
+
 mzInventarioBundle_categoria:
         resource: "@mzInventarioBundle/Resources/config/routing/categoria.yml"
         prefix:   /categorias
@@ -14,13 +26,13 @@ mzInventarioBundle_ubicacion:
         resource: "@mzInventarioBundle/Resources/config/routing/ubicacion.yml"
         prefix:   /ubicaciones
 
-mzInventarioBundle_admin_usuarios:
-        resource: "@mzInventarioBundle/Resources/config/routing/admin_usuarios.yml"
-        prefix:   /usuarios
-
 mzInventarioBundle_usuario:
         resource: "@mzInventarioBundle/Resources/config/routing/usuario.yml"
         prefix:   /usuario
+
+mzInventarioBundle_admin_usuarios:
+        resource: "@mzInventarioBundle/Resources/config/routing/usuarios_admin.yml"
+        prefix:   /usuarios
 
 mzInventarioBundle_item:
         resource: "@mzInventarioBundle/Resources/config/routing/item.yml"

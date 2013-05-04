@@ -28,8 +28,6 @@
 </div>
 <div id="filters" class="collapse">
     <form class="well" action="{{ path('condicion') }}" method="post" {{ form_enctype(filterForm) }}>
-        {{ form_row(filterForm.nombre) }}
-        {{ form_row(filterForm.slug) }}
         {{ form_rest(filterForm) }}
         <p>
             <button class="btn" type="submit" name="filter_action" value="reset">Reset</button>

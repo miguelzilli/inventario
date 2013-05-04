@@ -25,6 +25,6 @@ class ImagenType extends AbstractType
 
     public function getName()
     {
-        return 'mz_inventariobundle_imagentype';
+        return 'mz_imagentype';
     }
 }

@@ -6,6 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
+use mz\InventarioBundle\Utils\Utils as Utils;
 
 /**
  * Usuario
@@ -56,7 +57,7 @@ class Usuario implements UserInterface
      *
      * @ORM\Column(name="username", type="string", length=255, unique=true)
      * @Assert\NotBlank(message="Este campo no puede quedar en blanco.")
-     * Assert\Length(min = "6", minMessage = "Ingrese al menos {{ limit }} caracteres.")
+     * @Assert\Length(min = "6", minMessage = "Ingrese al menos {{ limit }} caracteres.")
      */
     private $username;
 
@@ -65,7 +66,7 @@ class Usuario implements UserInterface
      *
      * @ORM\Column(name="password", type="string", length=255)
      * @Assert\NotBlank(message="Este campo no puede quedar en blanco.")
-     * Assert\Length(min = "6", minMessage = "Ingrese al menos {{ limit }} caracteres.")
+     * @Assert\Length(min = "6", minMessage = "Ingrese al menos {{ limit }} caracteres.")
      */
     private $password;
 
@@ -78,12 +79,10 @@ class Usuario implements UserInterface
 
     /**
      * @var string
-     * UserInterface requires a "getRoles" method
-     * so i named this atribute in plural
      *
-     * @ORM\Column(name="roles", type="string", length=255)
+     * @ORM\Column(name="rol", type="string", length=255)
      */
-    private $roles;
+    private $rol;
 
     /**
      * @var boolean
@@ -306,16 +305,26 @@ class Usuario implements UserInterface
     }
 
     /**
-     * Set roles
+     * Set rol
      *
-     * @param string $roles
+     * @param string $rol
      * @return Usuario
      */
-    public function setRoles($roles)
+    public function setRol($rol)
     {
-        $this->roles = $roles;
+        $this->rol = $rol;
     
         return $this;
+    }
+
+    /**
+     * Get rol
+     *
+     * @return string
+     */
+    public function getRol()
+    {
+        return $this->rol;
     }
 
     /**
@@ -325,7 +334,7 @@ class Usuario implements UserInterface
      */
     public function getRoles()
     {
-        return $this->roles;
+        return array($this->getRol());
     }
 
     /**
@@ -455,5 +464,11 @@ class Usuario implements UserInterface
         return array(
             'ROLE_USER' => 'Usuario',
             'ROLE_ADMIN' => 'Administrador');
+    }
+
+    public function setSecurePassword() {
+        $this->setSalt(md5(time()));
+        $encodedPass = Utils::encodePassword($this->getPassword(), $this->getSalt());
+        $this->setPassword($encodedPass);
     }
 }

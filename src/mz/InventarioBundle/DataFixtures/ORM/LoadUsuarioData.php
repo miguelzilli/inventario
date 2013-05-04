@@ -19,7 +19,7 @@ class LoadUsuarioData extends AbstractFixture implements OrderedFixtureInterface
         $admin->setSalt(md5(time()));
         $password=Utils::encodePassword('adminpass', $admin->getSalt());
         $admin->setPassword($password);
-        $admin->setRoles('ROLE_ADMIN');
+        $admin->setRol('ROLE_ADMIN');
         $admin->setIsEnabled(true);
 
         $user = new Usuario();
@@ -30,7 +30,7 @@ class LoadUsuarioData extends AbstractFixture implements OrderedFixtureInterface
         $user->setSalt(md5(time()));
         $password=Utils::encodePassword('userpass', $user->getSalt());
         $user->setPassword($password);
-        $user->setRoles('ROLE_USER');
+        $user->setRol('ROLE_USER');
         $user->setIsEnabled(true);
 
         $em->persist($admin);

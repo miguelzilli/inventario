@@ -25,6 +25,6 @@ class UbicacionType extends AbstractType
 
     public function getName()
     {
-        return 'mz_inventariobundle_ubicaciontype';
+        return 'mz_ubicaciontype';
     }
 }

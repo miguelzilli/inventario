@@ -39,6 +39,6 @@ class ImagenFilterType extends AbstractType
 
     public function getName()
     {
-        return 'mz_inventariobundle_imagenfiltertype';
+        return 'mz_imagenfiltertype';
     }
 }

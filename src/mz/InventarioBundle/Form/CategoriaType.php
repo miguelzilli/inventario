@@ -25,6 +25,6 @@ class CategoriaType extends AbstractType
 
     public function getName()
     {
-        return 'mz_inventariobundle_categoriatype';
+        return 'mz_categoriatype';
     }
 }

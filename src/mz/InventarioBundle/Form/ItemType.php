@@ -40,6 +40,6 @@ class ItemType extends AbstractType
 
     public function getName()
     {
-        return 'mz_inventariobundle_itemtype';
+        return 'mz_itemtype';
     }
 }

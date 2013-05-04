@@ -1,0 +1,39 @@
+{% extends '::base.html.twig' %}
+{% import 'mzInventarioBundle::macros.html.twig' as macros %}
+
+{% block title %} {{ parent() }} - Login {% endblock %}
+
+{% block body %}
+    <nav class="navbar">
+        <div class="navbar-inner">
+            <a class="brand" href="{{ path('homepage') }}">
+                <span class="first">G4</span>
+                <span class="second">Inventario</span>
+            </a>
+        </div>
+    </nav>
+    <div class="row-fluid">
+        <div class="dialog">
+            {% if error %}
+                <div class="alert alert-error">{{ error.message }}</div>
+            {% endif %}
+            <div class="block">
+                <p class="block-heading">Login</p>
+                <div class="block-body">
+                    <form action="{{ path('login_check') }}" method="post">
+                        <label for="username">Username:</label>
+                        <input id="username" class="span12" type="text" name="_username" value="{{ last_username }}" />
+                        <label for="password">Password:</label>
+                        <input id="password" class="span12" type="password" name="_password" />
+                        <button class="btn btn-primary pull-right" type="submit" name="login">Entrar</button>
+                        <label class="remember-me">
+                            <input type="checkbox"> Recordarme
+                        </label>
+                        <div class="clearfix"></div>
+                    </form>
+                </div>
+            </div>
+            <p><a href="#">Olvidó su contraseña?</a></p>
+        </div>
+    </div>
+{% endblock %}

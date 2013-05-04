@@ -28,20 +28,6 @@
 </div>
 <div id="filters" class="collapse">
     <form class="well" action="{{ path('homepage') }}" method="post" {{ form_enctype(filterForm) }}>
-        {{ form_row(filterForm.id) }}
-        {{ form_row(filterForm.nombre) }}
-        {{ form_row(filterForm.marca) }}
-        {{ form_row(filterForm.modelo) }}
-        {{ form_row(filterForm.sn) }}
-        {{ form_row(filterForm.fechaCompra) }}
-        {{ form_row(filterForm.costo) }}
-        {{ form_row(filterForm.garantia) }}
-        {{ form_row(filterForm.descripcion) }}
-        {{ form_row(filterForm.codigo) }}
-        {{ form_row(filterForm.createdAt) }}
-        {{ form_row(filterForm.createdBy) }}
-        {{ form_row(filterForm.updatedAt) }}
-        {{ form_row(filterForm.updatedBy) }}
         {{ form_rest(filterForm) }}
 
         <p>

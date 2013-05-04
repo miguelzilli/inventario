@@ -12,6 +12,11 @@
         </a>
     </div>
     <div class="btn-toolbar">
+        <a class="btn btn-warning" href="{{ path('usuario_pass_edit', { 'id': entity.id }) }}">
+            <i class="icon-edit icon-large"></i> Cambiar Password
+        </a>
+    </div>
+    <div class="btn-toolbar">
         <form action="{{ path('usuario_delete', { 'id': entity.id }) }}" method="post" class="shitty-delete-form">
             {{ form_widget(delete_form) }}
             <button class="btn btn-danger" type="submit" onclick="return confirm('Seguro que desea eliminar este registro?');">

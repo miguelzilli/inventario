@@ -3,19 +3,43 @@
 namespace mz\InventarioBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Symfony\Component\Security\Core\SecurityContext;
+
 use Pagerfanta\Pagerfanta;
 use Pagerfanta\Adapter\DoctrineORMAdapter;
 use Pagerfanta\View\TwitterBootstrapView;
+
 use mz\InventarioBundle\Entity\Usuario;
 use mz\InventarioBundle\Form\UsuarioType;
+use mz\InventarioBundle\Form\UsuarioChangePassType;
 use mz\InventarioBundle\Form\UsuarioFilterType;
-use mz\InventarioBundle\Utils\Utils as Utils;
 
 /**
- * AdminUsuarios controller.
+ * UsuariosAdmin controller.
  *
  */
-class AdminUsuariosController extends Controller {
+class UsuariosAdminController extends Controller {
+
+    public function loginAction()
+    {
+        $request = $this->getRequest();
+        $session = $request->getSession();
+        // obtiene el error de inicio de sesión si lo hay
+        if ($request->attributes->has(SecurityContext::AUTHENTICATION_ERROR)) {
+            $error = $request->attributes->get(SecurityContext::AUTHENTICATION_ERROR);
+        } else {
+            $error = $session->get(SecurityContext::AUTHENTICATION_ERROR);
+        }
+        return $this->render('mzInventarioBundle:UsuariosAdmin:login.html.twig', array(
+            // el último nombre de usuario ingresado por el usuario
+            'last_username' => $session->get(SecurityContext::LAST_USERNAME),
+            'error'         => $error,
+        ));
+    }
 
     /**
      * Lists all Usuario entities.
@@ -23,11 +47,9 @@ class AdminUsuariosController extends Controller {
      */
     public function indexAction() {
         list($filterForm, $queryBuilder) = $this->filter();
-
         list($entities, $pagerHtml) = $this->paginator($queryBuilder);
 
-
-        return $this->render('mzInventarioBundle:AdminUsuarios:index.html.twig', array(
+        return $this->render('mzInventarioBundle:UsuariosAdmin:index.html.twig', array(
                     'entities' => $entities,
                     'pagerHtml' => $pagerHtml,
                     'filterForm' => $filterForm->createView(),
@@ -47,7 +69,7 @@ class AdminUsuariosController extends Controller {
 
         // Reset filter
         if ($request->getMethod() == 'POST' && $request->get('filter_action') == 'reset') {
-            $session->remove('AdminUsuariosControllerFilter');
+            $session->remove('UsuariosAdminControllerFilter');
         }
 
         // Filter action
@@ -60,12 +82,12 @@ class AdminUsuariosController extends Controller {
                 $this->get('lexik_form_filter.query_builder_updater')->addFilterConditions($filterForm, $queryBuilder);
                 // Save filter to session
                 $filterData = $filterForm->getData();
-                $session->set('AdminUsuariosControllerFilter', $filterData);
+                $session->set('UsuariosAdminControllerFilter', $filterData);
             }
         } else {
             // Get filter from session
-            if ($session->has('AdminUsuariosControllerFilter')) {
-                $filterData = $session->get('AdminUsuariosControllerFilter');
+            if ($session->has('UsuariosAdminControllerFilter')) {
+                $filterData = $session->get('UsuariosAdminControllerFilter');
                 $filterForm = $this->createForm(new UsuarioFilterType(), $filterData);
                 $this->get('lexik_form_filter.query_builder_updater')->addFilterConditions($filterForm, $queryBuilder);
             }
@@ -109,7 +131,6 @@ class AdminUsuariosController extends Controller {
      */
     public function showAction($id) {
         $em = $this->getDoctrine()->getManager();
-
         $entity = $em->getRepository('mzInventarioBundle:Usuario')->find($id);
 
         if (!$entity) {
@@ -118,7 +139,7 @@ class AdminUsuariosController extends Controller {
 
         $deleteForm = $this->createDeleteForm($id);
 
-        return $this->render('mzInventarioBundle:AdminUsuarios:show.html.twig', array(
+        return $this->render('mzInventarioBundle:UsuariosAdmin:show.html.twig', array(
                     'entity' => $entity,
                     'delete_form' => $deleteForm->createView(),));
     }
@@ -129,10 +150,9 @@ class AdminUsuariosController extends Controller {
      */
     public function newAction() {
         $entity = new Usuario();
-        $entity->setRoles('ROLE_USER');
         $form = $this->createForm(new UsuarioType(), $entity);
-
-        return $this->render('mzInventarioBundle:AdminUsuarios:new.html.twig', array(
+                
+        return $this->render('mzInventarioBundle:UsuariosAdmin:new.html.twig', array(
                     'entity' => $entity,
                     'form' => $form->createView(),
         ));
@@ -151,7 +171,7 @@ class AdminUsuariosController extends Controller {
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
 
-            $this->setSecurePassword($entity);
+            $entity->setSecurePassword();
 
             $em->persist($entity);
             $em->flush();
@@ -162,7 +182,7 @@ class AdminUsuariosController extends Controller {
             $this->get('session')->getFlashBag()->add('error', 'flash.create.error');
         }
 
-        return $this->render('mzInventarioBundle:AdminUsuarios:new.html.twig', array(
+        return $this->render('mzInventarioBundle:UsuariosAdmin:new.html.twig', array(
                     'entity' => $entity,
                     'form' => $form->createView(),
         ));
@@ -181,10 +201,11 @@ class AdminUsuariosController extends Controller {
             throw $this->createNotFoundException('Unable to find Usuario entity.');
         }
 
-        $editForm = $this->createForm(new UsuarioType(), $entity);
+        //$editForm = $this->createForm(new UsuarioType(), $entity);
+        $editForm = $this->createEditForm($entity);
         $deleteForm = $this->createDeleteForm($id);
 
-        return $this->render('mzInventarioBundle:AdminUsuarios:edit.html.twig', array(
+        return $this->render('mzInventarioBundle:UsuariosAdmin:edit.html.twig', array(
                     'entity' => $entity,
                     'edit_form' => $editForm->createView(),
                     'delete_form' => $deleteForm->createView(),
@@ -204,19 +225,13 @@ class AdminUsuariosController extends Controller {
             throw $this->createNotFoundException('Unable to find Usuario entity.');
         }
 
-        $editForm = $this->createForm(new UsuarioType(), $entity);
+        $editForm = $this->createEditForm($entity);
         $deleteForm = $this->createDeleteForm($id);
 
         $request = $this->getRequest();
-
-        $current_pass = $entity->getPassword();
-
         $editForm->bind($request);
 
         if ($editForm->isValid()) {
-            if ($current_pass != $entity->getPassword()) {
-                $this->setSecurePassword($entity);
-            }
             $em->persist($entity);
             $em->flush();
             $this->get('session')->getFlashBag()->add('success', 'flash.update.success');
@@ -226,7 +241,7 @@ class AdminUsuariosController extends Controller {
             $this->get('session')->getFlashBag()->add('error', 'flash.update.error');
         }
 
-        return $this->render('mzInventarioBundle:AdminUsuarios:edit.html.twig', array(
+        return $this->render('mzInventarioBundle:UsuariosAdmin:edit.html.twig', array(
                     'entity' => $entity,
                     'edit_form' => $editForm->createView(),
                     'delete_form' => $deleteForm->createView(),
@@ -261,6 +276,58 @@ class AdminUsuariosController extends Controller {
         return $this->redirect($this->generateUrl('usuario'));
     }
 
+    public function passEditAction($id)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $entity = $em->getRepository('mzInventarioBundle:Usuario')->find($id);
+
+        if (!$entity) {
+            throw $this->createNotFoundException('Unable to find Usuario entity.');
+        }
+
+        $editForm = $this->createChangePassForm($entity);
+
+        return $this->render('mzInventarioBundle:UsuariosAdmin:passEdit.html.twig', array(
+                    'entity' => $entity,
+                    'edit_form' => $editForm->createView(),
+        ));
+    }
+
+    public function passUpdateAction($id)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $entity = $em->getRepository('mzInventarioBundle:Usuario')->find($id);
+
+        if (!$entity) {
+            throw $this->createNotFoundException('Unable to find Usuario entity.');
+        }
+
+        $editForm = $this->createChangePassForm($entity);
+
+        $request = $this->getRequest();
+        $editForm->bind($request);
+
+        if ($editForm->isValid()) {
+
+            $entity->setSecurePassword();
+
+            $em->persist($entity);
+            $em->flush();
+            $this->get('session')->getFlashBag()->add('success', 'flash.update.success');
+
+            return $this->redirect($this->generateUrl('usuario_show', array('id' => $id)));
+        } else {
+            $this->get('session')->getFlashBag()->add('error', 'flash.update.error');
+        }
+
+        return $this->render('mzInventarioBundle:UsuariosAdmin:passEdit.html.twig', array(
+                    'entity' => $entity,
+                    'edit_form' => $editForm->createView(),
+        ));
+    }
+
+
     private function createDeleteForm($id) {
         return $this->createFormBuilder(array('id' => $id))
                         ->add('id', 'hidden')
@@ -268,14 +335,16 @@ class AdminUsuariosController extends Controller {
         ;
     }
 
-    /**
-     * encodePass
-     *
-     * @return string 
-     */
-    private function setSecurePassword(&$entity) {
-        $entity->setSalt(md5(time()));
-        $password = Utils::encodePassword($entity->getPassword(), $entity->getSalt());
-        $entity->setPassword($password);
+    private function createEditForm($entity) {
+        $form = $this->createForm(new UsuarioType(), $entity);
+        $form->remove('password');
+        return $form;
     }
+
+    private function createChangePassForm($entity) {
+        $form = $this->createForm(new UsuarioChangePassType(), $entity);
+        $form->remove('currentPass');
+        return $form;
+    }
+
 }

@@ -34,6 +34,6 @@ class PrestamoType extends AbstractType
 
     public function getName()
     {
-        return 'mz_inventariobundle_prestamotype';
+        return 'mz_prestamotype';
     }
 }
