@@ -1,97 +1,97 @@
 {% extends '::base.html.twig' %}
 
-{% block body %}
-    <nav class="navbar">
-        {% block navbar %}
-            <div class="navbar-inner">
-                <ul class="nav pull-right">
-                    <li id="fat-menu" class="dropdown">
-                        <a href="#" role="button" class="dropdown-toggle" data-toggle="dropdown">
-                            <i class="icon-user"></i> [CHANGE_THIS]
-                            <i class="icon-caret-down"></i>
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li><a href="{{ path('profile', {'id': 1})}}" tabindex="-1">Perfil</a></li>
-                            <li class="divider"> </li>
-                            <li><a href="{{ path('logout') }}" tabindex="-1">Salir</a></li>
-                        </ul>
-                    </li>
+{% set user = app.security.getToken().getUser() %}
+
+{% if user %}
+    {% block usermenu %}
+        <ul class="nav pull-right">
+            <li id="fat-menu" class="dropdown">
+                <a href="#" role="button" class="dropdown-toggle" data-toggle="dropdown">
+                    <i class="icon-user"></i> {{ user.nombre }} ({{ user.username }})
+                    <i class="icon-caret-down"></i>
+                </a>
+                <ul class="dropdown-menu">
+                    <li><a href="{{ path('profile', {'id': user.id })}}" tabindex="-1">Perfil</a></li>
+                    <li class="divider"> </li>
+                    <li><a href="{{ path('logout') }}" tabindex="-1">Salir</a></li>
                 </ul>
-                <a class="brand" href="{{ path('homepage') }}"><span class="first">G4</span> <span class="second">Inventario</span></a>
-            </div>
-        {% endblock %}
-    </nav>
+            </li>
+        </ul>
+    {% endblock %}
 
-    <nav class="sidebar-nav">
-        {% block sidenav %}
-            <a href="#dashboard-menu" class="nav-header" data-toggle="collapse">
-                <i class="icon-dashboard"></i>Inventario <i class="icon-chevron-up"></i>
-            </a>
-            <ul id="dashboard-menu" class="nav nav-list collapse in">
-                <li><a class="mnu_link" href="{{ path('homepage') }}">Items</a></li>
-                <li><a class="mnu_link" href="{{ path('prestamo') }}">Préstamos</a></li>
-                <li><a href="{{ path('imagen') }}">Imágenes</a></li>
-            </ul>
+    {% block body %}
+        <nav class="sidebar-nav">
+            {% block sidenav %}
+                <a href="#dashboard-menu" class="nav-header" data-toggle="collapse">
+                    <i class="icon-dashboard"></i>Inventario <i class="icon-chevron-up"></i>
+                </a>
+                <ul id="dashboard-menu" class="nav nav-list collapse in">
+                    <li><a class="mnu_link" href="{{ path('homepage') }}">Items</a></li>
+                    <li><a class="mnu_link" href="{{ path('prestamo') }}">Préstamos</a></li>
+                    <li><a href="{{ path('imagen') }}">Imágenes</a></li>
+                </ul>
 
-            <a href="#reports-menu" class="nav-header collapsed" data-toggle="collapse">
-                <i class="icon-bar-chart"></i>Reportes <i class="icon-chevron-up"></i>
-            </a>
-            <ul id="reports-menu" class="nav nav-list collapse">
-                <li ><a href="#">[CHANGE_THIS]</a></li>
-            </ul>
+                <a href="#reports-menu" class="nav-header collapsed" data-toggle="collapse">
+                    <i class="icon-bar-chart"></i>Reportes <i class="icon-chevron-up"></i>
+                </a>
+                <ul id="reports-menu" class="nav nav-list collapse">
+                    <li ><a href="#">[CHANGE_THIS]</a></li>
+                </ul>
 
-            <a href="#configs-menu" class="nav-header collapsed" data-toggle="collapse">
-                <i class="icon-cogs"></i>Configuración <i class="icon-chevron-up"></i>
-            </a>
-            <ul id="configs-menu" class="nav nav-list collapse">
-                <li ><a class="mnu_link" href="{{ path('categoria') }}">Categorías</a></li>
-                <li ><a class="mnu_link" href="{{ path('condicion') }}">Condiciones</a></li>
-                <li ><a class="mnu_link" href="{{ path('estado') }}">Estados</a></li>
-                <li ><a class="mnu_link" href="{{ path('ubicacion') }}">Ubicaciones</a></li>
-            </ul>
+                <a href="#configs-menu" class="nav-header collapsed" data-toggle="collapse">
+                    <i class="icon-cogs"></i>Configuración <i class="icon-chevron-up"></i>
+                </a>
+                <ul id="configs-menu" class="nav nav-list collapse">
+                    <li ><a class="mnu_link" href="{{ path('categoria') }}">Categorías</a></li>
+                    <li ><a class="mnu_link" href="{{ path('condicion') }}">Condiciones</a></li>
+                    <li ><a class="mnu_link" href="{{ path('estado') }}">Estados</a></li>
+                    <li ><a class="mnu_link" href="{{ path('ubicacion') }}">Ubicaciones</a></li>
+                </ul>
+                {% if user.rol == 'ROLE_ADMIN' %}
+                    <a href="{{ path ('usuario')}}" class="nav-header mnu_link">
+                        <i class="icon-group"></i> Usuarios
+                    </a>
+                {% endif %}
+            {% endblock %}
+        </nav>
 
-            <a href="{{ path ('usuario')}}" class="nav-header mnu_link">
-                <i class="icon-group"></i>Usuarios
-            </a>
-        {% endblock %}
-    </nav>
+        <section id="content" class="content">
+            {% block content %}
+                <section class="header">
+                    <div class="stats">
+                        {% block stats %}
+                            <p class="stat"><span class="number">53</span>tickets</p>
+                            <p class="stat"><span class="number">27</span>tasks</p>
+                            <p class="stat"><span class="number">15</span>waiting</p>
+                        {% endblock %}
+                    </div>
 
-    <section id="content" class="content">
-        {% block content %}
-            <section class="header">
-                <div class="stats">
-                    {% block stats %}
-                        <p class="stat"><span class="number">53</span>tickets</p>
-                        <p class="stat"><span class="number">27</span>tasks</p>
-                        <p class="stat"><span class="number">15</span>waiting</p>
-                    {% endblock %}
-                </div>
+                    <h1 class="page-title">{% block pagetitle %}Dashboard{% endblock %}</h1>
+                </section>
 
-                <h1 class="page-title">{% block pagetitle %}Dashboard{% endblock %}</h1>
-            </section>
+                <section class="container-fluid">
+                    <div class="row-fluid">
+                        {% for type, flashMessages in app.session.flashbag.all() %}
+                                {% for flashMessage in flashMessages %}
+                                    <div class="alert alert-{{ type }}">
+                                        <button type="button" class="close" data-dismiss="alert">×</button>
+                                        <strong>{{ flashMessage }}</strong>
+                                    </div>
+                                {% endfor %}
+                        {% endfor %}
 
-            <section class="container-fluid">
-                <div class="row-fluid">
-                    {% for type, flashMessages in app.session.flashbag.all() %}
-                            {% for flashMessage in flashMessages %}
-                                <div class="alert alert-{{ type }}">
-                                    <button type="button" class="close" data-dismiss="alert">×</button>
-                                    <strong>{{ flashMessage }}</strong>
-                                </div>
-                            {% endfor %}
-                    {% endfor %}
+                        {% block flashmessages %}{% endblock %}
 
-                    {% block flashmessages %}{% endblock %}
+                        {% block page %}{% endblock %}
+                    </div>
+                </section>
+            {% endblock %}
+        </section>
 
-                    {% block page %}{% endblock %}
-                </div>
-            </section>
-        {% endblock %}
-    </section>
-
-    <footer>
-        <hr>
-        <p class="pull-right">A <a href="http://www.portnine.com/bootstrap-themes" target="_blank">Free Bootstrap Theme</a> by <a href="http://www.portnine.com" target="_blank">Portnine</a></p>
-        <p>&copy; 2012 <a href="http://www.portnine.com" target="_blank">Portnine</a></p>
-    </footer>
-{% endblock %}
+        <footer>
+            <hr>
+            <p class="pull-right">A <a href="http://www.portnine.com/bootstrap-themes" target="_blank">Free Bootstrap Theme</a> by <a href="http://www.portnine.com" target="_blank">Portnine</a></p>
+            <p>&copy; 2012 <a href="http://www.portnine.com" target="_blank">Portnine</a></p>
+        </footer>
+    {% endblock %}
+{% endif %}

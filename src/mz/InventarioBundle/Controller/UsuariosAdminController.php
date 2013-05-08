@@ -28,14 +28,12 @@ class UsuariosAdminController extends Controller {
     {
         $request = $this->getRequest();
         $session = $request->getSession();
-        // obtiene el error de inicio de sesión si lo hay
         if ($request->attributes->has(SecurityContext::AUTHENTICATION_ERROR)) {
             $error = $request->attributes->get(SecurityContext::AUTHENTICATION_ERROR);
         } else {
             $error = $session->get(SecurityContext::AUTHENTICATION_ERROR);
         }
         return $this->render('mzInventarioBundle:UsuariosAdmin:login.html.twig', array(
-            // el último nombre de usuario ingresado por el usuario
             'last_username' => $session->get(SecurityContext::LAST_USERNAME),
             'error'         => $error,
         ));
@@ -134,7 +132,7 @@ class UsuariosAdminController extends Controller {
         $entity = $em->getRepository('mzInventarioBundle:Usuario')->find($id);
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Usuario entity.');
+            throw $this->createNotFoundException('No se encuentra el registro.');
         }
 
         $deleteForm = $this->createDeleteForm($id);
@@ -176,10 +174,10 @@ class UsuariosAdminController extends Controller {
             $em->persist($entity);
             $em->flush();
 
-            $this->get('session')->getFlashBag()->add('success', 'flash.create.success');
+            $this->get('session')->getFlashBag()->add('success', 'Operación realizada con éxito.');
             return $this->redirect($this->generateUrl('usuario_show', array('id' => $entity->getId())));
         } else {
-            $this->get('session')->getFlashBag()->add('error', 'flash.create.error');
+            $this->get('session')->getFlashBag()->add('error', 'No se pudo realizar la operación.');
         }
 
         return $this->render('mzInventarioBundle:UsuariosAdmin:new.html.twig', array(
@@ -198,7 +196,7 @@ class UsuariosAdminController extends Controller {
         $entity = $em->getRepository('mzInventarioBundle:Usuario')->find($id);
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Usuario entity.');
+            throw $this->createNotFoundException('No se encuentra el registro.');
         }
 
         //$editForm = $this->createForm(new UsuarioType(), $entity);
@@ -222,7 +220,7 @@ class UsuariosAdminController extends Controller {
         $entity = $em->getRepository('mzInventarioBundle:Usuario')->find($id);
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Usuario entity.');
+            throw $this->createNotFoundException('No se encuentra el registro.');
         }
 
         $editForm = $this->createEditForm($entity);
@@ -234,11 +232,11 @@ class UsuariosAdminController extends Controller {
         if ($editForm->isValid()) {
             $em->persist($entity);
             $em->flush();
-            $this->get('session')->getFlashBag()->add('success', 'flash.update.success');
+            $this->get('session')->getFlashBag()->add('success', 'Operación realizada con éxito.');
 
             return $this->redirect($this->generateUrl('usuario_show', array('id' => $id)));
         } else {
-            $this->get('session')->getFlashBag()->add('error', 'flash.update.error');
+            $this->get('session')->getFlashBag()->add('error', 'No se pudo realizar la operación.');
         }
 
         return $this->render('mzInventarioBundle:UsuariosAdmin:edit.html.twig', array(
@@ -263,14 +261,14 @@ class UsuariosAdminController extends Controller {
             $entity = $em->getRepository('mzInventarioBundle:Usuario')->find($id);
 
             if (!$entity) {
-                throw $this->createNotFoundException('Unable to find Usuario entity.');
+                throw $this->createNotFoundException('No se encuentra el registro.');
             }
 
             $em->remove($entity);
             $em->flush();
-            $this->get('session')->getFlashBag()->add('success', 'flash.delete.success');
+            $this->get('session')->getFlashBag()->add('success', 'Operación realizada con éxito.');
         } else {
-            $this->get('session')->getFlashBag()->add('error', 'flash.delete.error');
+            $this->get('session')->getFlashBag()->add('error', 'No se pudo realizar la operación.');
         }
 
         return $this->redirect($this->generateUrl('usuario'));
@@ -282,7 +280,7 @@ class UsuariosAdminController extends Controller {
         $entity = $em->getRepository('mzInventarioBundle:Usuario')->find($id);
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Usuario entity.');
+            throw $this->createNotFoundException('No se encuentra el registro.');
         }
 
         $editForm = $this->createChangePassForm($entity);
@@ -300,7 +298,7 @@ class UsuariosAdminController extends Controller {
         $entity = $em->getRepository('mzInventarioBundle:Usuario')->find($id);
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Usuario entity.');
+            throw $this->createNotFoundException('No se encuentra el registro.');
         }
 
         $editForm = $this->createChangePassForm($entity);
@@ -314,11 +312,11 @@ class UsuariosAdminController extends Controller {
 
             $em->persist($entity);
             $em->flush();
-            $this->get('session')->getFlashBag()->add('success', 'flash.update.success');
+            $this->get('session')->getFlashBag()->add('success', 'Operación realizada con éxito.');
 
             return $this->redirect($this->generateUrl('usuario_show', array('id' => $id)));
         } else {
-            $this->get('session')->getFlashBag()->add('error', 'flash.update.error');
+            $this->get('session')->getFlashBag()->add('error', 'No se pudo realizar la operación.');
         }
 
         return $this->render('mzInventarioBundle:UsuariosAdmin:passEdit.html.twig', array(

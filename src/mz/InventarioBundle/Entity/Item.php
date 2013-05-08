@@ -77,7 +77,7 @@ class Item
      * @var integer
      *
      * @ORM\Column(name="garantia", type="integer")
-     * @Assert\Type(type="numeric", message="El valor ingresado no es válido.")
+     * Assert\Type(type="numeric", message="El valor ingresado no es válido.")
      * @Assert\Type(type="integer", message="El valor ingresado no es válido.")
      */
     private $garantia;
@@ -105,13 +105,6 @@ class Item
     private $createdAt;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="created_by", type="string", length=255)
-     */
-    private $createdBy;
-
-    /**
      * @var \DateTime
      *
      * @ORM\Column(name="updated_at", type="datetime")
@@ -119,16 +112,9 @@ class Item
     private $updatedAt;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="updated_by", type="string")
-     */
-    private $updatedBy;
-
-    /**
      * @var \Doctrine\Common\Collections\Collection
      *
-     * @ORM\OneToMany(targetEntity="mz\InventarioBundle\Entity\Imagen", mappedBy="item")
+     * @ORM\OneToMany(targetEntity="mz\InventarioBundle\Entity\Imagen", mappedBy="item", cascade={"persist"})
      */
     private $imagenes;
 
@@ -192,12 +178,8 @@ class Item
         $this->prestamos = new \Doctrine\Common\Collections\ArrayCollection();
 
         $now=new \DateTime();
-
         $this->setCreatedAt($now);
-        $this->setCreatedBy('CHANGE_THIS');
-
         $this->setUpdatedAt($now);
-        $this->setUpdatedBy('CHANGE_THIS');
     }
     
     /**
@@ -310,7 +292,7 @@ class Item
      */
     public function setFechaCompra($fechaCompra)
     {
-        $this->fechaCompra = $fechaCompra;
+        $this->fechaCompra = new \DateTime($fechaCompra);
     
         return $this;
     }
@@ -441,29 +423,6 @@ class Item
     }
 
     /**
-     * Set createdBy
-     *
-     * @param string $createdBy
-     * @return Item
-     */
-    public function setCreatedBy($createdBy)
-    {
-        $this->createdBy = $createdBy;
-    
-        return $this;
-    }
-
-    /**
-     * Get createdBy
-     *
-     * @return string 
-     */
-    public function getCreatedBy()
-    {
-        return $this->createdBy;
-    }
-
-    /**
      * Set updatedAt
      *
      * @param \DateTime $updatedAt
@@ -484,29 +443,6 @@ class Item
     public function getUpdatedAt()
     {
         return $this->updatedAt;
-    }
-
-    /**
-     * Set updatedBy
-     *
-     * @param string $updatedBy
-     * @return Item
-     */
-    public function setUpdatedBy($updatedBy)
-    {
-        $this->updatedBy = $updatedBy;
-    
-        return $this;
-    }
-
-    /**
-     * Get updatedBy
-     *
-     * @return string 
-     */
-    public function getUpdatedBy()
-    {
-        return $this->updatedBy;
     }
 
     /**
@@ -676,12 +612,5 @@ class Item
      */
     public function setUpdatedAtValue() {
         $this->setUpdatedAt(new \DateTime());
-    }
-
-    /**
-     * @ORM\PreUpdate
-     */
-    public function setUpdatedByValue() {
-        $this->setUpdatedBy('CHANGE_THIS');
     }
 }

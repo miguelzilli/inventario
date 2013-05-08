@@ -14,28 +14,29 @@ class ItemType extends AbstractType
             ->add('nombre')
             ->add('marca')
             ->add('modelo')
+            ->add('categoria')
             ->add('sn')
             ->add('fechaCompra')
             ->add('costo')
             ->add('garantia')
             ->add('descripcion')
             ->add('codigo')
-            ->add('createdAt')
-            ->add('createdBy')
-            ->add('updatedAt')
-            ->add('updatedBy')
-            ->add('categoria')
             ->add('condicion')
             ->add('estado')
             ->add('ubicacion')
-        ;
+            ->add('imagenes','collection', array(
+                'type'         => new ImagenType(),
+                'allow_add'    => true,
+                'allow_delete' => true,
+                'by_reference' => false,
+            ));
     }
 
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
             'data_class' => 'mz\InventarioBundle\Entity\Item'
-        ));
+            ));
     }
 
     public function getName()

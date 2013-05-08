@@ -17,10 +17,6 @@ class PrestamoType extends AbstractType
             ->add('fecha')
             ->add('fechaDevolucion')
             ->add('observaciones')
-            ->add('createdAt')
-            ->add('createdBy')
-            ->add('updatedAt')
-            ->add('updatedBy')
             ->add('item')
         ;
     }

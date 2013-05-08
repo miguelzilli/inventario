@@ -25,92 +25,44 @@
     </div>
 </div>
 
-<form class="well form-horizontal">
-    <fieldset>
-        <div class="control-group">
-            <label class="control-label">Id</label>
-            <div class="controls">
-                <span class="input-xlarge uneditable-input">{{ entity.id }}</span>
-            </div>
-        </div>
-        <div class="control-group">
-            <label class="control-label">Nombre</label>
-            <div class="controls">
-                <span class="input-xlarge uneditable-input">{{ entity.nombre }}</span>
-            </div>
-        </div>
-        <div class="control-group">
-            <label class="control-label">Marca</label>
-            <div class="controls">
-                <span class="input-xlarge uneditable-input">{{ entity.marca }}</span>
-            </div>
-        </div>
-        <div class="control-group">
-            <label class="control-label">Modelo</label>
-            <div class="controls">
-                <span class="input-xlarge uneditable-input">{{ entity.modelo }}</span>
-            </div>
-        </div>
-        <div class="control-group">
-            <label class="control-label">Sn</label>
-            <div class="controls">
-                <span class="input-xlarge uneditable-input">{{ entity.sn }}</span>
-            </div>
-        </div>
-        <div class="control-group">
-            <label class="control-label">Fechacompra</label>
-            <div class="controls">
-                <span class="input-xlarge uneditable-input">{{ entity.fechaCompra|date('d-m-Y H:i:s') }}</span>
-            </div>
-        </div>
-        <div class="control-group">
-            <label class="control-label">Costo</label>
-            <div class="controls">
-                <span class="input-xlarge uneditable-input">{{ entity.costo }}</span>
-            </div>
-        </div>
-        <div class="control-group">
-            <label class="control-label">Garantia</label>
-            <div class="controls">
-                <span class="input-xlarge uneditable-input">{{ entity.garantia }}</span>
-            </div>
-        </div>
-        <div class="control-group">
-            <label class="control-label">Descripcion</label>
-            <div class="controls">
-                <span class="input-xlarge uneditable-input">{{ entity.descripcion }}</span>
-            </div>
-        </div>
-        <div class="control-group">
-            <label class="control-label">codigo</label>
-            <div class="controls">
-                <span class="input-xlarge uneditable-input">{{ entity.codigo }}</span>
-            </div>
-        </div>
-        <div class="control-group">
-            <label class="control-label">Createdat</label>
-            <div class="controls">
-                <span class="input-xlarge uneditable-input">{{ entity.createdAt|date('d-m-Y H:i:s') }}</span>
-            </div>
-        </div>
-        <div class="control-group">
-            <label class="control-label">Createdby</label>
-            <div class="controls">
-                <span class="input-xlarge uneditable-input">{{ entity.createdBy }}</span>
-            </div>
-        </div>
-        <div class="control-group">
-            <label class="control-label">Updatedat</label>
-            <div class="controls">
-                <span class="input-xlarge uneditable-input">{{ entity.updatedAt|date('d-m-Y H:i:s') }}</span>
-            </div>
-        </div>
-        <div class="control-group">
-            <label class="control-label">Updatedby</label>
-            <div class="controls">
-                <span class="input-xlarge uneditable-input">{{ entity.updatedBy }}</span>
-            </div>
-        </div>
-    </fieldset>
-</form>
+<div class="well">
+    <div><img src="{{ asset(entity.imagenes.1.path) }}"/></div>
+    <dl class="dl-horizontal">
+        <dt>Id:</dt>
+        <dd>{{ entity.id }}</dd>
+
+        <dt>Nombre:</dt>
+        <dd>{{ entity.nombre }}</dd>
+
+        <dt>Marca:</dt>
+        <dd>{{ entity.marca }}</dd>
+
+        <dt>Modelo:</dt>
+        <dd>{{ entity.modelo }}</dd>
+
+        <dt>Serial Number:</dt>
+        <dd>{{ entity.sn }}</dd>
+
+        <dt>Fecha de Compra:</dt>
+        <dd>{{ entity.fechaCompra|date('d-m-Y') }}</dd>
+
+        <dt>Costo:</dt>
+        <dd>{{ entity.costo }}</dd>
+
+        <dt>Garantia:</dt>
+        <dd>{{ entity.garantia }}</dd>
+
+        <dt>Descripción:</dt>
+        <dd>{{ entity.descripcion }}</dd>
+
+        <dt>Código:</dt>
+        <dd>{{ entity.codigo }}</dd>
+
+        <dt>Creado:</dt>
+        <dd>{{ entity.createdAt|date('d-m-Y') }}</dd>
+
+        <dt>Actualizado:</dt>
+        <dd>{{ entity.updatedAt|date('d-m-Y') }}</dd>
+    </dl>
+</div>
 {% endblock %}

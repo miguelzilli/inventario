@@ -81,25 +81,11 @@ class Prestamo
     private $createdAt;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="created_by", type="string", length=255)
-     */
-    private $createdBy;
-
-    /**
      * @var \DateTime
      *
      * @ORM\Column(name="updated_at", type="datetime")
      */
     private $updatedAt;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="updated_by", type="string", length=255)
-     */
-    private $updatedBy;
 
     /**
      * @var \mz\InventarioBundle\Entity\Item
@@ -118,10 +104,7 @@ class Prestamo
     {
         $now=new \DateTime();
         $this->setCreatedAt($now);
-        $this->setCreatedBy('CHANGE_THIS');
-
         $this->setUpdatedAt($now);
-        $this->setUpdatedBy('CHANGE_THIS');
     }
 
     /**
@@ -296,29 +279,6 @@ class Prestamo
     }
 
     /**
-     * Set createdBy
-     *
-     * @param string $createdBy
-     * @return Prestamo
-     */
-    public function setCreatedBy($createdBy)
-    {
-        $this->createdBy = $createdBy;
-    
-        return $this;
-    }
-
-    /**
-     * Get createdBy
-     *
-     * @return string 
-     */
-    public function getCreatedBy()
-    {
-        return $this->createdBy;
-    }
-
-    /**
      * Set updatedAt
      *
      * @param \DateTime $updatedAt
@@ -339,29 +299,6 @@ class Prestamo
     public function getUpdatedAt()
     {
         return $this->updatedAt;
-    }
-
-    /**
-     * Set updatedBy
-     *
-     * @param string $updatedBy
-     * @return Prestamo
-     */
-    public function setUpdatedBy($updatedBy)
-    {
-        $this->updatedBy = $updatedBy;
-    
-        return $this;
-    }
-
-    /**
-     * Get updatedBy
-     *
-     * @return string 
-     */
-    public function getUpdatedBy()
-    {
-        return $this->updatedBy;
     }
 
     /**
@@ -392,12 +329,5 @@ class Prestamo
      */
     public function setUpdatedAtValue() {
         $this->setUpdatedAt(new \DateTime());
-    }
-
-    /**
-     * @ORM\PreUpdate
-     */
-    public function setUpdatedByValue() {
-        $this->setUpdatedBy('CHANGE_THIS');
     }
 }

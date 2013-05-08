@@ -4,14 +4,6 @@
 {% block title %} {{ parent() }} - Login {% endblock %}
 
 {% block body %}
-    <nav class="navbar">
-        <div class="navbar-inner">
-            <a class="brand" href="{{ path('homepage') }}">
-                <span class="first">G4</span>
-                <span class="second">Inventario</span>
-            </a>
-        </div>
-    </nav>
     <div class="row-fluid">
         <div class="dialog">
             {% if error %}

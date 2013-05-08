@@ -120,7 +120,7 @@ class ItemController extends Controller
         $entity = $em->getRepository('mzInventarioBundle:Item')->find($id);
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Item entity.');
+            throw $this->createNotFoundException('No se encuentra el registro.');
         }
 
         $deleteForm = $this->createDeleteForm($id);
@@ -160,10 +160,10 @@ class ItemController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->persist($entity);
             $em->flush();
-            $this->get('session')->getFlashBag()->add('success', 'flash.create.success');
+            $this->get('session')->getFlashBag()->add('success', 'Operación realizada con éxito.');
 
             return $this->redirect($this->generateUrl('item_show', array('id' => $entity->getId())));        } else {
-            $this->get('session')->getFlashBag()->add('error', 'flash.create.error');
+            $this->get('session')->getFlashBag()->add('error', 'No se pudo realizar la operación.');
         }
 
         return $this->render('mzInventarioBundle:Item:new.html.twig', array(
@@ -182,7 +182,7 @@ class ItemController extends Controller
         $entity = $em->getRepository('mzInventarioBundle:Item')->find($id);
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Item entity.');
+            throw $this->createNotFoundException('No se encuentra el registro.');
         }
 
         $editForm = $this->createForm(new ItemType(), $entity);
@@ -206,7 +206,7 @@ class ItemController extends Controller
         $entity = $em->getRepository('mzInventarioBundle:Item')->find($id);
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Item entity.');
+            throw $this->createNotFoundException('No se encuentra el registro.');
         }
 
         $editForm   = $this->createForm(new ItemType(), $entity);
@@ -219,11 +219,11 @@ class ItemController extends Controller
         if ($editForm->isValid()) {
             $em->persist($entity);
             $em->flush();
-            $this->get('session')->getFlashBag()->add('success', 'flash.update.success');
+            $this->get('session')->getFlashBag()->add('success', 'Operación realizada con éxito.');
 
             return $this->redirect($this->generateUrl('item_edit', array('id' => $id)));
         } else {
-            $this->get('session')->getFlashBag()->add('error', 'flash.update.error');
+            $this->get('session')->getFlashBag()->add('error', 'No se pudo realizar la operación.');
         }
 
         return $this->render('mzInventarioBundle:Item:edit.html.twig', array(
@@ -248,14 +248,14 @@ class ItemController extends Controller
             $entity = $em->getRepository('mzInventarioBundle:Item')->find($id);
 
             if (!$entity) {
-                throw $this->createNotFoundException('Unable to find Item entity.');
+                throw $this->createNotFoundException('No se encuentra el registro.');
             }
 
             $em->remove($entity);
             $em->flush();
-            $this->get('session')->getFlashBag()->add('success', 'flash.delete.success');
+            $this->get('session')->getFlashBag()->add('success', 'Operación realizada con éxito.');
         } else {
-            $this->get('session')->getFlashBag()->add('error', 'flash.delete.error');
+            $this->get('session')->getFlashBag()->add('error', 'No se pudo realizar la operación.');
         }
 
         return $this->redirect($this->generateUrl('homepage'));

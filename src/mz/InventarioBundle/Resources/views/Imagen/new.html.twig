@@ -1,0 +1,16 @@
+{% extends 'mzInventarioBundle::layout.html.twig' %}
+{% import 'mzInventarioBundle::macros.html.twig' as macros %}
+
+{% block title %} {{ parent() }} - Imágenes {% endblock %}
+
+{% block pagetitle %} Agregar Imágen {% endblock %}
+
+{% block page %}
+<div class="row-fluid">
+    {{ macros.btn_volver('imagen') }}
+</div>
+<form class="well" action="{{ path('imagen_create') }}" method="post" {{ form_enctype(form) }}>
+    {{ form_widget(form) }}
+    <p>{{ macros.btn_guardar() }}</p>
+</form>
+{% endblock %}

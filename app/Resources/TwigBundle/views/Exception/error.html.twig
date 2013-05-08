@@ -1,0 +1,13 @@
+{% extends '::base.html.twig' %}
+
+{% block body %}
+    <div class="row-fluid">
+        <div class="http-error">
+            <h1>Oops!</h1>
+            <h2>The server returned a "{{ status_code }} {{ status_text }}".</h2>
+            <p class="info">Maldita Ley de Murphy!</p>
+            <p><i class="icon-home"></i></p>
+            <p><a href="{{ path('homepage') }}">Volver a la página de Inicio</a></p>
+        </div>
+    </div>
+{% endblock %}

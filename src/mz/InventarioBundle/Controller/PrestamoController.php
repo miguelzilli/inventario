@@ -120,7 +120,7 @@ class PrestamoController extends Controller
         $entity = $em->getRepository('mzInventarioBundle:Prestamo')->find($id);
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Prestamo entity.');
+            throw $this->createNotFoundException('No se encuentra el registro.');
         }
 
         $deleteForm = $this->createDeleteForm($id);
@@ -160,10 +160,10 @@ class PrestamoController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->persist($entity);
             $em->flush();
-            $this->get('session')->getFlashBag()->add('success', 'flash.create.success');
+            $this->get('session')->getFlashBag()->add('success', 'Operación realizada con éxito.');
 
             return $this->redirect($this->generateUrl('prestamo_show', array('id' => $entity->getId())));        } else {
-            $this->get('session')->getFlashBag()->add('error', 'flash.create.error');
+            $this->get('session')->getFlashBag()->add('error', 'No se pudo realizar la operación.');
         }
 
         return $this->render('mzInventarioBundle:Prestamo:new.html.twig', array(
@@ -182,7 +182,7 @@ class PrestamoController extends Controller
         $entity = $em->getRepository('mzInventarioBundle:Prestamo')->find($id);
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Prestamo entity.');
+            throw $this->createNotFoundException('No se encuentra el registro.');
         }
 
         $editForm = $this->createForm(new PrestamoType(), $entity);
@@ -206,7 +206,7 @@ class PrestamoController extends Controller
         $entity = $em->getRepository('mzInventarioBundle:Prestamo')->find($id);
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Prestamo entity.');
+            throw $this->createNotFoundException('No se encuentra el registro.');
         }
 
         $editForm   = $this->createForm(new PrestamoType(), $entity);
@@ -219,11 +219,11 @@ class PrestamoController extends Controller
         if ($editForm->isValid()) {
             $em->persist($entity);
             $em->flush();
-            $this->get('session')->getFlashBag()->add('success', 'flash.update.success');
+            $this->get('session')->getFlashBag()->add('success', 'Operación realizada con éxito.');
 
             return $this->redirect($this->generateUrl('prestamo_edit', array('id' => $id)));
         } else {
-            $this->get('session')->getFlashBag()->add('error', 'flash.update.error');
+            $this->get('session')->getFlashBag()->add('error', 'No se pudo realizar la operación.');
         }
 
         return $this->render('mzInventarioBundle:Prestamo:edit.html.twig', array(
@@ -248,14 +248,14 @@ class PrestamoController extends Controller
             $entity = $em->getRepository('mzInventarioBundle:Prestamo')->find($id);
 
             if (!$entity) {
-                throw $this->createNotFoundException('Unable to find Prestamo entity.');
+                throw $this->createNotFoundException('No se encuentra el registro.');
             }
 
             $em->remove($entity);
             $em->flush();
-            $this->get('session')->getFlashBag()->add('success', 'flash.delete.success');
+            $this->get('session')->getFlashBag()->add('success', 'Operación realizada con éxito.');
         } else {
-            $this->get('session')->getFlashBag()->add('error', 'flash.delete.error');
+            $this->get('session')->getFlashBag()->add('error', 'No se pudo realizar la operación.');
         }
 
         return $this->redirect($this->generateUrl('prestamo'));

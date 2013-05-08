@@ -6,8 +6,7 @@
 
 {% block page %}
 <div class="row-fluid">
-    {# macros.btn_agregar('#') #}
-    
+    {{ macros.btn_agregar('imagen_new') }}
     <div class="btn-toolbar">
         <a class="btn dropdown-toggle" data-toggle="collapse" data-target="#filters">
             Filtrar <span class="caret"></span>
@@ -30,7 +29,7 @@
         <thead>
             <tr>
                 <th>Id</th>
-                <th>Ruta</th>
+                <th>Path</th>
                 <th></th>
             </tr>
         </thead>
@@ -38,10 +37,10 @@
             {% for entity in entities %}
             <tr>
                 <td>{{ entity.id }}</a></td>
-                <td>{{ entity.ruta }}</td>
+                <td>{{ entity.webPath }}</td>
                 <td class="actions">
-                    <a href="#"><i class="icon-pencil"></i> </a>
-                    <a href="#"><i class="icon-remove"></i> </a>
+                    <a href="{{ path('imagen_show', { 'id': entity.id }) }}"><i class="icon-pencil"></i> </a>
+                    <a href="{{ path('imagen_edit', { 'id': entity.id }) }}"><i class="icon-remove"></i> </a>
                 </td>
             </tr>
             {% endfor %}

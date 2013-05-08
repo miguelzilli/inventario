@@ -1,0 +1,12 @@
+{% extends '::base.html.twig' %}
+
+{% block body %}
+    <div class="row-fluid">
+        <div class="http-error">
+            <h1>Oops!</h1>
+            <p class="info">No tienes permisos suficientes para ver esta página.</p>
+            <p><i class="icon-home"></i></p>
+            <p><a href="{{ path('homepage') }}">Volver a la página de Inicio</a></p>
+        </div>
+    </div>
+{% endblock %}

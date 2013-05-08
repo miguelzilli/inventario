@@ -100,13 +100,6 @@ class Usuario implements UserInterface
     private $createdAt;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="created_by", type="string", length=255)
-     */
-    private $createdBy;
-
-    /**
      * @var \DateTime
      *
      * @ORM\Column(name="updated_at", type="datetime")
@@ -114,23 +107,13 @@ class Usuario implements UserInterface
     private $updatedAt;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="updated_by", type="string", length=255)
-     */
-    private $updatedBy;
-
-    /**
      * Constructor
      */
     public function __construct()
     {
-        $now=new \DateTime();
+        $now = new \DateTime();
         $this->setCreatedAt($now);
-        $this->setCreatedBy('CHANGE_THIS');
-
         $this->setUpdatedAt($now);
-        $this->setUpdatedBy('CHANGE_THIS');
     }
 
     /**
@@ -361,29 +344,6 @@ class Usuario implements UserInterface
     }
 
     /**
-     * Set createdBy
-     *
-     * @param string $createdBy
-     * @return Usuario
-     */
-    public function setCreatedBy($createdBy)
-    {
-        $this->createdBy = $createdBy;
-    
-        return $this;
-    }
-
-    /**
-     * Get createdBy
-     *
-     * @return string 
-     */
-    public function getCreatedBy()
-    {
-        return $this->createdBy;
-    }
-
-    /**
      * Set updatedAt
      *
      * @param \DateTime $updatedAt
@@ -407,40 +367,11 @@ class Usuario implements UserInterface
     }
 
     /**
-     * Set updatedBy
-     *
-     * @param string $updatedBy
-     * @return Usuario
-     */
-    public function setUpdatedBy($updatedBy)
-    {
-        $this->updatedBy = $updatedBy;
-    
-        return $this;
-    }
-
-    /**
-     * Get updatedBy
-     *
-     * @return string 
-     */
-    public function getUpdatedBy()
-    {
-        return $this->updatedBy;
-    }
-    
-    /**
      * @ORM\PreUpdate
      */
-    public function setUpdatedAtValue() {
+    public function setUpdatedAtValues() 
+    {
         $this->setUpdatedAt(new \DateTime());
-    }
-
-    /**
-     * @ORM\PreUpdate
-     */
-    public function setUpdatedByValue() {
-        $this->setUpdatedBy('CHANGE_THIS');
     }
 
     /**

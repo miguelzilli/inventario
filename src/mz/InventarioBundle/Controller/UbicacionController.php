@@ -120,7 +120,7 @@ class UbicacionController extends Controller
         $entity = $em->getRepository('mzInventarioBundle:Ubicacion')->find($id);
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Ubicacion entity.');
+            throw $this->createNotFoundException('No se encuentra el registro.');
         }
 
         $deleteForm = $this->createDeleteForm($id);
@@ -160,10 +160,10 @@ class UbicacionController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->persist($entity);
             $em->flush();
-            $this->get('session')->getFlashBag()->add('success', 'flash.create.success');
+            $this->get('session')->getFlashBag()->add('success', 'Operación realizada con éxito.');
 
             return $this->redirect($this->generateUrl('ubicacion_show', array('id' => $entity->getId())));        } else {
-            $this->get('session')->getFlashBag()->add('error', 'flash.create.error');
+            $this->get('session')->getFlashBag()->add('error', 'No se pudo realizar la operación.');
         }
 
         return $this->render('mzInventarioBundle:Ubicacion:new.html.twig', array(
@@ -182,7 +182,7 @@ class UbicacionController extends Controller
         $entity = $em->getRepository('mzInventarioBundle:Ubicacion')->find($id);
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Ubicacion entity.');
+            throw $this->createNotFoundException('No se encuentra el registro.');
         }
 
         $editForm = $this->createForm(new UbicacionType(), $entity);
@@ -206,7 +206,7 @@ class UbicacionController extends Controller
         $entity = $em->getRepository('mzInventarioBundle:Ubicacion')->find($id);
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Ubicacion entity.');
+            throw $this->createNotFoundException('No se encuentra el registro.');
         }
 
         $editForm   = $this->createForm(new UbicacionType(), $entity);
@@ -219,11 +219,11 @@ class UbicacionController extends Controller
         if ($editForm->isValid()) {
             $em->persist($entity);
             $em->flush();
-            $this->get('session')->getFlashBag()->add('success', 'flash.update.success');
+            $this->get('session')->getFlashBag()->add('success', 'Operación realizada con éxito.');
 
             return $this->redirect($this->generateUrl('ubicacion_edit', array('id' => $id)));
         } else {
-            $this->get('session')->getFlashBag()->add('error', 'flash.update.error');
+            $this->get('session')->getFlashBag()->add('error', 'No se pudo realizar la operación.');
         }
 
         return $this->render('mzInventarioBundle:Ubicacion:edit.html.twig', array(
@@ -248,14 +248,14 @@ class UbicacionController extends Controller
             $entity = $em->getRepository('mzInventarioBundle:Ubicacion')->find($id);
 
             if (!$entity) {
-                throw $this->createNotFoundException('Unable to find Ubicacion entity.');
+                throw $this->createNotFoundException('No se encuentra el registro.');
             }
 
             $em->remove($entity);
             $em->flush();
-            $this->get('session')->getFlashBag()->add('success', 'flash.delete.success');
+            $this->get('session')->getFlashBag()->add('success', 'Operación realizada con éxito.');
         } else {
-            $this->get('session')->getFlashBag()->add('error', 'flash.delete.error');
+            $this->get('session')->getFlashBag()->add('error', 'No se pudo realizar la operación.');
         }
 
         return $this->redirect($this->generateUrl('ubicacion'));

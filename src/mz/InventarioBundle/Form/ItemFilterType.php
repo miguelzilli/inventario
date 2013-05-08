@@ -14,20 +14,10 @@ class ItemFilterType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            // ->add('id', 'filter_number_range')
             ->add('nombre', 'filter_text')
             ->add('marca', 'filter_text')
             ->add('modelo', 'filter_text')
-            // ->add('sn', 'filter_text')
-            // ->add('fechaCompra', 'filter_date_range')
-            // ->add('costo', 'filter_number_range')
-            // ->add('garantia', 'filter_number_range')
-            // ->add('descripcion', 'filter_text')
             ->add('codigo', 'filter_text')
-            // ->add('createdAt', 'filter_date_range')
-            // ->add('createdBy', 'filter_text')
-            // ->add('updatedAt', 'filter_date_range')
-            // ->add('updatedBy', 'filter_text')
         ;
 
         $listener = function(FormEvent $event)

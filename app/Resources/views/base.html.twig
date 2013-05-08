@@ -40,10 +40,20 @@
     <!--[if (gt IE 9)|!(IE)]><!--> 
 <body class="">
         <!--<![endif]-->
+<nav class="navbar">
+        <div class="navbar-inner">
+
+            {% block usermenu %}{% endblock %}
+
+            <a class="brand" href="{{ path('homepage') }}">
+                <span class="first">G4</span>
+                <span class="second">Inventario</span>
+            </a>
+        </div>
+</nav>
 {% block body %}{% endblock %}
-{% block javascripts %}
-    <script src="{{ asset('bundles/mzinventario/js/jquery-1.7.2.min.js')}}" type="text/javascript"></script>
-    <script src="{{ asset('bundles/mzinventario/js/bootstrap.js')}}"></script>
-{% endblock %}
+<script src="{{ asset('bundles/mzinventario/js/jquery-1.7.2.min.js')}}" type="text/javascript"></script>
+<script src="{{ asset('bundles/mzinventario/js/bootstrap.js')}}"></script>
+{% block javascripts %}{% endblock %}
 </body>
 </html>
