@@ -292,7 +292,7 @@ class Item
      */
     public function setFechaCompra($fechaCompra)
     {
-        $this->fechaCompra = new \DateTime($fechaCompra);
+        $this->fechaCompra = $fechaCompra;
     
         return $this;
     }
@@ -612,5 +612,20 @@ class Item
      */
     public function setUpdatedAtValue() {
         $this->setUpdatedAt(new \DateTime());
+    }
+
+    static function obtenerGarantias()
+    {
+        return array(
+            '0' => 'Ninguna',
+            '1' => '30 días',
+            '3' => '3 meses',
+            '6' => '6 meses',
+            '12' => '12 meses',
+            '18' => '18 meses',
+            '24' => '2 años',
+            '72' => '5 años',
+            '99999999' => 'de por vida',
+            );
     }
 }

@@ -13,9 +13,9 @@ class PrestamoType extends AbstractType
         $builder
             ->add('apellido')
             ->add('nombre')
-            ->add('dni')
-            ->add('fecha')
-            ->add('fechaDevolucion')
+            ->add('dni', null, array('label'=>'DNI'))
+            ->add('fecha', 'date', array('input'=>'datetime'))
+            ->add('fechaDevolucion', 'date', array('label'=>'Fecha de Devolución', 'input'=>'datetime'))
             ->add('observaciones')
             ->add('item')
         ;

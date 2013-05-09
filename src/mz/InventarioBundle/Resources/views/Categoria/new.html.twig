@@ -6,11 +6,11 @@
 {% block pagetitle %} Agregar Categoría {% endblock %}
 
 {% block page %}
-<div class="row-fluid">
-    {{ macros.btn_volver('categoria') }}
-</div>
-<form class="well" action="{{ path('categoria_create') }}" method="post" {{ form_enctype(form) }}>
-    {{ form_widget(form) }}
-    <p>{{ macros.btn_guardar() }}</p>
-</form>
+    <div class="btn-toolbar">
+        {{ macros.btn_volver('categoria') }}
+    </div>
+    <form class="well" action="{{ path('categoria_create') }}" method="post" {{ form_enctype(form) }}>
+        {{ form_widget(form) }}
+        <p>{{ macros.btn_guardar() }}</p>
+    </form>
 {% endblock %}

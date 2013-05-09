@@ -1,31 +1,17 @@
 {% extends 'mzInventarioBundle::layout.html.twig' %}
+{% import 'mzInventarioBundle::macros.html.twig' as macros %}
 
 {% block title %} {{ parent() }} - Ubicaciones {% endblock %}
 
 {% block pagetitle %} Editar Ubicación {% endblock %}
 
 {% block page %}
-<div class="row-fluid">
     <div class="btn-toolbar">
-        <a class="btn" href="{{ path('ubicacion') }}">
-            <i class="icon-angle-left icon-large"></i> Volver
-        </a>
+        {{ macros.btn_volver('ubicacion') }}
+        {{ macros.btn_borrarf('ubicacion_delete', entity.id, delete_form) }}
     </div>
-    <div class="btn-toolbar">
-        <form action="{{ path('ubicacion_delete', { 'id': entity.id }) }}" method="post" class="shitty-delete-form">
-            {{ form_widget(delete_form) }}
-            <button class="btn btn-danger" type="submit" onclick="return confirm('Seguro que desea eliminar este registro?');">
-                <i class="icon-trash icon-large"></i> Borrar
-            </button>
-        </form>
-    </div>
-</div>
-<form class="well" action="{{ path('ubicacion_update', { 'id': entity.id }) }}" method="post" {{ form_enctype(edit_form) }}>
-    {{ form_widget(edit_form) }}
-    <p>
-        <button type="submit" class="btn btn-success">
-            <i class="icon-save icon-large"></i> Guardar
-        </button>
-    </p>
-</form>
+    <form class="well" action="{{ path('ubicacion_update', { 'id': entity.id }) }}" method="post" {{ form_enctype(edit_form) }}>
+        {{ form_widget(edit_form) }}
+        <p>{{ macros.btn_guardar('ubicacion') }}</p>
+    </form>
 {% endblock %}

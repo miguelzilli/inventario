@@ -12,7 +12,6 @@ class CondicionType extends AbstractType
     {
         $builder
             ->add('nombre')
-            ->add('slug')
         ;
     }
 

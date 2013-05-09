@@ -6,13 +6,15 @@
 {% block pagetitle %} Estado {% endblock %}
 
 {% block page %}
-    <div class="row-fluid">
+    <div class="btn-toolbar">
         {{ macros.btn_volver('estado') }}
         {{ macros.btn_editar('estado_edit', entity.id) }}
         {{ macros.btn_borrarf('estado_delete', entity.id, delete_form) }}
     </div>
-    
-    <form class="well form-horizontal">
-        {% include 'mzInventarioBundle:Partials:_show_fieldset.html.twig' with { 'entity': entity } %}
-    </form>
+    <div class="well">
+        <dl class="dl-horizontal">
+            <dt>Nombre:</dt>
+            <dd>{{ entity.nombre }}</dd>
+        </dl>
+    </div>
 {% endblock %}

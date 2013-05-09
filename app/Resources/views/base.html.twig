@@ -7,11 +7,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
-    <link href="{{ asset('bundles/mzinventario/css/bootstrap.css') }}" rel="stylesheet" type="text/css">
+    <link href="{{ asset('bundles/mzinventario/css/bootstrap.css') }}" rel="stylesheet">
     <link href="{{ asset('bundles/mzinventario/css/bootstrap-responsive.css') }}" rel="stylesheet">
-    <link href="{{ asset('bundles/mzinventario/css/crud.css') }}" rel="stylesheet">
-    <link href="{{ asset('bundles/mzinventario/css/theme.css') }}" rel="stylesheet" type="text/css">
     <link href="{{ asset('bundles/mzinventario/css/font-awesome.css') }}" rel="stylesheet">
+    <link href="{{ asset('bundles/mzinventario/css/theme.css') }}" rel="stylesheet" type="text/css">
     <style type="text/css">
         #line-chart { height:300px; width:800px; margin: 0px auto; margin-top: 1em; }
         .brand { font-family: georgia, serif; }
@@ -42,9 +41,7 @@
         <!--<![endif]-->
 <nav class="navbar">
         <div class="navbar-inner">
-
             {% block usermenu %}{% endblock %}
-
             <a class="brand" href="{{ path('homepage') }}">
                 <span class="first">G4</span>
                 <span class="second">Inventario</span>

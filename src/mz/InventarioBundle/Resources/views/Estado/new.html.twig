@@ -1,24 +1,16 @@
 {% extends 'mzInventarioBundle::layout.html.twig' %}
+{% import 'mzInventarioBundle::macros.html.twig' as macros %}
 
 {% block title %} {{ parent() }} - Estados {% endblock %}
 
 {% block pagetitle %} Agregar Estado {% endblock %}
 
 {% block page %}
-<div class="row-fluid">
     <div class="btn-toolbar">
-        <a class="btn" href="{{ path('estado') }}">
-            <i class="icon-angle-left icon-large"></i> Volver
-        </a>
+        {{ macros.btn_volver('estado') }}
     </div>
-</div>
-
-<form class="well" action="{{ path('estado_create') }}" method="post" {{ form_enctype(form) }}>
-    {{ form_widget(form) }}
-    <p>
-        <button type="submit" class="btn btn-success">
-            <i class="icon-save icon-large"></i> Guardar
-        </button>
-    </p>
-</form>
+    <form class="well" action="{{ path('estado_create') }}" method="post" {{ form_enctype(form) }}>
+        {{ form_widget(form) }}
+        <p>{{ macros.btn_guardar() }}</p>
+    </form>
 {% endblock %}

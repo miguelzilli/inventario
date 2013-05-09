@@ -6,13 +6,15 @@
 {% block pagetitle %} Categoría {% endblock %}
 
 {% block page %}
-    <div class="row-fluid">
+    <div class="btn-toolbar">
         {{ macros.btn_volver('categoria') }}
         {{ macros.btn_editar('categoria_edit', entity.id) }}
         {{ macros.btn_borrarf('categoria_delete', entity.id, delete_form) }}
     </div>
-    
-    <form class="well form-horizontal">
-        {% include 'mzInventarioBundle:Partials:_show_fieldset.html.twig' with { 'entity': entity } %}
-    </form>
+    <div class="well">
+        <dl class="dl-horizontal">
+            <dt>Nombre:</dt>
+            <dd>{{ entity.nombre }}</dd>
+        </dl>
+    </div>
 {% endblock %}

@@ -12,7 +12,6 @@ class EstadoType extends AbstractType
     {
         $builder
             ->add('nombre')
-            ->add('slug')
         ;
     }
 

@@ -6,14 +6,12 @@
 {% block pagetitle %} Editar Categoría {% endblock %}
 
 {% block page %}
-
-<div class="row-fluid">
-    {{ macros.btn_volver('categoria') }}
-    {{ macros.btn_borrarf('categoria_delete', entity.id, delete_form) }}
-</div>
-
-<form class="well" action="{{ path('categoria_update', { 'id': entity.id }) }}" method="post" {{ form_enctype(edit_form) }}>
-    {{ form_widget(edit_form) }}
-    <p>{{ macros.btn_guardar('categoria') }}</p>
-</form>
+    <div class="btn-toolbar">
+        {{ macros.btn_volver('categoria') }}
+        {{ macros.btn_borrarf('categoria_delete', entity.id, delete_form) }}
+    </div>
+    <form class="well" action="{{ path('categoria_update', { 'id': entity.id }) }}" method="post" {{ form_enctype(edit_form) }}>
+        {{ form_widget(edit_form) }}
+        <p>{{ macros.btn_guardar('categoria') }}</p>
+    </form>
 {% endblock %}

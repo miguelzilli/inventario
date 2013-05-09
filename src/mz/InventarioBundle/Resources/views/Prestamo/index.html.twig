@@ -1,7 +1,9 @@
-{% extends app.request.isXmlHttpRequest ? "mzInventarioBundle::layout_ajax.html.twig" : "mzInventarioBundle::layout.html.twig" %}
-{% block title %} {{ parent() }} - Prestamos {% endblock %}
+{% extends "mzInventarioBundle::layout.html.twig" %}
+{% import 'mzInventarioBundle::macros.html.twig' as macros %}
 
-{% block pagetitle %} Prestamos {% endblock %}
+{% block title %} {{ parent() }} - Préstamos {% endblock %}
+
+{% block pagetitle %} Préstamos {% endblock %}
 
 {% block flashmessages %}
     {{ parent() }}
@@ -13,17 +15,11 @@
 {% endblock %}
 
 {% block page %}
-<div class="row-fluid">
-    <div class="btn-toolbar">
-        <a class="btn btn-primary" href="{{ path('prestamo_new') }}">
-            <i class="icon-plus"></i> Agregar
-        </a>
-    </div>
-    <div class="btn-toolbar">
-        <a class="btn dropdown-toggle" data-toggle="collapse" data-target="#filters">
-            Filtrar <span class="caret"></span>
-        </a>
-    </div>
+<div class="btn-toolbar">
+    {{ macros.btn_agregar('prestamo_new') }}
+    <a class="btn dropdown-toggle" data-toggle="collapse" data-target="#filters">
+        Filtrar <span class="caret"></span>
+    </a>
 </div>
 <div id="filters" class="collapse">
     <form class="well" action="{{ path('prestamo') }}" method="post" {{ form_enctype(filterForm) }}>

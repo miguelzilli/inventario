@@ -5,6 +5,7 @@ namespace mz\InventarioBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use mz\InventarioBundle\Entity\Item as Item;
 
 class ItemType extends AbstractType
 {
@@ -14,17 +15,18 @@ class ItemType extends AbstractType
             ->add('nombre')
             ->add('marca')
             ->add('modelo')
-            ->add('categoria')
-            ->add('sn')
-            ->add('fechaCompra')
-            ->add('costo')
-            ->add('garantia')
-            ->add('descripcion')
-            ->add('codigo')
-            ->add('condicion')
+            ->add('categoria', null, array('label'=>'Categoría'))
+            ->add('sn', null, array('label'=>'SerialNumber'))
+            ->add('fechaCompra', 'date', array('label'=>'Fecha de Compra', 'input'=>'datetime'))
+            ->add('costo', 'money', array('currency'=>false))
+            ->add('garantia', 'choice', array('label'=>'Garantía', 'choices'=>Item::obtenerGarantias()))
+            ->add('descripcion', null, array('label'=>'Descripción'))
+            ->add('codigo', null, array('label'=>'Código'))
+            ->add('condicion', null, array('label'=>'Condición'))
             ->add('estado')
-            ->add('ubicacion')
+            ->add('ubicacion', null, array('label'=>'Ubicación'))
             ->add('imagenes','collection', array(
+                'label' => 'Imágenes',
                 'type'         => new ImagenType(),
                 'allow_add'    => true,
                 'allow_delete' => true,

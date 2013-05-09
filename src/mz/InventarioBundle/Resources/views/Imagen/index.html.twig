@@ -5,13 +5,11 @@
 {% block pagetitle %} Imágenes {% endblock %}
 
 {% block page %}
-<div class="row-fluid">
+<div class="btn-toolbar">
     {{ macros.btn_agregar('imagen_new') }}
-    <div class="btn-toolbar">
-        <a class="btn dropdown-toggle" data-toggle="collapse" data-target="#filters">
-            Filtrar <span class="caret"></span>
-        </a>
-    </div>
+    <a class="btn dropdown-toggle" data-toggle="collapse" data-target="#filters">
+        Filtrar <span class="caret"></span>
+    </a>
 </div>
 
 <div id="filters" class="collapse">

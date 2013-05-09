@@ -1,11 +1,11 @@
-{% extends app.request.isXmlHttpRequest ? "mzInventarioBundle::layout_ajax.html.twig" : "mzInventarioBundle::layout.html.twig" %}
+{% extends "mzInventarioBundle::layout.html.twig" %}
+{% import 'mzInventarioBundle::macros.html.twig' as macros %}
 
 {% block title %} {{ parent() }} - Items {% endblock %}
 
 {% block pagetitle %} Items {% endblock %}
 
 {% block flashmessages %}
-    {{ parent() }}
     {% if form_errors(filterForm) %}
         <div class="alert alert-block alert-error fade in form-errors">
             {{ form_errors(filterForm) }}
@@ -14,22 +14,15 @@
 {% endblock %}
 
 {% block page %}
-<div class="row-fluid">
-    <div class="btn-toolbar">
-        <a class="btn btn-primary" href="{{ path('item_new') }}">
-            <i class="icon-plus"></i> Agregar
-        </a>
-    </div>
-    <div class="btn-toolbar">
-        <a class="btn dropdown-toggle" data-toggle="collapse" data-target="#filters">
-            Filtrar <span class="caret"></span>
-        </a>
-    </div>
+<div class="btn-toolbar">
+    {{ macros.btn_agregar('item_new') }}
+    <a class="btn dropdown-toggle" data-toggle="collapse" data-target="#filters">
+        Filtrar <span class="caret"></span>
+    </a>
 </div>
 <div id="filters" class="collapse">
     <form class="well" action="{{ path('homepage') }}" method="post" {{ form_enctype(filterForm) }}>
         {{ form_rest(filterForm) }}
-
         <p>
             <button class="btn" type="submit" name="filter_action" value="reset">Reset</button>
             <button class="btn btn-info" type="submit" name="filter_action" value="filter">Filtrar</button>
@@ -45,12 +38,12 @@
                 <th>Nombre</th>
                 <th>Marca</th>
                 <th>Modelo</th>
-                <th>SN</th>
-                <th>Fechacompra</th>
+                <th>Nº Serie</th>
+                <th>Fecha de Compra</th>
                 <th>Costo</th>
-                <th>Garantia</th>
-                <th>Descripcion</th>
-                <th>Codigo</th>
+                <th>Garantía</th>
+                <th>Descripción</th>
+                <th>Código</th>
                 <th></th>
             </tr>
         </thead>
@@ -62,7 +55,7 @@
                 <td>{{ entity.marca }}</td>
                 <td>{{ entity.modelo }}</td>
                 <td>{{ entity.sn }}</td>
-                <td>{% if entity.fechaCompra %}{{ entity.fechaCompra|date('d-m-Y H:i:s') }}{% endif %}</td>
+                <td>{% if entity.fechaCompra %}{{ entity.fechaCompra|date('d-m-Y') }}{% endif %}</td>
                 <td>{{ entity.costo }}</td>
                 <td>{{ entity.garantia }}</td>
                 <td>{{ entity.descripcion }}</td>
@@ -76,6 +69,5 @@
         </tbody>
     </table>
 </div>
-
-    {{ pagerHtml|raw }}
+{{ pagerHtml|raw }}
 {% endblock %}

@@ -14,7 +14,7 @@ class UsuarioType extends AbstractType
         $builder
             ->add('apellido')
             ->add('nombre')
-            ->add('email')
+            ->add('email', 'email')
             ->add('username')
             ->add('password', 'repeated', array(
                 'type' => 'password',
@@ -23,10 +23,7 @@ class UsuarioType extends AbstractType
                 'first_options'  => array('label' => 'Password'),
                 'second_options' => array('label' => 'Repetir Password'),
                 ))
-            ->add('rol', 'choice', array(
-                'label' => 'Rol',
-                'choices' => Usuario::obtenerRoles(),
-                ))
+            ->add('rol', 'choice', array('choices' => Usuario::obtenerRoles()))
             ->add('isEnabled', null, array('label'=>'Habilitado?'))
             ;
     }

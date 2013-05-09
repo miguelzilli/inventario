@@ -1,4 +1,4 @@
-{% extends app.request.isXmlHttpRequest ? "mzInventarioBundle::layout_ajax.html.twig" : "mzInventarioBundle::layout.html.twig" %}
+{% extends "mzInventarioBundle::layout.html.twig" %}
 {% import 'mzInventarioBundle::macros.html.twig' as macros %}
 
 {% block title %} {{ parent() }} - Categorías {% endblock %}
@@ -6,7 +6,6 @@
 {% block pagetitle %} Categorías {% endblock %}
 
 {% block flashmessages %}
-    {{ parent() }}
     {% if form_errors(filterForm) %}
         <div class="alert alert-block alert-error fade in form-errors">
             {{ form_errors(filterForm) }}
@@ -15,14 +14,11 @@
 {% endblock %}
 
 {% block page %}
-<div class="row-fluid">
+<div class="btn-toolbar">
     {{ macros.btn_agregar('categoria_new') }}
-    
-    <div class="btn-toolbar">
-        <a class="btn dropdown-toggle" data-toggle="collapse" data-target="#filters">
-            Filtrar <span class="caret"></span>
-        </a>
-    </div>
+    <a class="btn dropdown-toggle" data-toggle="collapse" data-target="#filters">
+        Filtrar <span class="caret"></span>
+    </a>
 </div>
 <div id="filters" class="collapse">
     <form class="well" action="{{ path('categoria') }}" method="post" {{ form_enctype(filterForm) }}>
@@ -39,7 +35,6 @@
             <tr>
                 <th>#</th>
                 <th>Nombre</th>
-                <th>Slug</th>
                 <th></th>
             </tr>
         </thead>
@@ -50,7 +45,6 @@
                 <td>
                     <a href="{{ path('categoria_show', { 'id': entity.id }) }}">{{ entity.nombre }}</a>
                 </td>
-                <td>{{ entity.slug }}</td>
                 <td class="actions">
                     <a href="{{ path('categoria_show', { 'id': entity.id }) }}"><i class="icon-pencil"></i> </a>
                     <a href="{{ path('categoria_edit', { 'id': entity.id }) }}"><i class="icon-remove"></i> </a>
