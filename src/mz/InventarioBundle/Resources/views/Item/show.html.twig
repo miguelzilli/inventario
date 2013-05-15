@@ -12,43 +12,72 @@
         {{ macros.btn_borrarf('item_delete', entity.id, delete_form) }}
     </div>
 
-<div class="well">
-    <dl class="dl-horizontal">
-        <dt>Id:</dt>
-        <dd>{{ entity.id }}</dd>
+    <div class="well">
+        <div class="item-details">
+            <dl class="dl-horizontal">
+                <dt>Nombre:</dt>
+                <dd>{{ entity.nombre }}</dd>
 
-        <dt>Nombre:</dt>
-        <dd>{{ entity.nombre }}</dd>
+                <dt>Marca:</dt>
+                <dd>{{ entity.marca }}</dd>
 
-        <dt>Marca:</dt>
-        <dd>{{ entity.marca }}</dd>
+                <dt>Modelo:</dt>
+                <dd>{{ entity.modelo }}</dd>
 
-        <dt>Modelo:</dt>
-        <dd>{{ entity.modelo }}</dd>
+                <dt>Nº de Serie:</dt>
+                <dd>{{ entity.sn }}</dd>
 
-        <dt>Serial Number:</dt>
-        <dd>{{ entity.sn }}</dd>
+                <dt>Fecha de Compra:</dt>
+                <dd>{{ entity.fechaCompra|date('d-m-Y') }}</dd>
 
-        <dt>Fecha de Compra:</dt>
-        <dd>{{ entity.fechaCompra|date('d-m-Y') }}</dd>
+                <dt>Costo:</dt>
+                <dd>{{ entity.costo }}</dd>
 
-        <dt>Costo:</dt>
-        <dd>{{ entity.costo }}</dd>
+                <dt>Garantia:</dt>
+                <dd>{{ entity.garantia }}</dd>
 
-        <dt>Garantia:</dt>
-        <dd>{{ entity.garantia }}</dd>
+                <dt>Descripción:</dt>
+                <dd>{{ entity.descripcion }}</dd>
 
-        <dt>Descripción:</dt>
-        <dd>{{ entity.descripcion }}</dd>
+                <dt>Código:</dt>
+                <dd>{{ entity.codigo }}</dd>
 
-        <dt>Código:</dt>
-        <dd>{{ entity.codigo }}</dd>
+                <dt>Creado:</dt>
+                <dd>{{ entity.createdAt|date('d-m-Y') }}</dd>
 
-        <dt>Creado:</dt>
-        <dd>{{ entity.createdAt|date('d-m-Y') }}</dd>
-
-        <dt>Actualizado:</dt>
-        <dd>{{ entity.updatedAt|date('d-m-Y') }}</dd>
-    </dl>
-</div>
+                <dt>Actualizado:</dt>
+                <dd>{{ entity.updatedAt|date('d-m-Y') }}</dd>
+            </dl>
+        </div>
+        <div class="item-gallery">
+            <table style="margin:auto;">
+                <tr><td>
+                    <div id="gallery-images">
+                        {% for imagen in entity.imagenes %}
+                            <img src="{{ asset(imagen.webPath) }}">
+                        {% else %}
+                            <img src="/uploads/imagenes/default.png">
+                        {% endfor %}
+                    </div>
+                </td></tr>
+                <tr><td>
+                    <div style="margin: 10px 0;">
+                        <a id="prev" class="btn" href="#"><i class="icon-chevron-sign-left"></i> </a>
+                        <a id="next" class="btn" href="#"><i class="icon-chevron-sign-right"></i> </a>
+                    </div>
+                </td></tr>
+            </table>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+{% endblock %}
+{% block javascripts %}
+    <script src="{{ asset('bundles/mzinventario/js/jquery.cycle.lite.js') }}"></script>
+    <script type="text/javascript">
+        $('#gallery-images').cycle({ 
+            prev:   '#prev', 
+            next:   '#next', 
+            timeout: 0 
+        });
+    </script>
 {% endblock %}

@@ -117,7 +117,7 @@ hr {
   border-top: 1px solid #ffffff;
   border-left: 1px solid #ffffff;
   padding: 0em 1.25em;
-  margin-bottom: 10px;
+  /**margin-bottom: 10px;**/
 }
 .header h1 {
   font-size: 2em;
@@ -563,6 +563,7 @@ input[type="password"] {
   -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorStr='#d9edf7',EndColorStr='#afd9ee')";
 }
 .alert.alert-success {
+  margin: 10px 0;
   border: 1px solid #a3d48e;
   background: #c1e2b3;
   background: -webkit-gradient(linear, left bottom, left top, color-stop(0, #c1e2b3), color-stop(1, #dff0d8));
@@ -788,7 +789,8 @@ td.actions{
   color: #FFFFFF;
 }
 form.shitty-delete-form{
-  margin: 0;
+  float: right;
+  margin: 0 0 0 5px;
 }
 .sidebar-nav .nav-header {
   text-decoration: none;
@@ -797,13 +799,36 @@ form.shitty-delete-form{
   float: right;
 }
 footer{
-    background: none repeat scroll 0 0 #FFFFFF;
-    border-left: 3px solid #999999;
-    margin-left: 240px;
-    min-width: 400px;
-    position: relative;
+  background: none repeat scroll 0 0 #FFFFFF;
+  border-left: 3px solid #999999;
+  margin-left: 240px;
+  min-width: 400px;
+  position: relative;
 }
 
 form div.control-group span.help-inline{
   margin-bottom: 10px
+}
+
+.item-details{
+  width: 50%;
+  float: left;
+}
+
+.item-gallery{
+  text-align: center;
+  width: 50%;
+  margin-left: 50%;
+  min-height: 254px;
+}
+
+#gallery-images{
+    height: 225px;
+    margin: 0;
+    overflow: hidden;
+    padding: 0;
+    width: 225px;
+}
+#gallery-images img{
+  left:0px;
 }

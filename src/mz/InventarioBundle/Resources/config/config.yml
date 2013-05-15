@@ -1,0 +1,5 @@
+# mzInventarioBundle Configs
+parameters:
+    images.root_web_dir: "%kernel.root_dir%/../../../../web/"
+    images.upload_dir: "uploads/imagenes"
+    image.default: "default.png"

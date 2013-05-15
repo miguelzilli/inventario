@@ -12,6 +12,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
  * @ORM\Table(name="items")
  * @ORM\Entity
  * @ORM\HasLifecycleCallbacks
+ * @ORM\Entity(repositoryClass="mz\InventarioBundle\Entity\ItemRepository")
  * @UniqueEntity(fields="codigo", message="Ya existe un registro con este código.")
  */
 class Item
@@ -453,6 +454,9 @@ class Item
      */
     public function addImagene(\mz\InventarioBundle\Entity\Imagen $imagenes)
     {
+        //needed to save the embedded form
+        $imagenes->setItem($this);
+
         $this->imagenes[] = $imagenes;
     
         return $this;

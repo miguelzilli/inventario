@@ -46,21 +46,18 @@ class ItemController extends Controller
         $session = $request->getSession();
         $filterForm = $this->createForm(new ItemFilterType());
         $em = $this->getDoctrine()->getManager();
-        $queryBuilder = $em->getRepository('mzInventarioBundle:Item')->createQueryBuilder('e');
-    
+
         // Reset filter
         if ($request->getMethod() == 'POST' && $request->get('filter_action') == 'reset') {
             $session->remove('ItemControllerFilter');
         }
-    
+        
         // Filter action
-        if ($request->getMethod() == 'POST' && $request->get('filter_action') == 'filter') {
+        if ($request->getMethod() == 'POST' && $request->get('filter_action') == 'search') {
             // Bind values from the request
             $filterForm->bind($request);
 
             if ($filterForm->isValid()) {
-                // Build the query from the given form object
-                $this->get('lexik_form_filter.query_builder_updater')->addFilterConditions($filterForm, $queryBuilder);
                 // Save filter to session
                 $filterData = $filterForm->getData();
                 $session->set('ItemControllerFilter', $filterData);
@@ -70,10 +67,14 @@ class ItemController extends Controller
             if ($session->has('ItemControllerFilter')) {
                 $filterData = $session->get('ItemControllerFilter');
                 $filterForm = $this->createForm(new ItemFilterType(), $filterData);
-                $this->get('lexik_form_filter.query_builder_updater')->addFilterConditions($filterForm, $queryBuilder);
+            } else {
+                $filterData = array('q' => '');
             }
         }
     
+        $queryBuilder = $em->getRepository('mzInventarioBundle:Item')
+            ->getSearchQuery($filterData['q']);
+
         return array($filterForm, $queryBuilder);
     }
 
@@ -127,7 +128,8 @@ class ItemController extends Controller
 
         return $this->render('mzInventarioBundle:Item:show.html.twig', array(
             'entity'      => $entity,
-            'delete_form' => $deleteForm->createView(),        ));
+            'delete_form' => $deleteForm->createView(),
+            ));
     }
 
     /**
@@ -160,6 +162,7 @@ class ItemController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->persist($entity);
             $em->flush();
+            
             $this->get('session')->getFlashBag()->add('success', 'Operación realizada con éxito.');
 
             return $this->redirect($this->generateUrl('item_show', array('id' => $entity->getId())));        } else {

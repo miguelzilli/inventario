@@ -24,7 +24,8 @@
         "doctrine/data-fixtures": "dev-master",
         "doctrine/doctrine-fixtures-bundle": "dev-master",
         "lexik/form-filter-bundle": "dev-master",
-        "pagerfanta/pagerfanta": "dev-master"
+        "pagerfanta/pagerfanta": "dev-master",
+        "genemu/form-bundle": "2.1.x"
     },
     "scripts": {
         "post-install-cmd": [

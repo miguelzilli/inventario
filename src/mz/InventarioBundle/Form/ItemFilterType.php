@@ -14,29 +14,29 @@ class ItemFilterType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('nombre', 'filter_text')
-            ->add('marca', 'filter_text')
-            ->add('modelo', 'filter_text')
-            ->add('codigo', 'filter_text')
+            ->add('q', 'search', array('required'=>false))
+            // ->add('marca', 'filter_text')
+            // ->add('modelo', 'filter_text')
+            // ->add('codigo', 'filter_text')
         ;
 
-        $listener = function(FormEvent $event)
-        {
-            // Is data empty?
-            foreach ($event->getData() as $data) {
-                if(is_array($data)) {
-                    foreach ($data as $subData) {
-                        if(!empty($subData)) return;
-                    }
-                }
-                else {
-                    if(!empty($data)) return;
-                }
-            }
+        // $listener = function(FormEvent $event)
+        // {
+        //     // Is data empty?
+        //     foreach ($event->getData() as $data) {
+        //         if(is_array($data)) {
+        //             foreach ($data as $subData) {
+        //                 if(!empty($subData)) return;
+        //             }
+        //         }
+        //         else {
+        //             if(!empty($data)) return;
+        //         }
+        //     }
 
-            $event->getForm()->addError(new FormError('Filter empty'));
-        };
-        $builder->addEventListener(FormEvents::POST_BIND, $listener);
+        //     $event->getForm()->addError(new FormError('Filter empty'));
+        // };
+        // $builder->addEventListener(FormEvents::POST_BIND, $listener);
     }
 
     public function getName()

@@ -38,7 +38,7 @@ class Imagen
      *
      * @ORM\ManyToOne(targetEntity="mz\InventarioBundle\Entity\Item", inversedBy="imagenes")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="item_id", referencedColumnName="id")
+     *   @ORM\JoinColumn(name="item_id", referencedColumnName="id", nullable=false)
      * })
      */
     private $item;
@@ -212,4 +212,5 @@ class Imagen
             unlink($file);
         }
     }
+
 }

@@ -1,5 +1,10 @@
 {% extends 'mzInventarioBundle::layout.html.twig' %}
 {% import 'mzInventarioBundle::macros.html.twig' as macros %}
+{% block stylesheets %}
+{{ parent() }}
+    <link href="{{ asset('bundles/mzinventario/css/cupertino/jquery-ui-1.10.3.custom.min.css') }}" rel="stylesheet" />
+    {{ form_stylesheet(edit_form) }}
+{% endblock %}
 
 {% block title %} {{ parent() }} - Items {% endblock %}
 
@@ -14,4 +19,10 @@
         {{ form_widget(edit_form) }}
         <p>{{ macros.btn_guardar('homepage') }}</p>
     </form>
+{% endblock %}
+{% block javascripts %}
+{{ parent() }}
+    <script src="{{ asset('bundles/mzinventario/js/jquery-ui-1.10.3.custom.min.js') }}"></script>
+    <script src="{{ asset('bundles/mzinventario/js/jquery-ui-i18n.js') }}"></script>
+    {{ form_javascript(edit_form) }}
 {% endblock %}

@@ -17,7 +17,11 @@ class ItemType extends AbstractType
             ->add('modelo')
             ->add('categoria', null, array('label'=>'Categoría'))
             ->add('sn', null, array('label'=>'SerialNumber'))
-            ->add('fechaCompra', 'date', array('label'=>'Fecha de Compra', 'input'=>'datetime'))
+            ->add('fechaCompra', 'genemu_jquerydate', array(
+                'widget' => 'single_text',
+                'label'=>'Fecha de Compra', 
+                'input'=>'datetime'
+                ))
             ->add('costo', 'money', array('currency'=>false))
             ->add('garantia', 'choice', array('label'=>'Garantía', 'choices'=>Item::obtenerGarantias()))
             ->add('descripcion', null, array('label'=>'Descripción'))

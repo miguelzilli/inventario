@@ -1,6 +1,12 @@
 {% extends 'mzInventarioBundle::layout.html.twig' %}
 {% import 'mzInventarioBundle::macros.html.twig' as macros %}
 
+{% block stylesheets %}
+{{ parent() }}
+    <link href="{{ asset('bundles/mzinventario/css/cupertino/jquery-ui-1.10.3.custom.min.css') }}" rel="stylesheet" />
+    {{ form_stylesheet(form) }}
+{% endblock %}
+
 {% block title %} {{ parent() }} - Items {% endblock %}
 
 {% block pagetitle %} Agregar Item {% endblock %}
@@ -17,6 +23,8 @@
 
 {% block javascripts %}
 {{ parent() }}
+    <script src="{{ asset('bundles/mzinventario/js/jquery-ui-1.10.3.custom.min.js') }}"></script>
+    <script src="{{ asset('bundles/mzinventario/js/jquery-ui-i18n.js') }}"></script>
 <script type="text/javascript">
     // Obtiene la ul que contiene la colección de etiquetas
     var collectionHolder = $('#mz_itemtype_imagenes');
@@ -83,4 +91,5 @@ function addImagenFormDeleteLink($tagFormDiv) {
     });
 }
 </script>
+{{ form_javascript(form) }}
 {% endblock %}

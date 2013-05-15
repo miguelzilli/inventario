@@ -1,7 +1,5 @@
 {% extends '::base.html.twig' %}
-
 {% set user = app.security.getToken().getUser() %}
-
 {% if user %}
     {% block usermenu %}
         <ul class="nav pull-right">

@@ -21,6 +21,7 @@ class AppKernel extends Kernel
             new JMS\DiExtraBundle\JMSDiExtraBundle($this),
             new JMS\SecurityExtraBundle\JMSSecurityExtraBundle(),
             new Lexik\Bundle\FormFilterBundle\LexikFormFilterBundle(),
+            new Genemu\Bundle\FormBundle\GenemuFormBundle(),
             new mz\InventarioBundle\mzInventarioBundle(),
         );
 
