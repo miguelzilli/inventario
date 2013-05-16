@@ -636,6 +636,9 @@ input[type="password"] {
   -moz-background-clip: padding;
   -webkit-background-clip: padding-box;
   background-clip: padding-box;
+  left: 35%;
+  margin:0em;
+
 }
 .modal.small {
   width: 400px;

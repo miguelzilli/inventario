@@ -27,7 +27,7 @@ class LoadPrestamoData extends AbstractFixture implements OrderedFixtureInterfac
             $prestamo->setFecha(new \DateTime($fecha));
             $prestamo->setNombre($nombres[rand(0,2)]);
             $prestamo->setObservaciones('Observaciones del prestamo #'.$i);
-            $prestamo->setItem($em->merge($this->getReference('item'.$i)));
+            //$prestamo->setItem($em->merge($this->getReference('item'.$i)));
 
             $em->persist($prestamo);
         }
@@ -35,7 +35,7 @@ class LoadPrestamoData extends AbstractFixture implements OrderedFixtureInterfac
     }
 
     public function getOrder() {
-        return 7; // the order in which fixtures will be loaded
+        return 9; // the order in which fixtures will be loaded
     }
 
 }
