@@ -262,7 +262,7 @@ class ItemController extends Controller {
         ;
     }
 
-    public function borrarAction($id) {
+    public function getDeleteFormAction($id) {
         $em = $this->getDoctrine()->getManager();
 
         $entity = $em->getRepository('mzInventarioBundle:Item')->find($id);
@@ -271,12 +271,10 @@ class ItemController extends Controller {
             throw $this->createNotFoundException('No se encuentra el registro.');
         }
 
-//        $editForm = $this->createForm(new ItemType(), $entity);
         $deleteForm = $this->createDeleteForm($id);
 
-        return $this->render('mzInventarioBundle:Item:borrarform.html.twig', array(
+        return $this->render('mzInventarioBundle:Item:deleteForm.html.twig', array(
                     'entity' => $entity,
-//                    'edit_form' => $editForm->createView(),
                     'delete_form' => $deleteForm->createView(),
         ));
     }

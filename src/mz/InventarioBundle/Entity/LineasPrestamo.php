@@ -4,12 +4,14 @@ namespace mz\InventarioBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * LineasPrestamo
  *
- * @ORM\Table(name="lineasprestamos")
+ * @ORM\Table(name="lineas_prestamo")
  * @ORM\Entity
+ * @UniqueEntity(fields={"prestamo", "item"}, message="Línea duplicada.")
  */
 class LineasPrestamo
 {
@@ -56,6 +58,7 @@ class LineasPrestamo
      * @ORM\Column(name="observaciones", type="text")
      */
     private $observaciones;
+
     /**
      * Get id
      *

@@ -1,6 +1,6 @@
-item_borrar:
-    pattern:  /{id}/borrar
-    defaults: { _controller: "mzInventarioBundle:Item:borrar" }
+item_get_delete_form:
+    pattern:  /{id}/get_delete_form
+    defaults: { _controller: "mzInventarioBundle:Item:getDeleteForm" }
     requirements: { _method: get }
 item_show:
     pattern:  /{id}/show

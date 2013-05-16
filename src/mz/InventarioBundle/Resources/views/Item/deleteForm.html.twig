@@ -1,6 +1,7 @@
 {% import 'mzInventarioBundle::macros.html.twig' as macros %}
+
 <form action="{{ path('item_delete', { 'id': entity.id }) }}" method="post" class="shitty-delete-form">
         {{ form_widget(delete_form) }}
-        <button class="btn" aria-hidden="true" data-dismiss="modal">Cancelar</button>
-        <button type="submit" class="btn btn-danger"><i class="icon-trash icon-large"></i> Borrar</button>
+        <button class="btn" data-dismiss="modal" aria-hidden="true">Cancelar</button>
+        <button class="btn btn-danger" data-dismiss="modal" type="submit">Borrar</button>
 </form>
