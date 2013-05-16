@@ -1,3 +1,7 @@
+item_borrar:
+    pattern:  /{id}/borrar
+    defaults: { _controller: "mzInventarioBundle:Item:borrar" }
+    requirements: { _method: get }
 item_show:
     pattern:  /{id}/show
     defaults: { _controller: "mzInventarioBundle:Item:show" }

@@ -1,6 +1,10 @@
 {% extends 'mzInventarioBundle::layout.html.twig' %}
 {% import 'mzInventarioBundle::macros.html.twig' as macros %}
-
+{% block stylesheets %}
+{{ parent() }}
+    <link href="{{ asset('bundles/mzinventario/css/cupertino/jquery-ui-1.10.3.custom.min.css') }}" rel="stylesheet" />
+    {{ form_stylesheet(form) }}
+{% endblock %}
 {% block title %} {{ parent() }} - Préstamos {% endblock %}
 
 {% block pagetitle %} Agregar Préstamo {% endblock %}
@@ -13,4 +17,10 @@
         {{ form_widget(form) }}
         <p>{{ macros.btn_guardar() }}</p>
     </form>
+{% endblock %}
+{% block javascripts %}
+{{ parent() }}
+    <script src="{{ asset('bundles/mzinventario/js/jquery-ui-1.10.3.custom.min.js') }}"></script>
+    <script src="{{ asset('bundles/mzinventario/js/jquery-ui-i18n.js') }}"></script>
+    {{ form_javascript(form) }}
 {% endblock %}

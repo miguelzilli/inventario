@@ -12,8 +12,8 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Entity
  * @ORM\HasLifecycleCallbacks
  */
-class Prestamo
-{
+class Prestamo {
+
     /**
      * @var integer
      *
@@ -88,21 +88,19 @@ class Prestamo
     private $updatedAt;
 
     /**
-     * @var \mz\InventarioBundle\Entity\Item
+     * @var \Doctrine\Common\Collections\Collection
      *
-     * @ORM\ManyToOne(targetEntity="mz\InventarioBundle\Entity\Item", inversedBy="prestamos")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="item_id", referencedColumnName="id")
-     * })
+     * @ORM\OneToMany(targetEntity="mz\InventarioBundle\Entity\LineasPrestamo", mappedBy="prestamo")
      */
-    private $item;
+    private $lineasPrestamos;
 
     /**
      * Constructor
      */
-    public function __construct()
-    {
-        $now=new \DateTime();
+    public function __construct() {
+        $this->lineasPrestamos = new \Doctrine\Common\Collections\ArrayCollection();
+
+        $now = new \DateTime();
         $this->setCreatedAt($now);
         $this->setUpdatedAt($now);
     }
@@ -112,8 +110,7 @@ class Prestamo
      *
      * @return integer 
      */
-    public function getId()
-    {
+    public function getId() {
         return $this->id;
     }
 
@@ -123,10 +120,9 @@ class Prestamo
      * @param string $apellido
      * @return Prestamo
      */
-    public function setApellido($apellido)
-    {
+    public function setApellido($apellido) {
         $this->apellido = $apellido;
-    
+
         return $this;
     }
 
@@ -135,8 +131,7 @@ class Prestamo
      *
      * @return string 
      */
-    public function getApellido()
-    {
+    public function getApellido() {
         return $this->apellido;
     }
 
@@ -146,10 +141,9 @@ class Prestamo
      * @param string $nombre
      * @return Prestamo
      */
-    public function setNombre($nombre)
-    {
+    public function setNombre($nombre) {
         $this->nombre = $nombre;
-    
+
         return $this;
     }
 
@@ -158,8 +152,7 @@ class Prestamo
      *
      * @return string 
      */
-    public function getNombre()
-    {
+    public function getNombre() {
         return $this->nombre;
     }
 
@@ -169,10 +162,9 @@ class Prestamo
      * @param string $dni
      * @return Prestamo
      */
-    public function setDni($dni)
-    {
+    public function setDni($dni) {
         $this->dni = $dni;
-    
+
         return $this;
     }
 
@@ -181,8 +173,7 @@ class Prestamo
      *
      * @return string 
      */
-    public function getDni()
-    {
+    public function getDni() {
         return $this->dni;
     }
 
@@ -192,10 +183,9 @@ class Prestamo
      * @param \DateTime $fecha
      * @return Prestamo
      */
-    public function setFecha($fecha)
-    {
+    public function setFecha($fecha) {
         $this->fecha = $fecha;
-    
+
         return $this;
     }
 
@@ -204,8 +194,7 @@ class Prestamo
      *
      * @return \DateTime 
      */
-    public function getFecha()
-    {
+    public function getFecha() {
         return $this->fecha;
     }
 
@@ -215,10 +204,9 @@ class Prestamo
      * @param \DateTime $fechaDevolucion
      * @return Prestamo
      */
-    public function setFechaDevolucion($fechaDevolucion)
-    {
+    public function setFechaDevolucion($fechaDevolucion) {
         $this->fechaDevolucion = $fechaDevolucion;
-    
+
         return $this;
     }
 
@@ -227,8 +215,7 @@ class Prestamo
      *
      * @return \DateTime 
      */
-    public function getFechaDevolucion()
-    {
+    public function getFechaDevolucion() {
         return $this->fechaDevolucion;
     }
 
@@ -238,10 +225,9 @@ class Prestamo
      * @param string $observaciones
      * @return Prestamo
      */
-    public function setObservaciones($observaciones)
-    {
+    public function setObservaciones($observaciones) {
         $this->observaciones = $observaciones;
-    
+
         return $this;
     }
 
@@ -250,8 +236,7 @@ class Prestamo
      *
      * @return string 
      */
-    public function getObservaciones()
-    {
+    public function getObservaciones() {
         return $this->observaciones;
     }
 
@@ -261,10 +246,9 @@ class Prestamo
      * @param \DateTime $createdAt
      * @return Prestamo
      */
-    public function setCreatedAt($createdAt)
-    {
+    public function setCreatedAt($createdAt) {
         $this->createdAt = $createdAt;
-    
+
         return $this;
     }
 
@@ -273,8 +257,7 @@ class Prestamo
      *
      * @return \DateTime 
      */
-    public function getCreatedAt()
-    {
+    public function getCreatedAt() {
         return $this->createdAt;
     }
 
@@ -284,10 +267,9 @@ class Prestamo
      * @param \DateTime $updatedAt
      * @return Prestamo
      */
-    public function setUpdatedAt($updatedAt)
-    {
+    public function setUpdatedAt($updatedAt) {
         $this->updatedAt = $updatedAt;
-    
+
         return $this;
     }
 
@@ -296,33 +278,30 @@ class Prestamo
      *
      * @return \DateTime 
      */
-    public function getUpdatedAt()
-    {
+    public function getUpdatedAt() {
         return $this->updatedAt;
     }
 
-    /**
-     * Set item
-     *
-     * @param \mz\InventarioBundle\Entity\Item $item
-     * @return Prestamo
-     */
-    public function setItem(\mz\InventarioBundle\Entity\Item $item = null)
-    {
-        $this->item = $item;
-    
-        return $this;
-    }
+//    /**
+//     * Set item
+//     *
+//     * @param \mz\InventarioBundle\Entity\Item $item
+//     * @return Prestamo
+//     */
+//    public function setItem(\mz\InventarioBundle\Entity\Item $item = null) {
+//        $this->item = $item;
+//
+//        return $this;
+//    }
 
-    /**
-     * Get item
-     *
-     * @return \mz\InventarioBundle\Entity\Item 
-     */
-    public function getItem()
-    {
-        return $this->item;
-    }
+//    /**
+//     * Get item
+//     *
+//     * @return \mz\InventarioBundle\Entity\Item 
+//     */
+//    public function getItem() {
+//        return $this->item;
+//    }
 
     /**
      * @ORM\PreUpdate
@@ -330,4 +309,35 @@ class Prestamo
     public function setUpdatedAtValue() {
         $this->setUpdatedAt(new \DateTime());
     }
+
+    /**
+     * Add lineasPrestamos
+     *
+     * @param \mz\InventarioBundle\Entity\LineasPrestamo $lineasPrestamos
+     * @return Prestamo
+     */
+    public function addLineasPrestamo(\mz\InventarioBundle\Entity\LineasPrestamo $lineasPrestamos) {
+        $this->lineasPrestamos[] = $lineasPrestamos;
+
+        return $this;
+    }
+
+    /**
+     * Remove lineasPrestamos
+     *
+     * @param \mz\InventarioBundle\Entity\LineasPrestamo $lineasPrestamos
+     */
+    public function removeLineasPrestamo(\mz\InventarioBundle\Entity\LineasPrestamo $lineasPrestamos) {
+        $this->lineasPrestamos->removeElement($lineasPrestamos);
+    }
+
+    /**
+     * Get lineasPrestamos
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getLineasPrestamos() {
+        return $this->lineasPrestamos;
+    }
+
 }

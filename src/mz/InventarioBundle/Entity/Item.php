@@ -122,9 +122,9 @@ class Item
     /**
      * @var \Doctrine\Common\Collections\Collection
      *
-     * @ORM\OneToMany(targetEntity="mz\InventarioBundle\Entity\Prestamo", mappedBy="item")
+     * @ORM\OneToMany(targetEntity="mz\InventarioBundle\Entity\LineasPrestamo", mappedBy="item")
      */
-    private $prestamos;
+    private $lineasPrestamos;
 
     /**
      * @var \mz\InventarioBundle\Entity\Categoria
@@ -176,7 +176,7 @@ class Item
     public function __construct()
     {
         $this->imagenes = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->prestamos = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->lineasPrestamos = new \Doctrine\Common\Collections\ArrayCollection();
 
         $now=new \DateTime();
         $this->setCreatedAt($now);
@@ -482,38 +482,38 @@ class Item
         return $this->imagenes;
     }
 
-    /**
-     * Add prestamos
-     *
-     * @param \mz\InventarioBundle\Entity\Prestamo $prestamos
-     * @return Item
-     */
-    public function addPrestamo(\mz\InventarioBundle\Entity\Prestamo $prestamos)
-    {
-        $this->prestamos[] = $prestamos;
-    
-        return $this;
-    }
-
-    /**
-     * Remove prestamos
-     *
-     * @param \mz\InventarioBundle\Entity\Prestamo $prestamos
-     */
-    public function removePrestamo(\mz\InventarioBundle\Entity\Prestamo $prestamos)
-    {
-        $this->prestamos->removeElement($prestamos);
-    }
-
-    /**
-     * Get prestamos
-     *
-     * @return \Doctrine\Common\Collections\Collection 
-     */
-    public function getPrestamos()
-    {
-        return $this->prestamos;
-    }
+//    /**
+//     * Add prestamos
+//     *
+//     * @param \mz\InventarioBundle\Entity\Prestamo $prestamos
+//     * @return Item
+//     */
+//    public function addPrestamo(\mz\InventarioBundle\Entity\Prestamo $prestamos)
+//    {
+//        $this->prestamos[] = $prestamos;
+//    
+//        return $this;
+//    }
+//
+//    /**
+//     * Remove prestamos
+//     *
+//     * @param \mz\InventarioBundle\Entity\Prestamo $prestamos
+//     */
+//    public function removePrestamo(\mz\InventarioBundle\Entity\Prestamo $prestamos)
+//    {
+//        $this->prestamos->removeElement($prestamos);
+//    }
+//
+//    /**
+//     * Get prestamos
+//     *
+//     * @return \Doctrine\Common\Collections\Collection 
+//     */
+//    public function getPrestamos()
+//    {
+//        return $this->prestamos;
+//    }
 
     /**
      * Set categoria
@@ -631,5 +631,38 @@ class Item
             '72' => '5 años',
             '99999999' => 'de por vida',
             );
+    }
+
+    /**
+     * Add lineasPrestamos
+     *
+     * @param \mz\InventarioBundle\Entity\LineasPrestamo $lineasPrestamos
+     * @return Item
+     */
+    public function addLineasPrestamo(\mz\InventarioBundle\Entity\LineasPrestamo $lineasPrestamos)
+    {
+        $this->lineasPrestamos[] = $lineasPrestamos;
+    
+        return $this;
+    }
+
+    /**
+     * Remove lineasPrestamos
+     *
+     * @param \mz\InventarioBundle\Entity\LineasPrestamo $lineasPrestamos
+     */
+    public function removeLineasPrestamo(\mz\InventarioBundle\Entity\LineasPrestamo $lineasPrestamos)
+    {
+        $this->lineasPrestamos->removeElement($lineasPrestamos);
+    }
+
+    /**
+     * Get lineasPrestamos
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getLineasPrestamos()
+    {
+        return $this->lineasPrestamos;
     }
 }

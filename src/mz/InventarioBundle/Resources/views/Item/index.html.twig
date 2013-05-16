@@ -7,58 +7,82 @@
 
 {% block flashmessages %}
     {% if form_errors(filterForm) %}
-        <div class="alert alert-block alert-error fade in form-errors">
+<div class="alert alert-block alert-error fade in form-errors">
             {{ form_errors(filterForm) }}
-        </div>
+    </div>
     {% endif %}
 {% endblock %}
 
 {% block page %}
-<div class="btn-toolbar">
+    <div class="btn-toolbar">
     {{ macros.btn_agregar('item_new') }}
-</div>
-<div id="filters" class="btn-toolbar pull-right">
-    <form action="{{ path('homepage') }}" method="post" {{ form_enctype(filterForm) }}>
-        <div class="input-append">
+        </div>
+        <div id="filters" class="btn-toolbar pull-right">
+            <form action="{{ path('homepage') }}" method="post" {{ form_enctype(filterForm) }}>
+                <div class="input-append">
             {{ form_widget(filterForm.q) }}
             {{ form_rest(filterForm) }}
-            <button class="btn" value="search" name="filter_action" type="submit"><i class="icon-search"></i></button>
-        </div>
-    </form>
-</div>
+                        <button class="btn" value="search" name="filter_action" type="submit"><i class="icon-search"></i></button>
+                    </div>
+                </form>
+            </div>
 
-<div class="well">
-    <table class="table table-striped table-hover table-condensed">
-        <thead>
-            <tr>
-                <th>#</th>
-                <th>Nombre</th>
-                <th>Marca</th>
-                <th>Modelo</th>
-                <th>Garantía</th>
-                <th>Nº Serie</th>
-                <th>Código</th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
+            <div class="well">
+                <table class="table table-striped table-hover table-condensed">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Nombre</th>
+                            <th>Marca</th>
+                            <th>Modelo</th>
+                            <th>Garantía</th>
+                            <th>Nº Serie</th>
+                            <th>Código</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
             {% for entity in entities %}
-            <tr>
-                <td>{{ loop.index }}</td>
-                <td><a href="{{ path('item_show', { 'id': entity.id }) }}">{{ entity.nombre }}</a></td>
-                <td>{{ entity.marca }}</td>
-                <td>{{ entity.modelo }}</td>
-                <td>{{ entity.garantia }}</td>
-                <td>{{ entity.sn }}</td>
-                <td>{{ entity.codigo }}</td>
-                <td class="actions">
-                    <a href="{{ path('item_show', { 'id': entity.id }) }}"><i class="icon-pencil"></i> </a>
-                    <a href="{{ path('item_edit', { 'id': entity.id }) }}"><i class="icon-remove"></i> </a>
-                </td>
-            </tr>
+                            <tr>
+                                <td>{{ loop.index }}</td>
+                                <td><a href="{{ path('item_show', { 'id': entity.id }) }}">{{ entity.nombre }}</a></td>
+                                <td>{{ entity.marca }}</td>
+                                <td>{{ entity.modelo }}</td>
+                                <td>{{ entity.garantia }}</td>
+                                <td>{{ entity.sn }}</td>
+                                <td>{{ entity.codigo }}</td>
+                                <td class="actions">
+                                    <a href="{{ path('item_show', { 'id': entity.id }) }}"><i class="icon-pencil"></i> </a>
+                                    <a href="{{ path('item_edit', { 'id': entity.id }) }}"><i class="icon-remove"></i> </a>
+                                    <a href="#deleteModal" data-toggle="modal" role="button" class="delete_link" xhref="{{ path('item_borrar', { 'id': entity.id }) }}">Borrar</a>
+                                </td>
+                            </tr>
             {% endfor %}
-        </tbody>
-    </table>
-</div>
+                        </tbody>
+                    </table>
+                </div>
 {{ pagerHtml|raw }}
+
+                <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="deleteModal" class="modal small hide fade" style="display: none;">
+                    <div class="modal-header">
+                        <button aria-hidden="true" data-dismiss="modal" class="close" type="button">×</button>
+                        <h3 id="myModalLabel">Confirmación</h3>
+                    </div>
+                    <div class="modal-body">
+                        <p class="error-text"><i class="icon-warning-sign modal-icon"></i>Seguro que desea borrar este registro?</p>
+                    </div>
+                    <div id="delete_form" class="modal-footer"></div>
+                </div>
+{% endblock %}
+
+{% block javascripts %}
+{{ parent() }}
+                <script type="text/javascript">
+                    $(document).ready(function() {
+                        $('a.delete_link').click(function(event) {
+                            event.preventDefault(); //cancela el comportamiento por defecto
+                            $('#delete_form').load($(this).attr('xhref')); //carga por ajax a la capa "notice_viewer"
+                        });
+                    });
+                    </script>
 {% endblock %}
