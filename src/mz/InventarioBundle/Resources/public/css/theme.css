@@ -639,7 +639,7 @@ input[type="password"] {
 }
 .modal.small {
   width: 400px;
-  margin: -170px 0 0 -200px;
+  /*margin: -170px 0 0 -200px;*/
 }
 .modal .modal-icon {
   vertical-align: middle;
