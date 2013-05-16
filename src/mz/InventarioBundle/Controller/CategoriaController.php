@@ -10,7 +10,7 @@ use Pagerfanta\View\TwitterBootstrapView;
 
 use mz\InventarioBundle\Entity\Categoria;
 use mz\InventarioBundle\Form\CategoriaType;
-use mz\InventarioBundle\Form\CategoriaFilterType;
+use mz\InventarioBundle\Form\SimpleSearchType;
 
 /**
  * Categoria controller.
@@ -22,8 +22,7 @@ class CategoriaController extends Controller
      * Lists all Categoria entities.
      *
      */
-    public function indexAction()
-    {
+    public function indexAction(){
         list($filterForm, $queryBuilder) = $this->filter();
 
         list($entities, $pagerHtml) = $this->paginator($queryBuilder);
@@ -44,23 +43,15 @@ class CategoriaController extends Controller
     {
         $request = $this->getRequest();
         $session = $request->getSession();
-        $filterForm = $this->createForm(new CategoriaFilterType());
+        $filterForm = $this->createForm(new SimpleSearchType());
         $em = $this->getDoctrine()->getManager();
-        $queryBuilder = $em->getRepository('mzInventarioBundle:Categoria')->createQueryBuilder('e');
-    
-        // Reset filter
-        if ($request->getMethod() == 'POST' && $request->get('filter_action') == 'reset') {
-            $session->remove('CategoriaControllerFilter');
-        }
-    
+
         // Filter action
-        if ($request->getMethod() == 'POST' && $request->get('filter_action') == 'filter') {
+        if ($request->getMethod() == 'POST' && $request->get('filter_action') == 'search') {
             // Bind values from the request
             $filterForm->bind($request);
 
             if ($filterForm->isValid()) {
-                // Build the query from the given form object
-                $this->get('lexik_form_filter.query_builder_updater')->addFilterConditions($filterForm, $queryBuilder);
                 // Save filter to session
                 $filterData = $filterForm->getData();
                 $session->set('CategoriaControllerFilter', $filterData);
@@ -69,11 +60,15 @@ class CategoriaController extends Controller
             // Get filter from session
             if ($session->has('CategoriaControllerFilter')) {
                 $filterData = $session->get('CategoriaControllerFilter');
-                $filterForm = $this->createForm(new CategoriaFilterType(), $filterData);
-                $this->get('lexik_form_filter.query_builder_updater')->addFilterConditions($filterForm, $queryBuilder);
+                $filterForm = $this->createForm(new SimpleSearchType(), $filterData);
+            } else {
+                $filterData = array('q' => '');
             }
         }
-    
+
+        $queryBuilder = $em->getRepository('mzInventarioBundle:Categoria')
+                ->getSearchQuery($filterData['q']);
+
         return array($filterForm, $queryBuilder);
     }
 

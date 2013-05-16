@@ -10,7 +10,7 @@ use Pagerfanta\View\TwitterBootstrapView;
 
 use mz\InventarioBundle\Entity\Condicion;
 use mz\InventarioBundle\Form\CondicionType;
-use mz\InventarioBundle\Form\CondicionFilterType;
+use mz\InventarioBundle\Form\SimpleSearchType;
 
 /**
  * Condicion controller.
@@ -44,23 +44,15 @@ class CondicionController extends Controller
     {
         $request = $this->getRequest();
         $session = $request->getSession();
-        $filterForm = $this->createForm(new CondicionFilterType());
+        $filterForm = $this->createForm(new SimpleSearchType());
         $em = $this->getDoctrine()->getManager();
-        $queryBuilder = $em->getRepository('mzInventarioBundle:Condicion')->createQueryBuilder('e');
-    
-        // Reset filter
-        if ($request->getMethod() == 'POST' && $request->get('filter_action') == 'reset') {
-            $session->remove('CondicionControllerFilter');
-        }
-    
+
         // Filter action
-        if ($request->getMethod() == 'POST' && $request->get('filter_action') == 'filter') {
+        if ($request->getMethod() == 'POST' && $request->get('filter_action') == 'search') {
             // Bind values from the request
             $filterForm->bind($request);
 
             if ($filterForm->isValid()) {
-                // Build the query from the given form object
-                $this->get('lexik_form_filter.query_builder_updater')->addFilterConditions($filterForm, $queryBuilder);
                 // Save filter to session
                 $filterData = $filterForm->getData();
                 $session->set('CondicionControllerFilter', $filterData);
@@ -69,11 +61,15 @@ class CondicionController extends Controller
             // Get filter from session
             if ($session->has('CondicionControllerFilter')) {
                 $filterData = $session->get('CondicionControllerFilter');
-                $filterForm = $this->createForm(new CondicionFilterType(), $filterData);
-                $this->get('lexik_form_filter.query_builder_updater')->addFilterConditions($filterForm, $queryBuilder);
+                $filterForm = $this->createForm(new SimpleSearchType(), $filterData);
+            } else {
+                $filterData = array('q' => '');
             }
         }
-    
+
+        $queryBuilder = $em->getRepository('mzInventarioBundle:Condicion')
+                ->getSearchQuery($filterData['q']);
+
         return array($filterForm, $queryBuilder);
     }
 

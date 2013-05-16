@@ -14,6 +14,7 @@ use mz\InventarioBundle\Utils\Utils as Utils;
  * @ORM\Table(name="usuarios")
  * @ORM\Entity
  * @ORM\HasLifecycleCallbacks
+ * @ORM\Entity(repositoryClass="mz\InventarioBundle\Entity\UsuarioRepository")
  * @UniqueEntity(fields="username", message="Ya existe un usuario con este nombre.")
  */
 class Usuario implements UserInterface

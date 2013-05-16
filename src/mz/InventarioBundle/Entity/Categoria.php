@@ -12,6 +12,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
  *
  * @ORM\Table(name="categorias")
  * @ORM\Entity
+ * @ORM\Entity(repositoryClass="mz\InventarioBundle\Entity\CategoriaRepository")
  * @UniqueEntity(fields="nombre", message="Ya existe un registro con este nombre.")
  */
 class Categoria

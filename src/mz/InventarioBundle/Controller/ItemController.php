@@ -43,11 +43,6 @@ class ItemController extends Controller {
         $filterForm = $this->createForm(new ItemFilterType());
         $em = $this->getDoctrine()->getManager();
 
-        // Reset filter
-        if ($request->getMethod() == 'POST' && $request->get('filter_action') == 'reset') {
-            $session->remove('ItemControllerFilter');
-        }
-
         // Filter action
         if ($request->getMethod() == 'POST' && $request->get('filter_action') == 'search') {
             // Bind values from the request

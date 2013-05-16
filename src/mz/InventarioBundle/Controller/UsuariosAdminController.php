@@ -16,7 +16,7 @@ use Pagerfanta\View\TwitterBootstrapView;
 use mz\InventarioBundle\Entity\Usuario;
 use mz\InventarioBundle\Form\UsuarioType;
 use mz\InventarioBundle\Form\UsuarioChangePassType;
-use mz\InventarioBundle\Form\UsuarioFilterType;
+use mz\InventarioBundle\Form\SimpleSearchType;
 
 /**
  * UsuariosAdmin controller.
@@ -61,35 +61,31 @@ class UsuariosAdminController extends Controller {
     protected function filter() {
         $request = $this->getRequest();
         $session = $request->getSession();
-        $filterForm = $this->createForm(new UsuarioFilterType());
+        $filterForm = $this->createForm(new SimpleSearchType());
         $em = $this->getDoctrine()->getManager();
-        $queryBuilder = $em->getRepository('mzInventarioBundle:Usuario')->createQueryBuilder('e');
-
-        // Reset filter
-        if ($request->getMethod() == 'POST' && $request->get('filter_action') == 'reset') {
-            $session->remove('UsuariosAdminControllerFilter');
-        }
 
         // Filter action
-        if ($request->getMethod() == 'POST' && $request->get('filter_action') == 'filter') {
+        if ($request->getMethod() == 'POST' && $request->get('filter_action') == 'search') {
             // Bind values from the request
             $filterForm->bind($request);
 
             if ($filterForm->isValid()) {
-                // Build the query from the given form object
-                $this->get('lexik_form_filter.query_builder_updater')->addFilterConditions($filterForm, $queryBuilder);
                 // Save filter to session
                 $filterData = $filterForm->getData();
-                $session->set('UsuariosAdminControllerFilter', $filterData);
+                $session->set('UsuarioControllerFilter', $filterData);
             }
         } else {
             // Get filter from session
-            if ($session->has('UsuariosAdminControllerFilter')) {
-                $filterData = $session->get('UsuariosAdminControllerFilter');
-                $filterForm = $this->createForm(new UsuarioFilterType(), $filterData);
-                $this->get('lexik_form_filter.query_builder_updater')->addFilterConditions($filterForm, $queryBuilder);
+            if ($session->has('UsuarioControllerFilter')) {
+                $filterData = $session->get('UsuarioControllerFilter');
+                $filterForm = $this->createForm(new SimpleSearchType(), $filterData);
+            } else {
+                $filterData = array('q' => '');
             }
         }
+
+        $queryBuilder = $em->getRepository('mzInventarioBundle:Usuario')
+                ->getSearchQuery($filterData['q']);
 
         return array($filterForm, $queryBuilder);
     }

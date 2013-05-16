@@ -12,6 +12,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
  *
  * @ORM\Table(name="estados")
  * @ORM\Entity
+ * @ORM\Entity(repositoryClass="mz\InventarioBundle\Entity\EstadoRepository")
  * @UniqueEntity(fields="nombre", message="Ya existe un registro con este nombre.")
  */
 class Estado
