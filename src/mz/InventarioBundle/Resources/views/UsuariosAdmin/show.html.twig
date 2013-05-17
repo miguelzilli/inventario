@@ -30,8 +30,14 @@
             <dd>{{ entity.password }}</dd>
             <dt>Rol</dt>
             <dd>{{ entity.rol }}</dd>
-            <dt>Isenabled</dt>
-            <dd>{{ entity.isEnabled }}</dd>
+            <dt>Habilitado?</dt>
+            <dd>
+                {% if entity.isEnabled %}
+                    <span class="badge badge-success">Si</span>
+                {% else %}
+                    <span class="badge badge-important">No</span>
+                {% endif %}
+            </dd>
         </dl>
     </div>
 {% endblock %}

@@ -52,7 +52,7 @@
                     <td>{{ entity.sn }}</td>
                     <td>{{ entity.codigo }}</td>
                     <td class="actions">
-                        <a href="{{ path('item_show', { 'id': entity.id }) }}"><i class="icon-pencil"></i> </a>
+                        <a href="{{ path('item_edit', { 'id': entity.id }) }}"><i class="icon-pencil"></i> </a>
                         <a href="#deleteModal" data-toggle="modal" role="button" class="delete_link" xhref="{{ path('item_get_delete_form', { 'id': entity.id }) }}"><i class="icon-remove"></i></a>
                     </td>
                 </tr>
