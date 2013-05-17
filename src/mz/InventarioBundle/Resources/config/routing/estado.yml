@@ -28,3 +28,8 @@ estado_delete:
     pattern:  /{id}/delete
     defaults: { _controller: "mzInventarioBundle:Estado:delete" }
     requirements: { _method: post }
+
+estado_get_delete_form:
+    pattern:  /{id}/get_delete_form
+    defaults: { _controller: "mzInventarioBundle:Estado:getDeleteForm" }
+    requirements: { _method: get }

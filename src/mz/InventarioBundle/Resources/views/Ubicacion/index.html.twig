@@ -43,8 +43,8 @@
                     <a href="{{ path('ubicacion_show', { 'id': entity.id }) }}">{{ entity.nombre }}</a>
                 </td>
                 <td class="actions">
-                    <a href="{{ path('ubicacion_show', { 'id': entity.id }) }}"><i class="icon-pencil"></i> </a>
-                    <a href="{{ path('ubicacion_edit', { 'id': entity.id }) }}"><i class="icon-remove"></i> </a>
+                    <a href="{{ path('ubicacion_edit', { 'id': entity.id }) }}"><i class="icon-pencil"></i> </a>
+                    <a href="#deleteModal" data-toggle="modal" role="button" class="delete_link" xhref="{{ path('ubicacion_get_delete_form', { 'id': entity.id }) }}"><i class="icon-remove"></i></a>
                 </td>
             </tr>
         {% endfor %}
@@ -52,4 +52,27 @@
     </table>
 </div>
 {{ pagerHtml|raw }}
+
+    <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="deleteModal" class="modal small hide fade" style="display: none;">
+        <div class="modal-header">
+            <button aria-hidden="true" data-dismiss="modal" class="close" type="button">×</button>
+            <h3 id="myModalLabel">Confirmación</h3>
+        </div>
+        <div class="modal-body">
+            <p class="error-text"><i class="icon-warning-sign modal-icon"></i>Seguro que desea borrar este registro?</p>
+        </div>
+        <div id="delete_form" class="modal-footer"></div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('a.delete_link').click(function(event) {
+                event.preventDefault();
+                $('#delete_form').load($(this).attr('xhref'));
+            });
+        });
+    </script>
 {% endblock %}

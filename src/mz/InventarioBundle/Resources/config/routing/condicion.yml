@@ -28,3 +28,8 @@ condicion_delete:
     pattern:  /{id}/delete
     defaults: { _controller: "mzInventarioBundle:Condicion:delete" }
     requirements: { _method: post }
+
+condicion_get_delete_form:
+    pattern:  /{id}/get_delete_form
+    defaults: { _controller: "mzInventarioBundle:Condicion:getDeleteForm" }
+    requirements: { _method: get }

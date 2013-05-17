@@ -37,3 +37,8 @@ usuario_pass_update:
     pattern:  /{id}/pass_update
     defaults: { _controller: "mzInventarioBundle:UsuariosAdmin:passUpdate" }
     requirements: { _method: post }
+
+usuario_get_delete_form:
+    pattern:  /{id}/get_delete_form
+    defaults: { _controller: "mzInventarioBundle:UsuariosAdmin:getDeleteForm" }
+    requirements: { _method: get }

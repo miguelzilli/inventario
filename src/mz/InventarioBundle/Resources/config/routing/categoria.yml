@@ -28,3 +28,8 @@ categoria_delete:
     pattern:  /{id}/delete
     defaults: { _controller: "mzInventarioBundle:Categoria:delete" }
     requirements: { _method: post }
+
+categoria_get_delete_form:
+    pattern:  /{id}/get_delete_form
+    defaults: { _controller: "mzInventarioBundle:Categoria:getDeleteForm" }
+    requirements: { _method: get }

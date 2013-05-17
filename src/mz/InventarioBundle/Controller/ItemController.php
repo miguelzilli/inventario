@@ -268,10 +268,10 @@ class ItemController extends Controller {
 
         $deleteForm = $this->createDeleteForm($id);
 
-        return $this->render('mzInventarioBundle:Item:deleteForm.html.twig', array(
-                    'entity' => $entity,
-                    'delete_form' => $deleteForm->createView(),
-        ));
+        return $this->render('mzInventarioBundle::simpleDeleteForm.html.twig', array(
+            'route' => 'item_delete',
+            'entity' => $entity,
+            'delete_form' => $deleteForm->createView(),
+            ));
     }
-
 }

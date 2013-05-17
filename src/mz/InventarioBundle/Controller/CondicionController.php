@@ -264,4 +264,22 @@ class CondicionController extends Controller
             ->getForm()
         ;
     }
+
+    public function getDeleteFormAction($id) {
+        $em = $this->getDoctrine()->getManager();
+
+        $entity = $em->getRepository('mzInventarioBundle:Condicion')->find($id);
+
+        if (!$entity) {
+            throw $this->createNotFoundException('No se encuentra el registro.');
+        }
+
+        $deleteForm = $this->createDeleteForm($id);
+
+        return $this->render('mzInventarioBundle::simpleDeleteForm.html.twig', array(
+            'route' => 'condicion_delete',
+            'entity' => $entity,
+            'delete_form' => $deleteForm->createView(),
+            ));
+    }
 }

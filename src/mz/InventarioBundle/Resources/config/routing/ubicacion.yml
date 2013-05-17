@@ -28,3 +28,8 @@ ubicacion_delete:
     pattern:  /{id}/delete
     defaults: { _controller: "mzInventarioBundle:Ubicacion:delete" }
     requirements: { _method: post }
+
+ubicacion_get_delete_form:
+    pattern:  /{id}/get_delete_form
+    defaults: { _controller: "mzInventarioBundle:Ubicacion:getDeleteForm" }
+    requirements: { _method: get }
